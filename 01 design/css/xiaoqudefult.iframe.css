@@ -1,0 +1,180 @@
+/******************************/
+/*should change in git@git.lianjia.com:lianjia-fe/ljwebeditor.git, no here*/
+/******************************/
+/*可以在这里添加你自己的css*/
+.lj_editor_view,.lj_editor_view *{
+  color:#333;
+  font-size:16px;
+}
+.lj_editor_view span {
+  font-size:13px;
+}
+.lj_editor_view a {
+  color: #00ae66 !important;
+  text-decoration: underline !important;
+}
+.lj_editor_view a[class],
+.lj_editor_view .lj-editor-card a {
+  color: #333 !important;
+  text-decoration: none !important;
+}
+
+.lj_editor_view *{
+  margin:0px;
+  padding:0px;
+}
+.lj_editor_view p{
+  line-height:29px;
+    /*word-break: break-all;*/
+}
+.lj_editor_view strong,
+.lj_editor_view b{
+  font-weight:bold;
+}
+.lj_editor_view h1{
+  font-weight:bold;
+  color:#333;
+  font-size:22px;
+  line-height:31px;
+  -webkit-margin-before: 0px;
+    -webkit-margin-after: 0px;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+}
+.lj_editor_view h2{
+  font-weight:bold;
+  color:#333;
+  font-size:19px;
+  line-height:26px;
+  -webkit-margin-before: 0px;
+    -webkit-margin-after: 0px;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+}
+.lj_editor_view .list-paddingleft-2{
+  padding-left: 16px;
+}
+.lj_editor_view ul,.lj_editor_view ol{
+  padding-left: 16px;
+}
+.lj_editor_view ol,.lj_editor_view ol li{
+  list-style-type: decimal;
+}
+.lj_editor_view ol li{
+  margin-left:1px;
+}
+.lj_editor_view ul li{
+  list-style-type: disc;
+}
+.lj_editor_view .insert-img,
+.lj_editor_view  .lj-editor-card{
+  margin:32px 0px;
+}
+.lj_editor_view .insert-img img{
+  display:block;
+  max-width:100%;
+  height:auto;
+  margin-right: auto;
+  margin-left: auto;
+}
+.lj_editor_view .insert-img .insert-img-title,.insert-img-img-title{
+  display:block;
+  font-size:14px;
+  color:#ccc;
+  margin-top:5px;
+  text-align: center;
+}
+.lj_editor_view .insert-img-img{
+  display:block;
+  max-width:100%;
+  *width:100%;
+  height:auto;
+}
+
+.lj_editor_view .lj-editor-card{
+  width:415px;
+  height:100px;
+  padding:20px;
+  border-radius:5px;
+  box-shadow: 1px 1px rgba(0,0,0,.1), -1px 1px rgba(0,0,0,.1), 1px -1px rgba(0,0,0,.1), -1px -1px rgba(0,0,0,.1);
+  overflow:hidden;
+  line-height: 22px;
+}
+
+.lj_editor_view .lj-editor-card img,.lj-editor-img{
+  float:left;
+  width:103px;
+  height:103px;
+  vertical-align:middle;
+  margin-right:20px;
+}
+.lj_editor_view .lj-editor-card .lj-editor-img{
+  display:inline-block;
+  *display:block;
+  background:url(./default/images/card.png) no-repeat;
+}
+.lj_editor_view .lj-editor-card span,.lj-editor-card a{
+  display:block;
+}
+.lj_editor_view .lj-editor-card .lj-editor-type1{
+  background-position: 0 0;
+}
+.lj_editor_view .lj-editor-card .lj-editor-type2{
+  background-position: 0 -103px;
+}
+.lj_editor_view .lj-editor-card .lj-editor-type3{
+  background-position: 0 -206px;
+}
+.lj_editor_view .lj-editor-card .lj-editor-type4{
+  background-position: 0 -309px;
+}
+.lj_editor_view .lj-editor-card .lj-editor-type5,
+.lj_editor_view .lj-editor-card .lj-editor-type8{
+  background-position: 0 -412px;
+}
+.lj_editor_view .lj-editor-card .lj-editor-type6{
+  background-position: 0 -515px;
+}
+.lj_editor_view .lj-editor-card .lj-editor-type7{
+  background-position: 0 -618px;
+}
+.lj_editor_view .lj-editor-card .lj-editor-card-title{
+  font-size:16px;
+  color:#333;
+  height:20px;
+  width:285px;
+  overflow:hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight:bold;
+  margin-top:-2px;
+}
+
+.lj-editor-card .lj-editor-card-desc{
+  font-size:12px;
+  color:#999;
+  height:35px;
+  line-height:18px;
+  margin-top:15px;
+  overflow:hidden;
+}
+.lj-editor-card-desc1,.lj-editor-card-desc2{
+  margin-top:10px;
+  height:17px;
+  line-height:20px;
+  font-size:12px;
+  color:#999;
+  overflow:hidden;
+  width:285px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.lj-editor-card-desc2{
+  margin-top:0px;
+}
+.lj-editor-card .lj-editor-card-goon{
+  font-size:12px;
+  color:#333;
+  text-decoration: none;
+  margin-top:15px;
+}
