@@ -1317,7 +1317,7 @@ a {
 .xiaoquOverview .xiaoquDescribe .xiaoquInfo .xiaoquInfoItem .xiaoquInfoContent {
     color: #394043;
     display: inline-block;
-    width: 297px;
+    width: 293px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis
@@ -2117,7 +2117,7 @@ a {
 .xiaoquMainContent .frameDeal .frameDealList .frameDealFrom {
     text-align: center;
     display: inline-block;
-    width: 16.1971831%
+    width: 13.197183%
 }
 
 .xiaoquMainContent .frameDeal .frameDealList .frameDealListItem li {
