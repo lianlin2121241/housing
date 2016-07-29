@@ -173,97 +173,135 @@ $(document).ready(function() {
 </head>
 
 <body>
-<div class="tab1-con ov-hi" style="display:block; overflow-y:auto;">
-	<div class="log customer mt0" tabindex="1">
-    	<div class="search-left">
-            <div class="user-name"><input type="text" msg="软件名称" /></div>
-            <div class="select2 modular zl_select dl-ib fl po-re ml15">
-                <select>
-                    <option>软件编码</option>
-                    <option value="2">软件编码</option>
-                </select>
-            </div>
-            <div class="select1 modular zl_select dl-ib fl po-re ml15">
-                <select>
-                    <option>单位</option>
-                    <option value="2">点</option>
-                    <option value="3">年</option>
-                </select>
-            </div>
-            <div class="select3 modular zl_select dl-ib fl po-re ml15">
-                <select>
-                    <option>有无证书</option>
-                    <option value="2">有</option>
-                    <option value="3">无</option>
-                </select>
-            </div>
-            <div class="select4 modular zl_select dl-ib fl po-re ml15">
-                <select>
-                    <option>状态</option>
-                    <option value="2">使用中</option>
-                    <option value="3">未使用</option>
-                </select>
-            </div>
-        </div>
-        <div class="search"><a>搜 索</a></div>
-        <div class="clear fl ml15"><a>清空筛选</a></div>
-	</div>
-    <div class="customer-list log-table" style="display:block">
-        <div class="table-top">
-            <div class="fl fs14 colorfff ml15">软件列表</div>
-            <div class="fr fs12 coloraaa mr15">共<span>20</span>条</div>
-            <div class="table-border"></div>
-            <div class="add colorfff fr"><a>添加</a></div>
-        </div>
-        <div class="table-middle">
-            <table width="100%" cellpadding="0" border="0" cellspacing="0">
-                <thead>
-                    <td width="2%"></td>
-                    <td width="5%">No.</td>
-                    <td width="28%">软件名称</td>
-                    <td width="15%">软件编码</td>
-                    <td width="8%">单位</td>
-                    <td width="10%">有无证书</td>
-                    <td width="10%">状态</td>
-                    <td width="19%">操作</td>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td width="2%"></td>
-                        <td width="5%">No.</td>
-                        <td width="28%">troila troila troila</td>
-                        <td width="15%">张三三</td>
-                        <td width="8%">点</td>
-                        <td width="10%">有</td>
-                        <td width="10%" class="color478120 state">已启用</td>
-                        <td width="19%">
-                        	<a class="stop mr20">停用</a><a class="edit-dis mr20">编辑</a><a class="delete-staff-dis mr20">删除</a><a class="upload">测试证书</a><!--可用是upload reset delete-staff 不可用加edit-dis delete-staff-dis 没有下载加display:none--></td>
-                    </tr>
-                    <tr>
-                        <td width="2%"></td>
-                        <td width="5%">No.</td>
-                        <td width="28%">troila troila troila</td>
-                        <td width="15%">张三三</td>
-                        <td width="8%">年</td>
-                        <td width="10%">无</td>
-                        <td width="10%" class="coloraaa state">已停用</td>
-                        <td width="19%">
-                        	<a class="start mr20">启用</a><a class="edit mr20">编辑</a><a class="delete-staff mr20">删除</a></td>
-                    </tr>
-                </tbody>
-            </table>
-            <!----------------没有搜索到数据---数据加载中----(显示时把tbody和table-bottom隐藏)----------->
-            <div class="pt15 pb15 bgcolorfafafa ta-center" style="display:none">没有搜索到<span>【某某集团】</span>的数据~!</div>
-            <div class="empty-table pt15 pb15 bgcolorfafafa ta-center" style="display:none"><a>数据加载中......</a></div>
-            <!--------------没有搜索到数据---数据加载中-------结束-------->
-        </div>
-        <!----------分页------------>
-        <div class="table-bottom">
-            <div class="pagination-panel pb-10 mg-t-10 mr20">
-                <div id="pagination" class="pagination-content fr"></div>
+<!--menu-->
+<div class="menu">
+    <div class="menu-shandow"></div>
+    <div class="menu-logo"><span></span></div>
+    <div class="menu-con">
+        <ul>
+            <li class="menu-icon1">
+                <a href="软件管理.html" target="mainFrame" class="hover">二手房管理</a><div class="menu-border"></div>
+                <div class="menu-sel"></div>
+            </li>
+            <li class="menu-icon2"><a href="产品管理.html" target="mainFrame">租房管理</a><div class="menu-border"></div></li>
+            <li class="menu-icon3"><a href="销售员管理.html" target="mainFrame">小区管理</a><div class="menu-border"></div></li>
+            <li class="menu-icon4"><a href="客户管理.html" target="mainFrame">用户管理</a><div class="menu-border"></div></li>
+            <li class="menu-icon5"><a href="订单管理.html" target="mainFrame">公共设置</a><div class="menu-border"></div></li>
+            <li class="menu-icon6"><a href="销售统计.html" target="mainFrame">权限设置</a><div class="menu-border"></div></li>
+        </ul>
+    </div>
+</div>
+<!--content-->
+<div class="content">
+    <!--head-->
+    <div class="head">
+        <div class="head-left">软件管理</div>
+        <div class="head-right">
+            <span class="login-icon"></span><span class="user">您好,Admin</span><em class="user-tip"></em><a class="down"></a>
+            <div class="login-sub">
+                <div class="personal-info"><a href="个人信息.html" target="mainFrame">个人信息</a></div>
+                <div class="msg-list mt7"><a href="消息列表.html" target="mainFrame">消息列表</a><em class="email-tip"></em></div>
+                <div class="modify-psw mt7"><a>修改密码</a></div>
+                <div class="exit-account mt7"><a>退出账户</a></div>
             </div>
         </div>
-        <!----------分页结束------------>
+    </div>
+    <div class="page">
+        <div class="iframe_container">
+            <div class="tab1-con ov-hi" style="display:block; overflow-y:auto;">
+                <div class="log customer mt0" tabindex="1">
+                    <div class="search-left">
+                        <div class="user-name"><input type="text" msg="软件名称" /></div>
+                        <div class="select2 modular zl_select dl-ib fl po-re ml15">
+                            <select>
+                                <option>软件编码</option>
+                                <option value="2">软件编码</option>
+                            </select>
+                        </div>
+                        <div class="select1 modular zl_select dl-ib fl po-re ml15">
+                            <select>
+                                <option>单位</option>
+                                <option value="2">点</option>
+                                <option value="3">年</option>
+                            </select>
+                        </div>
+                        <div class="select3 modular zl_select dl-ib fl po-re ml15">
+                            <select>
+                                <option>有无证书</option>
+                                <option value="2">有</option>
+                                <option value="3">无</option>
+                            </select>
+                        </div>
+                        <div class="select4 modular zl_select dl-ib fl po-re ml15">
+                            <select>
+                                <option>状态</option>
+                                <option value="2">使用中</option>
+                                <option value="3">未使用</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="search"><a>搜 索</a></div>
+                    <div class="clear fl ml15"><a>清空筛选</a></div>
+                </div>
+                <div class="customer-list log-table" style="display:block">
+                    <div class="table-top">
+                        <div class="fl fs14 colorfff ml15">软件列表</div>
+                        <div class="fr fs12 coloraaa mr15">共<span>20</span>条</div>
+                        <div class="table-border"></div>
+                        <div class="add colorfff fr"><a>添加</a></div>
+                    </div>
+                    <div class="table-middle">
+                        <table width="100%" cellpadding="0" border="0" cellspacing="0">
+                            <thead>
+                            <td width="2%"></td>
+                            <td width="5%">No.</td>
+                            <td width="28%">软件名称</td>
+                            <td width="15%">软件编码</td>
+                            <td width="8%">单位</td>
+                            <td width="10%">有无证书</td>
+                            <td width="10%">状态</td>
+                            <td width="19%">操作</td>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td width="2%"></td>
+                                <td width="5%">No.</td>
+                                <td width="28%">troila troila troila</td>
+                                <td width="15%">张三三</td>
+                                <td width="8%">点</td>
+                                <td width="10%">有</td>
+                                <td width="10%" class="color478120 state">已启用</td>
+                                <td width="19%">
+                                    <a class="stop mr20">停用</a><a class="edit-dis mr20">编辑</a><a class="delete-staff-dis mr20">删除</a><a class="upload">测试证书</a><!--可用是upload reset delete-staff 不可用加edit-dis delete-staff-dis 没有下载加display:none--></td>
+                            </tr>
+                            <tr>
+                                <td width="2%"></td>
+                                <td width="5%">No.</td>
+                                <td width="28%">troila troila troila</td>
+                                <td width="15%">张三三</td>
+                                <td width="8%">年</td>
+                                <td width="10%">无</td>
+                                <td width="10%" class="coloraaa state">已停用</td>
+                                <td width="19%">
+                                    <a class="start mr20">启用</a><a class="edit mr20">编辑</a><a class="delete-staff mr20">删除</a></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <!----------------没有搜索到数据---数据加载中----(显示时把tbody和table-bottom隐藏)----------->
+                        <div class="pt15 pb15 bgcolorfafafa ta-center" style="display:none">没有搜索到<span>【某某集团】</span>的数据~!</div>
+                        <div class="empty-table pt15 pb15 bgcolorfafafa ta-center" style="display:none"><a>数据加载中......</a></div>
+                        <!--------------没有搜索到数据---数据加载中-------结束-------->
+                    </div>
+                    <!----------分页------------>
+                    <div class="table-bottom">
+                        <div class="pagination-panel pb-10 mg-t-10 mr20">
+                            <div id="pagination" class="pagination-content fr"></div>
+                        </div>
+                    </div>
+                    <!----------分页结束------------>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <!----------弹出层---添加/编辑软件信息--------->

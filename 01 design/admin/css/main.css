@@ -12,17 +12,14 @@ input::-ms-reveal{
     display:none;
 }
 .head-left {
-	background:url(../images/logo2.png) no-repeat;
-	width:100px;
-	height:26px;
-	float:left;
-	position:relative;
-	left:130px;
-	top:8px;
-	font-size:16px;
-	color:#fafafa;
-	line-height:33px;
-	padding-left:23px;
+	background: url(../images/logo2.png) no-repeat 0px -3px;
+	height: 26px;
+	float: left;
+	font-size: 16px;
+	color: #fafafa;
+	line-height: 26px;
+	padding-left: 23px;
+	margin: 11px 0px 0px 10px;
 }
 .head-right {
 	width:158px;
