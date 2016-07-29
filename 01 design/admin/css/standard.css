@@ -1,0 +1,236 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*
+   ┏━━━━━━━━━━━━━━━━━━━━━┓
+   ┃                标  准  色    	           ┃
+   ┣━━━━━━━━━━━━━━━━━━━━━┫
+*/
+/********标准色-主色*******/
+.main_color{
+	color:	
+}
+.main_color1{
+	color:	
+}
+.main_color2{
+	color:	
+}
+.main_color3{
+	color:	
+}
+/********标准色-辅色*******/
+.secondary_color{
+	color:	
+}
+.secondary_color1{
+	color:	
+}
+.secondary_color2{
+	color:	
+}
+.secondary_color3{
+	color:	
+}
+/*
+   ┏━━━━━━━━━━━━━━━━━━━━━┓
+   ┃                标  准  字    	           ┃
+   ┣━━━━━━━━━━━━━━━━━━━━━┫
+*/
+.important_font{
+	font-size:
+	line-height:
+}
+.general_font{
+	font-size:
+	line-height:
+}
+.weak_font{
+	font-size:
+	line-height:
+}
+/*
+   ┏━━━━━━━━━━━━━━━━━━━━━┓
+   ┃                  图  标    	           ┃
+   ┣━━━━━━━━━━━━━━━━━━━━━┫
+*/
+/**********标题图标**********/
+.big_icon{
+	width:
+	height:
+}
+.small_icon_normal{
+	width:
+	height:
+}
+.small_icon_hover{
+	width:
+	height:
+}
+/**********按钮图标**********/
+.normal_btn_icon{
+	width:
+	height:
+}
+.hover_btn_icon{
+	width:
+	height:
+}
+/**********输入域图标**********/
+.input_icon{
+	width:
+	height:
+}
+/**********功能图标**********/
+.func_icon{
+	width:
+	height:
+	background-color:
+}
+/*
+   ┏━━━━━━━━━━━━━━━━━━━━━┓
+   ┃                  按  钮    	           ┃
+   ┣━━━━━━━━━━━━━━━━━━━━━┫
+*/
+/**********按钮--主按钮**********/
+.normal_mainBtn{
+	background-color:
+	border-radius:
+	font-size:
+	text-align:
+}
+.hover_mainBtn{
+	background-color:
+	border-radius:
+	font-size:
+	text-align:
+}
+/**********按钮--次按钮**********/
+.normal_normalBtn{
+	background-color:
+	background-img:
+	border-radius:
+	font-size:
+	text-align:
+	box-shadow:
+}
+.disable_normalBtn{
+	background-color:
+	background-img:
+	border-radius:
+	font-size:
+	text-align:
+	box-shadow:
+}
+/*
+   ┏━━━━━━━━━━━━━━━━━━━━━┓
+   ┃              公  共  控  件    	       ┃
+   ┣━━━━━━━━━━━━━━━━━━━━━┫
+*/
+/**********公共控件--输入框**********/
+.normal_input{
+	background-color:
+	background-img:
+	border-radius:
+	font-size:
+    border:
+	font-color:
+	text-align:
+}
+.focus_input{
+	background-color:
+	background-img:
+	border-radius:
+	font-size:
+    border:
+	font-color:
+	text-align:
+}
+.error_input{
+	background-color:
+	background-img:
+	border-radius:
+	font-size:
+    border:
+	font-color:
+	text-align:
+}
+.disable_input{
+	background-color:
+	background-img:
+	border-radius:
+	font-size:
+    border:
+	font-color:
+	text-align:
+}
+/*
+   ┏━━━━━━━━━━━━━━━━━━━━━┓
+   ┃              提  示  信  息    	       ┃
+   ┣━━━━━━━━━━━━━━━━━━━━━┫
+*/
+/**********提示信息--强提示**********/
+.strong_msg{
+	background-color:
+	border-radius:
+	font-color:
+	font-size:
+    border:
+	box-shadow:
+}
+.strong_msg_error{
+	background:
+}
+.strong_msg_warn{
+	background:
+}
+.strong_msg_succeed{
+	background:
+}
+.strong_msg_remind{
+	background:
+}
+/**********提示信息--弱提示**********/
+.weak_errorMsg{
+	background-color:
+	border-radius:
+	font-color:
+	font-size:
+	text-align:
+	background-img:
+	border:
+}
+.weak_newMsg{
+	background-color:
+	border-radius:
+	font-color:
+	font-size:
+	text-align:
+	background-img:
+	border:
+}
+.weak_succeedMsg{
+	background-color:
+	border-radius:
+	font-color:
+	font-size:
+	text-align:
+	background-img:
+	border:
+}
+/*
+   ┏━━━━━━━━━━━━━━━━━━━━━┓
+   ┃                  列  表    	           ┃
+   ┣━━━━━━━━━━━━━━━━━━━━━┫
+*/
+.normal_table{
+	background-color:
+	border-radius:
+	font-color:
+	font-size:
+	border:
+    box-shadow:
+}
+.hover_table{
+	background-color:
+}

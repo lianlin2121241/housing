@@ -1,0 +1,217 @@
+﻿<!DOCTYPE html> 
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="edge" />
+<title>主页</title>
+<link href="js/plugins/radio/default-style/css/zl_radio.css" rel="stylesheet" type="text/css" />
+<link href="js/plugins/select/default-style/css/content.css" rel="stylesheet" type="text/css" />
+<link href="css/index.css" rel="stylesheet" type="text/css" />
+<link href="css/pop.css" rel="stylesheet" type="text/css" />
+<link href="css/jquery-ui.min.css" rel="stylesheet" type="text/css" />
+<link href="css/iquery-ui-index.css" rel="stylesheet" type="text/css" />
+<script src="js/jquery-1.11.1.min.js" language="javascript" type="text/javascript"></script>
+<script src="js/plugins/niceScroll/js/jquery.nicescroll.js"></script>
+<script src="js/function.js" language="javascript" type="text/javascript"></script>
+<script src="js/plugins/select/default-style/js/jquery.zl_select_u3.js"></script>
+<script src="js/plugins/jquery-ui-1.10.4.custom.min.js"></script>
+<script src="js/plugins/radio/default-style/js/jquery.zl_radio_origin.js"></script>
+<script src="js/plugins/niceScroll/js/jquery.nicescroll.js"></script>
+<script language="javascript">
+$(function(){
+	//f5刷新
+	document.onkeypress = function(e){
+		if(e.keyCode == 116){
+			e.preventDefault();
+			window.top.f5();
+		};
+	};
+	contentWH();
+	$(window).resize(contentWH);
+	$(window).resize(popWH);
+	//修改密码
+	$(".modify-psw").click(function(){
+		$(".modify-password").show();
+		$(".zzc").show();	
+	});
+	//修改密码弹出层点击关闭，取消
+	$(".modify-password .pop-head a,.modify-password.pop2 .pop-qx").click(function(){
+		$(".modify-password").hide();
+		$(".zzc").hide();		
+	});
+	//弹出层确定按钮
+	$(".modify-password .pop-qd").click(function(){
+		$(".modify-password").hide();
+		$(".zzc").hide();
+		//弱提示
+		$(".weak-prompt").fadeIn("slow").text("密码修改成功~！");
+		window.setTimeout(function(){$(".weak-prompt").fadeOut("slow")},3000);
+	});
+	//点击个人信息和消息列表
+	$(".personal-info a,.msg-list a").click(function(){
+		$(".menu-con ul li a").removeClass("hover");
+		$(".menu-sel").hide();
+	});
+	$(".personal-info a").click(function(){
+		$(".head-left").text("个人信息");
+	});
+	$(".msg-list a").click(function(){
+		$(".head-left").text("消息列表");
+	});
+	//初始化滚动条插件
+    $(".menu-con").niceScroll({
+        cursorcolor: "#519CAC",
+        autohidemode: false,
+	    cursorwidth: "4px",
+		background: "",
+		cursorborder:"1px solid #6FAFB3",
+    });
+})
+//设置滚动条
+	function setNiceScroll(eles,option){
+		var setting= $.extend({
+			cursorcolor: "#00C9C7",
+			autohidemode: false,
+			cursorwidth: "5px",
+			background: "#EFEFEF"
+		},option||{});
+		$(eles).niceScroll(setting);
+	}
+//成功弱提示(有tab的)
+	function promptTabSuccess(text){
+		$(".zzc").hide();
+		$(".pop").appendTo($(window.top.frames['mainFrame'].frames['tabFrame'].document.body)).hide();
+		//弱提示
+		$(".weak-prompt").fadeIn("slow").text(text);
+		window.setTimeout(function(){$(".weak-prompt").fadeOut("slow")},3000);
+	};
+//成功弱提示(没有tab的)
+	function promptSuccess(text){
+		$(".zzc").hide();
+		$(".pop1").appendTo($(window.top.frames['mainFrame'].document.body)).hide();
+		//弱提示
+		$(".weak-prompt").fadeIn("slow").text(text);
+		window.setTimeout(function(){$(".weak-prompt").fadeOut("slow")},3000);
+	};
+//信息弱提示
+	function promptInfo(text){
+		$(".zzc").hide();
+		$(".pop").appendTo($(window.top.frames['mainFrame'].document.body)).hide();
+		//弱提示
+		$(".info-prompt").fadeIn("slow").text(text);
+		window.setTimeout(function(){$(".info-prompt").fadeOut("slow")},3000);
+	};
+//失败弱提示(有tab)
+	function promptTabFail(text){
+		$(".zzc").hide();
+		$(".pop").appendTo($(window.top.frames['mainFrame'].frames['tabFrame'].document.body)).hide();
+		//弱提示
+		$(".fail-prompt").fadeIn("slow").text(text);
+		window.setTimeout(function(){$(".fail-prompt").fadeOut("slow")},3000);
+	};
+//失败弱提示(没有tab)
+	function promptFail(text){
+		$(".zzc").hide();
+		$(".pop").appendTo($(window.top.frames['mainFrame'].document.body)).hide();
+		//弱提示
+		$(".fail-prompt").fadeIn("slow").text(text);
+		window.setTimeout(function(){$(".fail-prompt").fadeOut("slow")},3000);
+	};
+//强提示
+	function promptStrong(text){
+		//强提示
+		$(".zzc").show();
+		$(".strong-prompt").show();
+		$(".confirm-txt").text(text);
+	};
+	function f5(){
+		var tab = $("#mainFrame").contents().find(".tab").length
+		if( tab ) {
+			var href = $("#mainFrame").contents().find("div.sel").children("a").attr("href");
+			$("#mainFrame").contents().find("#tabFrame").attr("src",href);
+			$(".pop").appendTo($(window.top.frames['mainFrame'].frames['tabFrame'].document.body)).hide();
+			$(".zzc").hide();
+			$(".modify-password").hide();		
+		}
+		else {
+			var src = $(".menu-con li.hover a").attr("href");
+			$("#mainFrame").attr("src",src);
+			$(".pop1").appendTo($(window.top.frames['mainFrame'].document.body)).hide();
+			$(".zzc").hide();	
+			$(".modify-password").hide();	
+		};
+	}
+</script>
+</head>
+<body>
+<!--head-->
+<div class="head">
+	<div class="head-left">软件管理</div>
+    <div class="head-right">
+    	<span class="login-icon"></span><span class="user">您好,Admin</span><em class="user-tip"></em><a class="down"></a>
+        <div class="login-sub">
+        	<div class="personal-info"><a href="个人信息.html" target="mainFrame">个人信息</a></div>
+            <div class="msg-list mt7"><a href="消息列表.html" target="mainFrame">消息列表</a><em class="email-tip"></em></div>
+        	<div class="modify-psw mt7"><a>修改密码</a></div>
+            <div class="exit-account mt7"><a>退出账户</a></div>
+        </div>
+    </div>
+</div>
+<!--content-->
+<div class="content">
+    <div class="menu">
+    	<div class="menu-shandow"></div>
+        <div class="menu-logo"><span></span></div>
+        <div class="menu-con">
+            <ul>
+            	<li class="menu-icon1">
+                    <a href="软件管理.html" target="mainFrame" class="hover">二手房管理</a><div class="menu-border"></div>
+                    <div class="menu-sel"></div>
+                </li>
+                <li class="menu-icon2"><a href="产品管理.html" target="mainFrame">租房管理</a><div class="menu-border"></div></li>
+                <li class="menu-icon3"><a href="销售员管理.html" target="mainFrame">小区管理</a><div class="menu-border"></div></li>
+                <li class="menu-icon4"><a href="客户管理.html" target="mainFrame">用户管理</a><div class="menu-border"></div></li>
+                <li class="menu-icon5"><a href="订单管理.html" target="mainFrame">公共设置</a><div class="menu-border"></div></li>
+                <li class="menu-icon6"><a href="销售统计.html" target="mainFrame">权限设置</a><div class="menu-border"></div></li>
+            </ul>
+        </div>
+    </div>
+	<div class="page">
+		<div class="iframe_container">
+			<iframe src="软件管理.html" frameborder="0" allowTransparency='true' width="100%" height="100%" id="mainFrame" name="mainFrame"></iframe>
+		</div>
+	</div>
+</div>
+<!----------遮罩层------------>
+<div class="zzc"></div>
+<!----------遮罩层结束------------>
+<!----------弹出层---修改密码--------->
+<div class="pop2 modify-password">
+	<div class="pop-head"><span>修改密码</span><a></a></div>
+    <div class="pop-con">
+        <div class="add-salesman3 h30 ml30 mb15"><span class="headline">原始密码</span><input type="password" /><span class="impor">*</span></div>
+        <div class="add-salesman4 h30 ml30 mb15"><span class="headline">新设密码</span><input type="password" /><span class="impor">*</span></div>
+        <div class="add-salesman5 h30 ml30 mb15">
+        	<span class="headline">再次确认</span><input type="password" /><span class="impor">*</span><span class="error">密码输入不一致</span>
+        </div>
+    </div>
+    <div class="pop-foot"><a class="pop-qd">确 定</a><a class="pop-qx">取消</a></div>
+</div>
+<!----------弹出层修改密码 结束------------>
+<!----------弱提示------------>
+<div class="weak-prompt">操作员添加成功~！</div>
+<div class="info-prompt">请先分配员工~！</div>
+<div class="fail-prompt">输入错误~！</div>
+<!----------弱提示-----结束------->
+<!----------弹出层---强提示--------->
+<div class="strong-prompt submit-order reset-psw">
+	<div class="pop-head"><span>信息提示</span><a></a></div>
+    <div class="pop-con">
+    	<div class="confirm-icon"></div>
+        <div class="confirm-txt">提交订单前，请先保存产品信息!</div>	
+    </div>
+    <div class="pop-foot"><a class="pop-qd">确 定</a></div>
+</div>
+<!----------弹出层强提示 结束------------>
+</body>
+</html>

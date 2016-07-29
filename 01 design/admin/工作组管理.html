@@ -1,0 +1,382 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>销售级别</title>
+<link href="js/plugins/select/default-style/css/content.css" rel="stylesheet" type="text/css" />
+<link href="css/index.css" rel="stylesheet" type="text/css" />
+<link href="js/plugins/defaultMsg/default-style/css/content.css" rel="stylesheet" type="text/css" />
+<link href="js/plugins/pagination/pagenation.css" rel="stylesheet" type="text/css" />
+<script src="js/jquery-1.11.1.min.js" language="javascript" type="text/javascript"></script>
+<script src="js/function.js" language="javascript" type="text/javascript"></script>
+<script src="js/plugins/defaultMsg/default-style/js/jquery.defaultMsg.js"></script>
+<script src="js/plugins/pagination/jquery.pagination.js"></script>
+<script src="js/plugins/select/default-style/js/jquery.zl_select_u3.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	//f5刷新
+	$(".log").trigger("focus");
+	document.onkeydown = function(e){
+		var ev = window.event || e;
+		var code = ev.keyCode || ev.which;
+		if (code == 116) {
+			if(ev.preventDefault) {
+				ev.preventDefault();
+				window.top.f5();
+			} else {
+				ev.keyCode = 0;
+				ev.returnValue = false;
+			}
+		}
+	};
+	popWH();
+	$(window).resize(popWH);
+	var top = window.top.document.body;
+	var self = window.self.document.body;
+	$(".user-name input").formsStyle();
+	//下拉列表
+	$(".zl_select.select").zl_select({
+		w: 160
+		,h:30
+	});
+	$(".zl_select.select2").zl_select({
+		w: 160
+		,h:30
+	});
+	$(".zl_select.select3").zl_select({
+		w: 160
+		,h:30
+	});
+	//添加工作组
+	$(".add").click(function(){
+		$(".add-salesman").appendTo(top).show().find(".pop-jxtj").show();
+		$(".add-salesman .pop-head span",top).text("添加工作组");
+		$(".add-salesman .pop-con > div",top).slice(1,5).show();
+		$(".zzc",top).show();
+	});
+	//编辑工作组
+	$(".edit").click(function(){
+		$(".add-salesman").appendTo(top).show().find(".pop-jxtj").hide();
+		$(".add-salesman .pop-head span",top).text("编辑工作组");
+		$(".add-salesman .pop-con > div",top).slice(1,5).hide();
+		$(".zzc",top).show();
+	});
+	//删除
+	$(".table-middle").delegate(".delete-staff","click",function(){
+		$(".confirm").appendTo(top).show();
+		$(".zzc",top).show();
+	});
+	//分页
+	$("#pagination").pagination(50, {
+		items_per_page: 1,
+		current_page: 2,
+		prev_text: "上一页",
+		next_text: "下一页",
+		first_text: " ",
+		prev_text: " ",
+		next_text: " ",
+		last_text: " ",
+		jump_text: "GO",
+		num_edge_entries: 3,
+		ellipse_text: '...',
+		num_display_entries: 5,
+		isSum: false,
+		link_to: 'javascript:void(0)'
+	});
+	//分配负责人
+	$(".assign").click(function(){
+		window.top.promptInfo();
+		//$(".page_tc").appendTo(top).show().find(".pop-head").children("span").text("分配负责人");
+		//$(".zzc",top).show();
+        //分配角色初始化滚动条插件
+        window.top.setNiceScroll("#qxfp_tc_l_con,#qxfp_tc_r_con");
+	});
+	//分配员工
+	$(".assign-staff").click(function(){
+		$(".page_tc").appendTo(top).show().find(".pop-head").children("span").text("分配员工");
+		$(".zzc",top).show();
+        //分配角色初始化滚动条插件
+        window.top.setNiceScroll("#qxfp_tc_l_con,#qxfp_tc_r_con");
+	});
+	//部门员工展开
+	$(".qxfp_tc_l_con .gd_con_bm em").click(function(){
+		if($(this).hasClass("jd_on")){
+		   $(this).removeClass("jd_on");
+		   $(this).parent().next(".gd_con_cy").hide();
+			}
+			else{
+			$(this).addClass("jd_on");	
+			  $(this).parent().next(".gd_con_cy").show();
+			}
+		})
+	$(".qxfp_tc_l_search input").blur(function(){
+		$(this).css("border","none");	
+		$(".qxfp_tc_l_search").css("border","1px solid #aaa");
+	});
+	$(".qxfp_tc_l_search input").focus(function(){
+		$(this).css("border","none");
+		$(".qxfp_tc_l_search").css("border","1px solid #0db4be");
+	});
+	$(".qxfp_tc_r_con .gd_con_bm em").click(function(){
+		if($(this).hasClass("jd_on")){
+		   $(this).removeClass("jd_on");
+		   $(this).parent().next(".gd_con_cy").hide();
+			}
+			else{
+			$(this).addClass("jd_on");	
+			  $(this).parent().next(".gd_con_cy").show();
+			}
+		});	
+});
+</script>
+</head>
+
+<body>
+<div class="tab1-con ov-hi" style="display:block; overflow-y:auto;">
+	<div class="log mt0" tabindex="1">
+    	<div class="search-left">
+            <div class="user-name"><input type="text" msg="工作组名称" /></div>
+            <div class="user-name ml15"><input type="text" msg="员工" /></div>
+            <div class="user-name ml15"><input type="text" msg="负责人" /></div>
+        </div>
+        <div class="search"><a>搜 索</a></div>
+        <div class="clear fl ml15"><a>清空筛选</a></div>
+    </div>
+    <div class="customer-list log-table" style="display:block">
+        <div class="table-top">
+            <div class="fl fs14 colorfff ml15">工作组列表</div>
+            <div class="fr fs12 coloraaa mr15">共<span>20</span>条</div>
+            <div class="table-border"></div>
+            <div class="add colorfff fr"><a>添加</a></div>
+        </div>
+        <div class="permission3 table-middle">
+            <table width="100%" cellpadding="0" border="0" cellspacing="0">
+                <thead>
+                    <td width="2%"></td>
+                    <td width="5%">No.</td>
+                    <td width="13%">工作组名称</td>
+                    <td width="28%">员工</td>
+                    <td width="28%">负责人</td>
+                    <td width="26%">操作</td>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td width="2%"></td>
+                        <td width="5%">No.</td>
+                        <td width="13%" class="job-name"><span>张三三</span></td>
+                        <td width="28%" class="modular-name">
+                        	<span class="span1">分配角色分配角色，分配角色分配角色分配角色分配角色分配角色分配角色分配角色分配角色分配角色分配角色分配角色分配角色，分配角色分配角色分配角色分配角色，分配角色分配角色，分配角色</span>
+                        </td>
+                        <td width="28%" class="user-people"><span class="span2"></span></td>
+                        <td width="26%"><a class="assign-staff mr20">分配员工</a><a class="assign mr20">分配负责人</a><a class="edit mr20">编辑</a><a class="delete-staff mr20">删除</a><a class="permission-up"></a></td>
+                    </tr>
+                    <tr>
+                        <td width="2%"></td>
+                        <td width="5%">No.</td>
+                        <td width="13%" class="job-name"><span>张三三</span></td>
+                        <td width="28%" class="modular-name"><span class="span1">555555555</span></td>
+                        <td width="28%" class="user-people"><span class="span2">Vagabond_1983@gmail.com</span></td>
+                        <td width="26%"><a class="assign-staff mr20">分配员工</a><a class="assign mr20">分配负责人</a><a class="edit mr20">编辑</a><a class="delete-staff mr20">删除</a><a class="permission-up"></a></td>
+                    </tr>
+                    <tr>
+                        <td width="2%"></td>
+                        <td width="5%">No.</td>
+                        <td width="13%" class="job-name"><span>张三三</span></td>
+                        <td width="28%" class="modular-name"><span class="span1">555555555</span></td>
+                        <td width="28%" class="user-people"><span class="span2">分配角色分配角色分配角色分配角色分配角色分配角色分配角色分配角色分配角色分配角色@gmail.com</span></td>
+                        <td width="26%"><a class="assign-staff mr20">分配员工</a><a class="assign mr20">分配负责人</a><a class="edit mr20">编辑</a><a class="delete-staff mr20">删除</a><a class="permission-up"></a></td>
+                    </tr>
+                    <tr>
+                        <td width="2%"></td>
+                        <td width="5%">No.</td>
+                        <td width="13%" class="job-name"><span>张三三</span></td>
+                        <td width="28%" class="modular-name"><span class="span1">555555555</span></td>
+                        <td width="28%" class="user-people"><span class="span2">Vagabond_1983@gmail.com</span></td>
+                        <td width="26%"><a class="assign-staff mr20">分配员工</a><a class="assign mr20">分配负责人</a><a class="edit mr20">编辑</a><a class="delete-staff mr20">删除</a><a class="permission-up"></a></td>
+                    </tr>
+                    <tr>
+                        <td width="2%"></td>
+                        <td width="5%">No.</td>
+                        <td width="13%" class="job-name"><span>张三三</span></td>
+                        <td width="28%" class="modular-name"><span class="span1">555555555</span></td>
+                        <td width="28%" class="user-people"><span class="span2">555555555</span></td>
+                        <td width="26%"><a class="assign-staff mr20">分配员工</a><a class="assign mr20">分配负责人</a><a class="edit mr20">编辑</a><a class="delete-staff mr20">删除</a><a class="permission-up"></a></td>
+                    </tr>
+                    <tr>
+                        <td width="2%"></td>
+                        <td width="5%">No.</td>
+                        <td width="13%" class="job-name"><span>张三三张三三张三三张三三张三三张三三张三三</span></td>
+                        <td width="28%" class="modular-name"><span class="span1">555555555</span></td>
+                        <td width="28%" class="user-people"><span class="span2">555555555</span></td>
+                        <td width="26%"><a class="assign-staff mr20">分配员工</a><a class="assign mr20">分配负责人</a><a class="edit mr20">编辑</a><a class="delete-staff mr20">删除</a><a class="permission-up"></a></td>
+                    </tr>
+                    <tr>
+                        <td width="2%"></td>
+                        <td width="5%">No.</td>
+                        <td width="13%" class="job-name"><span>张三三</span></td>
+                        <td width="28%" class="modular-name"><span class="span1">5555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555</span></td>
+                        <td width="28%" class="user-people"><span class="span2">555555555</span></td>
+                        <td width="26%"><a class="assign-staff mr20">分配员工</a><a class="assign mr20">分配负责人</a><a class="edit mr20">编辑</a><a class="delete-staff mr20">删除</a><a class="permission-up"></a></td>
+                    </tr>
+                    <tr>
+                        <td width="2%"></td>
+                        <td width="5%">No.</td>
+                        <td width="13%" class="job-name"><span>张三三</span></td>
+                        <td width="28%" class="modular-name"><span class="span1">555555555</span></td>
+                        <td width="28%" class="user-people"><span class="span2">555555555</span></td>
+                        <td width="26%"><a class="assign-staff mr20">分配员工</a><a class="assign mr20">分配负责人</a><a class="edit mr20">编辑</a><a class="delete-staff mr20">删除</a><a class="permission-up"></a></td>
+                    </tr>
+                </tbody>
+            </table>
+            <!----------------没有搜索到数据---数据加载中----(显示时把tbody和table-bottom隐藏)----------->
+            <div class="pt15 pb15 bgcolorfafafa ta-center" style="display:none">没有搜索到<span>【某某集团】</span>的数据~!</div>
+            <div class="empty-table pt15 pb15 bgcolorfafafa ta-center" style="display:none"><a>数据加载中......</a></div>
+            <!--------------没有搜索到数据---数据加载中-------结束-------->
+        </div>
+        <!----------分页------------>
+        <div class="table-bottom">
+            <div class="pagination-panel pb-10 mg-t-10 mr20">
+                <div id="pagination" class="pagination-content fr"></div>
+            </div>
+        </div>
+        <!----------分页结束------------>
+    </div>
+</div>
+<!----------弹出层---添加/编辑工作组--------->
+<div class="pop add-salesman">
+	<div class="pop-head"><span>添加工作组</span><a></a></div>
+    <div class="pop-con pb10">
+    	<div class="h30 ml30 mb15"><span class="headline">工作组名称1</span><input type="text" /></div>
+        <div class="h30 ml30 mb15"><span class="headline">工作组名称2</span><input type="text" /></div>
+        <div class="h30 ml30 mb15"><span class="headline">工作组名称3</span><input type="text" /></div>
+        <div class="h30 ml30 mb15"><span class="headline">工作组名称4</span><input type="text" /></div>
+        <div class="h30 ml30 mb15"><span class="headline">工作组名称5</span><input type="text" /></div>
+    </div>
+    <div class="pop-foot"><a class="pop-jxtj">继续添加</a><a class="pop-qd">确 定</a><a class="pop-qx">取消</a></div>
+</div>
+<!----------弹出层添加/编辑工作组 结束------------>
+<!----------弹出层删除确认 开始------------>
+<div class="pop confirm">
+	<div class="pop-head"><span>删除确认</span><a></a></div>
+    <div class="pop-con">
+    	<div class="confirm-icon"></div>
+        <div class="confirm-txt">工作组<span>【销售代表】</span>下有销售员账号，您确定要将其删除吗？</div>	
+    </div>
+    <div class="pop-foot"><a class="pop-qd">确 定</a><a class="pop-qx">取消</a></div>
+</div>
+<!----------弹出层删除确认 结束------------>
+<!------------------分配人员-----弹出层------------------------------>
+<div class="page_tc pop">
+  <div class="pop-head"><span>分配角色</span><a></a></div>
+  <div class="page_tc_con">
+    <div class="qxfp_tc_con">
+      <div class="qxfp_tc_l">
+      	<div class="left-head">
+        	<p>部门及人员</p>
+        </div>
+        <div class="qxfp_tc_l_search">
+        	<input type="text" placeholder="查询部门名称或者员工姓名"/>
+        </div>
+        <div class="qxfp_tc_l_con" id="qxfp_tc_l_con">
+              <div class="gd_list">
+                <div class="gd_con">
+                  <div class="gd_con_bm"><em></em><span>人员列表一</span><a class="cy_add"></a></div>
+                  <ul class="gd_con_cy">
+                    <li><span class="cy_img"></span><span class="cy_na">张三</span><a class="cy_add"></a></li>
+                    <li><span class="cy_img"></span><span class="cy_na">张三</span><a class="cy_add"></a></li>
+                    <li><span class="cy_img"></span><span class="cy_na">张三</span><a class="cy_add"></a></li>
+                    <li><span class="cy_img"></span><span class="cy_na">张三</span><a class="cy_add"></a></li>
+                    <li><span class="cy_img"></span><span class="cy_na">张三</span><a class="cy_add"></a></li>
+                    <li><span class="cy_img"></span><span class="cy_na">张三</span><a class="cy_add"></a></li>
+                  </ul>
+                </div>
+                <div class="gd_con">
+                  <div class="gd_con_bm"><em></em><span>人员列表二</span><a class="cy_add"></a></div>
+                  <ul class="gd_con_cy">
+                    <li><span class="cy_img"></span><span class="cy_na">张三</span><a class="cy_add"></a></li>
+                    <li><span class="cy_img"></span><span class="cy_na">张三</span><a class="cy_add"></a></li>
+                    <li><span class="cy_img"></span><span class="cy_na">张三</span><a class="cy_add"></a></li>
+                    <li><span class="cy_img"></span><span class="cy_na">张三</span><a class="cy_add"></a></li>
+                    <li><span class="cy_img"></span><span class="cy_na">张三</span><a class="cy_add"></a></li>
+                    <li><span class="cy_img"></span><span class="cy_na">张三</span><a class="cy_add"></a></li>
+                  </ul>
+                </div>
+                <div class="gd_con">
+                  <div class="gd_con_bm"><em></em><span>人员列表三</span><a class="cy_add"></a></div>
+                  <ul class="gd_con_cy">
+                    <li><span class="cy_img"></span><span class="cy_na">张三</span><a class="cy_add"></a></li>
+                    <li><span class="cy_img"></span><span class="cy_na">张三</span><a class="cy_add"></a></li>
+                    <li><span class="cy_img"></span><span class="cy_na">张三</span><a class="cy_add"></a></li>
+                    <li><span class="cy_img"></span><span class="cy_na">张三</span><a class="cy_add"></a></li>
+                    <li><span class="cy_img"></span><span class="cy_na">张三</span><a class="cy_add"></a></li>
+                    <li><span class="cy_img"></span><span class="cy_na">张三</span><a class="cy_add"></a></li>
+                  </ul>
+                </div>
+              </div>
+        </div>
+      </div>
+      <div class="qxfp_tc_m"></div>
+      <div class="qxfp_tc_r">
+        <div class="left-head">
+        	<p>已选人员
+            	<span>(6人)</span>
+            	<div class="pop-an">
+                    <a class="pop-clear" href="#">清空</a>
+                    <div class="pop-border"></div>
+                    <a class="pop-add" href="#">添加全部</a>
+                </div>
+            </p>
+        </div>
+        <div class="qxfp_tc_r_con" id="qxfp_tc_r_con">
+              <div class="gd_list">
+                <div class="gd_con">
+                  <ul class="gd_con_cy" style="display:block">
+                    <li><span class="cy_img"></span><span class="cy_na sel">张三</span><a class="cy_del"></a></li>
+                    <li><span class="cy_img"></span><span class="cy_na">张三</span><a class="cy_del"></a></li>
+                    <li><span class="cy_img"></span><span class="cy_na">张三</span><a class="cy_del"></a></li>
+                    <li><span class="cy_img"></span><span class="cy_na">张三</span><a class="cy_del"></a></li>
+                    <li><span class="cy_img"></span><span class="cy_na">张三</span><a class="cy_del"></a></li>
+                    <li><span class="cy_img"></span><span class="cy_na">张三</span><a class="cy_del"></a></li>
+                  </ul>
+                </div>
+                <div class="gd_con">
+                  <ul class="gd_con_cy" style="display:block">
+                    <li><span class="cy_img"></span><span class="cy_na">张三</span><a class="cy_del"></a></li>
+                    <li><span class="cy_img"></span><span class="cy_na">张三</span><a class="cy_del"></a></li>
+                    <li><span class="cy_img"></span><span class="cy_na">张三</span><a class="cy_del"></a></li>
+                    <li><span class="cy_img"></span><span class="cy_na">张三</span><a class="cy_del"></a></li>
+                    <li><span class="cy_img"></span><span class="cy_na">张三</span><a class="cy_del"></a></li>
+                    <li><span class="cy_img"></span><span class="cy_na">张三</span><a class="cy_del"></a></li>
+                  </ul>
+                </div>
+                <div class="gd_con">
+                  <ul class="gd_con_cy" style="display:block">
+                    <li><span class="cy_img"></span><span class="cy_na">张三</span><a class="cy_del"></a></li>
+                    <li><span class="cy_img"></span><span class="cy_na">张三</span><a class="cy_del"></a></li>
+                    <li><span class="cy_img"></span><span class="cy_na">张三</span><a class="cy_del"></a></li>
+                    <li><span class="cy_img"></span><span class="cy_na">张三</span><a class="cy_del"></a></li>
+                    <li><span class="cy_img"></span><span class="cy_na">张三</span><a class="cy_del"></a></li>
+                    <li><span class="cy_img"></span><span class="cy_na">张三</span><a class="cy_del"></a></li>
+                  </ul>
+                </div>
+                <div class="gd_con">
+                  <ul class="gd_con_cy" style="display:block">
+                    <li><span class="cy_img"></span><span class="cy_na">张三</span><a class="cy_del"></a></li>
+                    <li><span class="cy_img"></span><span class="cy_na">张三</span><a class="cy_del"></a></li>
+                    <li><span class="cy_img"></span><span class="cy_na">张三</span><a class="cy_del"></a></li>
+                    <li><span class="cy_img"></span><span class="cy_na">张三</span><a class="cy_del"></a></li>
+                    <li><span class="cy_img"></span><span class="cy_na">张三</span><a class="cy_del"></a></li>
+                    <li><span class="cy_img"></span><span class="cy_na">张三</span><a class="cy_del"></a></li>
+                  </ul>
+                </div>
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+  <div class="pop-foot"><a class="pop-qd">确 定</a><a class="pop-qx">取消</a></div>
+</div>
+<!---------------------分配角色--弹出层-----------------end----------------->
+
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>软件录入</title>
+<link href="js/plugins/select/default-style/css/content.css" rel="stylesheet" type="text/css" />
+<link href="js/plugins/defaultMsg/default-style/css/content.css" rel="stylesheet" type="text/css" />
+<link href="css/index.css" rel="stylesheet" type="text/css" />
+<link href="js/plugins/pagination/pagenation.css" rel="stylesheet" type="text/css" />
+<script src="js/jquery-1.11.1.min.js" language="javascript" type="text/javascript"></script>
+<script src="js/function.js" language="javascript" type="text/javascript"></script>
+<script src="js/plugins/select/default-style/js/jquery.zl_select_u3.js"></script>
+<script src="js/plugins/defaultMsg/default-style/js/jquery.defaultMsg.js"></script>
+<script src="js/plugins/pagination/jquery.pagination.js"></script>
+<script src="js/plugins/jquery-ui-1.10.4.custom.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	//f5刷新
+	$(".log").trigger("focus");
+	document.onkeydown = function(e){
+		var ev = window.event || e;
+		var code = ev.keyCode || ev.which;
+		if (code == 116) {
+			if(ev.preventDefault) {
+				ev.preventDefault();
+				window.top.f5();
+			} else {
+				ev.keyCode = 0;
+				ev.returnValue = false;
+				window.top.f5();
+			}
+		}
+	};
+	var top = window.top.document.body;
+    $(".user-name input").formsStyle();
+	popWH();
+	$(window).resize(popWH);
+	//下拉列表
+	$(".zl_select.select4").zl_select({
+		w: 160
+		,h:30
+	});
+	//添加单位
+	$(".add").click(function(){
+		$(".add-salesman").appendTo(top).show();
+		$(".zzc",top).show();
+	});
+	//删除单位
+	$(".delete-staff").click(function(){
+		$(".confirm").appendTo(top).show();
+		$(".zzc",top).show();
+	});
+	//分页
+	$("#pagination").pagination(50, {
+		items_per_page: 1,
+		current_page: 2,
+		prev_text: "上一页",
+		next_text: "下一页",
+		first_text: " ",
+		prev_text: " ",
+		next_text: " ",
+		last_text: " ",
+		jump_text: "GO",
+		num_edge_entries: 3,
+		ellipse_text: '...',
+		num_display_entries: 5,
+		isSum: false,
+		link_to: 'javascript:void(0)'
+	});
+});
+</script>
+</head>
+
+<body>
+<div class="tab1-con ov-hi" style="display:block; overflow-y:auto;">
+	<div class="log mt0" tabindex="1">
+    	<div class="search-left">
+            <div class="user-name"><input type="text" msg="单位名称" /></div>
+            <div class="select4 modular zl_select dl-ib fl po-re ml15">
+                <select>
+                    <option>状态</option>
+                    <option value="2">使用中</option>
+                    <option value="3">未使用</option>
+                </select>
+            </div>
+        </div>
+        <div class="search"><a>搜 索</a></div>
+        <div class="clear fl ml15"><a>清空筛选</a></div>
+	</div>
+    <div class="customer-list log-table" style="display:block">
+        <div class="table-top">
+            <div class="fl fs14 colorfff ml15">单位列表</div>
+            <div class="fr fs12 coloraaa mr15">共<span>20</span>条</div>
+            <div class="table-border"></div>
+            <div class="add colorfff fr"><a>添加</a></div>
+        </div>
+        <div class="table-middle">
+            <table width="100%" cellpadding="0" border="0" cellspacing="0">
+                <thead>
+                    <td width="2%"></td>
+                    <td width="8%">No.</td>
+                    <td width="30%">单位名称</td>
+                    <td width="30%">状态</td>
+                    <td width="30%">操作</td>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td width="2%"></td>
+                        <td width="8%">No.</td>
+                        <td width="30%">点</td>
+                        <td width="30%" class="color478120">使用中</td>
+                        <td width="30%"><a class="delete-staff-dis mr20">删除</a><!--可用是delete-staff 不可用加delete-staff-dis--></td>
+                    </tr>
+                    <tr>
+                        <td width="2%"></td>
+                        <td width="8%">No.</td>
+                        <td width="30%">点</td>
+                        <td width="30%">未使用</td>
+                        <td width="30%"><a class="delete-staff mr20">删除</a></td>
+                    </tr>
+                    <tr>
+                        <td width="2%"></td>
+                        <td width="8%">No.</td>
+                        <td width="30%">点</td>
+                        <td width="30%">未使用</td>
+                        <td width="30%"><a class="delete-staff mr20">删除</a></td>
+                    </tr>
+                </tbody>
+            </table>
+            <!----------------没有搜索到数据---数据加载中----(显示时把tbody和table-bottom隐藏)----------->
+            <div class="pt15 pb15 bgcolorfafafa ta-center" style="display:none">没有搜索到<span>【某某集团】</span>的数据~!</div>
+            <div class="empty-table pt15 pb15 bgcolorfafafa ta-center" style="display:none"><a>数据加载中......</a></div>
+            <!--------------没有搜索到数据---数据加载中-------结束-------->
+        </div>
+        <!----------分页------------>
+        <div class="table-bottom">
+            <div class="pagination-panel pb-10 mg-t-10 mr20">
+                <div id="pagination" class="pagination-content fr"></div>
+            </div>
+        </div>
+        <!----------分页结束------------>
+    </div>
+</div>
+<!----------弹出层---删除确认--------->
+<div class="pop confirm">
+	<div class="pop-head"><span>删除确认</span><a></a></div>
+    <div class="pop-con">
+    	<div class="confirm-icon"></div>
+        <div class="confirm-txt">您确定要删除单位【XXX】吗？</div>	
+    </div>
+    <div class="pop-foot"><a class="pop-qd">确 定</a><a class="pop-qx">取消</a></div>
+</div>
+<!----------弹出层删除确认 结束------------>
+<!----------弹出层---添加单位--------->
+<div class="pop add-salesman">
+	<div class="pop-head"><span>添加单位名称</span><a></a></div>
+    <div class="pop-con pb10">
+    	<div class="h30 ml30 mb15"><span class="headline">单位名称1</span><input type="text" /></div>
+        <div class="h30 ml30 mb15"><span class="headline">单位名称2</span><input type="text" /></div>
+        <div class="h30 ml30 mb15"><span class="headline">单位名称3</span><input type="text" /></div>
+        <div class="h30 ml30 mb15"><span class="headline">单位名称4</span><input type="text" /></div>
+        <div class="h30 ml30 mb15"><span class="headline">单位名称5</span><input type="text" /></div>
+    </div>
+    <div class="pop-foot"><a class="pop-jxtj">继续添加</a><a class="pop-qd">确 定</a><a class="pop-qx">取消</a></div>
+</div>
+<!----------弹出层添加单位 结束------------>
+
+</body>
+</html>

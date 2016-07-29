@@ -1,0 +1,103 @@
+﻿/* CSS Document */
+.zl_select .select-container {
+	background-color: #fafafa;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border: 1px solid #d8d9dd;
+/*	border-bottom: 0px;*/
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    line-height: 26px;
+    padding: 0 0 0 8px;
+    color: #444;
+    text-decoration: none;
+	outline:none;
+	border-radius:4px;
+}
+
+.zl_select select{
+	display:none;
+}
+
+.select-drop{
+	position:absolute;
+	display:none;
+	border-width: 1px 1px 1px 1px;
+	border-color:#aaa;
+	border-style:solid;
+	/*height:auto;*/
+	background:#fff;
+	z-index:10000;
+	margin-top:-1px;
+	z-index:999999999;
+	overflow:hidden;
+}
+
+.select-drop ul.items{
+	list-style:none;
+	margin:0px;
+	padding:0px;
+	height: 100%;
+	overflow: auto;
+	max-height:120px;
+}
+
+.select-drop ul.items li{
+	cursor:pointer;
+	padding: 3px 3px 3px 8px;
+	word-warp: break-word;
+	word-break: break-all;/*Only work in IE*/ 
+}
+
+.select-drop ul.items li.over{
+	background:#eee;
+}
+
+.select-drop ul.items li.down{
+	background:#ccc;
+}
+
+.zl_select .select-container > div{
+	width:30px;
+	height:100%;
+	float:right;
+	clear:right;
+	background:url(../images/down.png) no-repeat center;
+	position:absolute;
+	right:0px;
+	background-color:#fafafa;
+}
+.zl_select.active .select-container > div{
+	background-image:url(../images/up.png);
+}
+.zl_select .select-container > span{
+	float:left;
+	overflow: hidden;
+	text-overflow:ellipsis;
+	white-space: nowrap; 
+	text-align:left;
+}
+.zl_select.has-val a.select-container {
+	border:1px solid #aaa;
+	color:#222;
+}
+.zl_select.active a.select-container{
+	border:1px solid #0db4be;
+	color:#222;
+}
+.log .zl_select.has-val a.select-container {
+	border:1px solid #0db4be;
+}
+.zl_select.active .select-drop{
+	border:1px solid #0db4be;
+	border-top:none;
+	border-radius:0 0 4px 4px;
+	overflow: hidden;
+}
+.zl_select.disabled a.select-container{
+	border:1px solid #e0e0e0;
+	color:#bbbbbb;
+}

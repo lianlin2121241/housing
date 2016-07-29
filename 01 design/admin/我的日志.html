@@ -1,0 +1,239 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>管理员用户日志</title>
+<link href="js/plugins/select/default-style/css/content.css" rel="stylesheet" type="text/css" />
+<link href="js/plugins/defaultMsg/default-style/css/content.css" rel="stylesheet" type="text/css" />
+<link href="css/jquery-ui.min.css" rel="stylesheet" type="text/css" />
+<link href="css/index.css" rel="stylesheet" type="text/css" />
+<link href="js/plugins/pagination/pagenation.css" rel="stylesheet" type="text/css" />
+<script src="js/jquery-1.11.1.min.js" language="javascript" type="text/javascript"></script>
+<script src="js/function.js" language="javascript" type="text/javascript"></script>
+<script src="js/plugins/select/default-style/js/jquery.zl_select_u3.js"></script>
+<script src="js/plugins/defaultMsg/default-style/js/jquery.defaultMsg.js"></script>
+<script src="js/plugins/jquery-ui-1.10.4.custom.min.js"></script>
+<script src="js/plugins/jquery-ui-timepicker-addon.min.js"></script>
+<script src="js/plugins/jquery.ui.datepicker-zh-CN.js" type="text/javascript"></script>
+<script src="js/plugins/pagination/jquery.pagination.js"></script>
+<script src="js/plugins/niceScroll/js/jquery.nicescroll.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	//f5刷新
+	$(".log").trigger("focus");
+	document.onkeydown = function(e){
+		var ev = window.event || e;
+		var code = ev.keyCode || ev.which;
+		if (code == 116) {
+			if(ev.preventDefault) {
+				ev.preventDefault();
+				window.top.f5();
+			} else {
+				ev.keyCode = 0;
+				ev.returnValue = false;
+			}
+		}
+	};
+    $(".user-name input").formsStyle();
+	//下拉列表
+	$(".zl_select.modular").zl_select({
+		w: 160
+		,h:30
+	});
+	var resultSelect=$(".zl_select.operation").zl_select({
+		w: 160
+		,h:30
+	});
+	var resultSelect1=$(".zl_select.select1").zl_select({
+		w: 160
+		,h:30
+	});
+	$(".select-drop ul").niceScroll({
+        cursorcolor: "#00C9C7",
+        autohidemode: false,
+	    cursorwidth: "5px",
+		background: "#EFEFEF",
+    });
+	//日历控件
+	$("#from").datepicker({
+		showOn: "both",
+		buttonImage: "images/date.png",
+		buttonText: null,
+		buttonImageOnly: true,
+		dateFormat:"yy-mm-dd",
+		onSelect: function( selectedDate ) {
+				$(this).parent().addClass("focus");
+				$(this).siblings("img").attr("src","images/date-sel.png");
+				$(this).siblings(".date-clear").css("display","inline-block");
+				$( "#to" ).datepicker( "option", "minDate", selectedDate );
+				$( "#from" ).datepicker( "option", "buttonImage", "images/date-sel.png" );	
+				$(this).siblings(".date-clear").click(function(){
+					$(this).siblings("input").val("");
+					$( "#from" ).datepicker( "option", "buttonImage", "images/date.png" );	
+					$(this).parent().removeClass("focus");
+					$("#to").datepicker( "option", "minDate", null );
+					$(this).hide();
+				});		
+			}	
+	});
+	$("#to").datepicker({
+		showOn: "both",
+		buttonImage: "images/date.png",
+		buttonText: null,
+		buttonImageOnly: true,
+		dateFormat:"yy-mm-dd",
+		onSelect: function( selectedDate ) {
+			$(this).parent().addClass("focus");
+			$(this).siblings("img").attr("src","images/date-sel.png");
+			$(this).siblings(".date-clear").css("display","inline-block");
+			$( "#from" ).datepicker( "option", "maxDate", selectedDate );
+			$( "#to" ).datepicker( "option", "buttonImage", "images/date-sel.png" );
+			$(this).siblings(".date-clear").click(function(){
+				$(this).siblings("input").val("");
+				$( "#to" ).datepicker( "option", "buttonImage", "images/date.png" );
+				$(this).parent().removeClass("focus");
+				$("#from").datepicker( "option", "maxDate", null );
+				$(this).hide();
+			});				
+		}	
+	});
+	//分页
+	$("#pagination").pagination(50, {
+		items_per_page: 1,
+		current_page: 2,
+		prev_text: "上一页",
+		next_text: "下一页",
+		first_text: " ",
+		prev_text: " ",
+		next_text: " ",
+		last_text: " ",
+		jump_text: "GO",
+		num_edge_entries: 3,
+		ellipse_text: '...',
+		num_display_entries: 5,
+		isSum: false,
+		link_to: 'javascript:void(0)'
+	});
+	$(".log")
+            .on("change",".modular>select",function(){
+                if(!!$(this).val()) {
+					
+                    $("select",".select1").prop("disabled",false);
+
+                    var data= $.parseJSON($("option:selected",this).attr("data-childData"));
+                    $(".zl_select.select1>select").empty().append("<option>页签</option>");
+                    $.each(data,function(index,obj){
+                        $(".zl_select.select1>select").append("<option value='"+obj.value+"'>"+obj.name+"</option>");
+                    })
+                    resultSelect1.reloadData(".select1");
+                }else{
+                    $("select",".select1")
+                            .val("").trigger("change")
+                            .prop("disabled",true);
+                }
+                resultSelect1.changeDisState(".select1");
+            });
+	$(".log")
+            .on("change",".select1>select",function(){
+                if(!!$(this).val()) {
+                    $("select",".operation").prop("disabled",false);
+                    var data2= $.parseJSON($("option:selected",".modular").attr("data-childData"));
+                    $(".operation>select").empty().append("<option>操作</option>");
+                    $.each(data2,function(index,obj){
+                        $(".zl_select.operation>select").append("<option value='"+obj.value+"'>"+obj.name2+"</option>");
+                    })
+                    resultSelect.reloadData(".operation");
+                }else{
+                    $("select",".operation")
+                            .val("").trigger("change")
+                            .prop("disabled",true);
+                }
+                resultSelect.changeDisState(".operation");
+            });
+    $(".clear").on("click",function(){
+        $("#from2").val("").datepicker( "option","maxDate",null );
+        $("#to2").val("").datepicker( "option","minDate",null );
+    });
+});
+</script>
+</head>
+
+<body>
+<div class="tab1-con ov-hi" style="display:block; overflow-y:auto;">
+    <div class="log mt0" tabindex="1">
+    	<div class="search-left">
+            <div class="modular zl_select dl-ib fl po-re ml30">
+                <select>
+                    <option value="">模块</option>
+                    <option value="1" data-childData='[{"value":"1","name":"模块1页签1","name2":"操作1"},{"value":"2","name":"模块1页签2","name2":"操作2"}]'>模块1</option>
+                    <option value="2" data-childData='[{"value":"1","name":"模块2页签1","name2":"操作1"},{"value":"2","name":"模块2页签2","name2":"操作2"}]'>模块2</option>
+                </select>
+            </div>
+            <div class="select1 zl_select dl-ib fl po-re ml15">
+                <select disabled="disabled">
+                    <option value="">页签</option>
+                    <option value="1">页签1</option>
+                    <option value="2">页签2</option>
+                </select>
+            </div>
+            <div class="operation zl_select dl-ib fl po-re ml15">
+                <select disabled="disabled">
+                    <option value="">操作</option>
+                    <option value="1">操作1</option>
+                    <option value="2">操作2</option>
+                </select>
+            </div>
+            <div class="dl-ib time fl ml15">
+                <div class="dl-ib from fl"><input type="text" id="from" onfocus="this.blur()" /><a class="date-clear" href="#"></a></div>
+                <div class="dl-ib fl txt">至</div>
+                <div class="dl-ib to fl"><input type="text" id="to" onfocus="this.blur()" /><a class="date-clear" href="#"></a></div>
+            </div>
+        </div>
+        <div class="search"><a>搜 索</a></div>
+        <div class="clear fl ml15"><a>清空筛选</a></div>
+    </div>
+    <div class="log-table admin" style="display:block">
+        <div class="table-top">
+            <div class="fl fs14 colorfff ml15">用户日志列表</div>
+            <div class="fr fs12 coloraaa mr15">共<span>20</span>条</div>
+        </div>
+        <div class="table-middle">
+            <table width="100%" cellpadding="0" border="0" cellspacing="0">
+                <thead>
+                    <td width="8%">No.</td>
+                    <td width="15%">模块</td>
+                    <td width="15%">页签</td>
+                    <td width="30%">操作</td>
+                    <td width="15%">时间</td>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td width="8%">1</td>
+                        <td width="15%">客户管理</td>
+                        <td width="15%">页签</td>
+                        <td width="30%">新建客户</td>
+                        <td width="15%">2016-1-29 13:03:51</td>
+                    </tr>
+                    <tr>
+                        <td width="8%">1</td>
+                        <td width="15%">客户管理</td>
+                        <td width="15%">页签</td>
+                        <td width="30%">新建客户</td>
+                        <td width="15%">2016-1-29 13:03:51</td>
+                    </tr>
+                </tbody>
+            </table>
+            <!----------------没有搜索到数据---数据加载中----(显示时把tbody和table-bottom隐藏)----------->
+            <div class="pt15 pb15 bgcolorfafafa ta-center" style="display:none">没有搜索到<span>【某某集团】</span>的数据~!</div>
+            <div class="empty-table pt15 pb15 bgcolorfafafa ta-center" style="display:none"><a>数据加载中......</a></div>
+            <!--------------没有搜索到数据---数据加载中-------结束-------->
+        </div>
+        <div class="table-bottom">
+            <div class="pagination-panel pb-10 mg-t-10 mr20">
+                <div id="pagination" class="pagination-content fr"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

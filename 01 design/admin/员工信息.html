@@ -1,0 +1,450 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>员工信息</title>
+<link href="js/plugins/select/default-style/css/content.css" rel="stylesheet" type="text/css" />
+<link href="css/index.css" rel="stylesheet" type="text/css" />
+<link href="js/plugins/defaultMsg/default-style/css/content.css" rel="stylesheet" type="text/css" />
+<link href="js/plugins/pagination/pagenation.css" rel="stylesheet" type="text/css" />
+<script src="js/jquery-1.11.1.min.js" language="javascript" type="text/javascript"></script>
+<script src="js/function.js" language="javascript" type="text/javascript"></script>
+<script src="js/plugins/defaultMsg/default-style/js/jquery.defaultMsg.js"></script>
+<script src="js/plugins/pagination/jquery.pagination.js"></script>
+<script src="js/plugins/select/default-style/js/jquery.zl_select_u3.js"></script>
+<script src="js/plugins/niceScroll/js/jquery.nicescroll.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	//f5刷新
+	$(".log").trigger("focus");
+	document.onkeydown = function(e){
+		var ev = window.event || e;
+		var code = ev.keyCode || ev.which;
+		if (code == 116) {
+			if(ev.preventDefault) {
+				ev.preventDefault();
+				window.top.f5();
+			} else {
+				ev.keyCode = 0;
+				ev.returnValue = false;
+			}
+		}
+	};
+	var top = window.top.document.body;
+	var self = window.self.document.body;
+	$(".user-name input").formsStyle();
+	popWH();
+	$(window).resize(popWH);
+	//下拉列表
+	$(".zl_select.select").zl_select({
+		w: 160
+		,h:30
+	});
+	$(".zl_select.select2").zl_select({
+		w: 160
+		,h:30
+	});
+	$(".zl_select.select3").zl_select({
+		w: 160
+		,h:30
+	});
+	$(".zl_select.select5").zl_select({
+		w: 160
+		,h:30
+	});
+	$(".select-drop ul").niceScroll({
+        cursorcolor: "#00C9C7",
+        autohidemode: false,
+	    cursorwidth: "5px",
+		background: "#EFEFEF",
+    });
+    //下拉列表
+    $(".zl_select.select1").zl_select({
+        w: 287
+        ,h:30
+        ,windowArea:top
+    });
+    $(".zl_select.select4").zl_select({
+        w: 287
+        ,h:30
+        ,windowArea:top
+    });
+	//添加销售员
+	$(".add").click(function(){
+		$(".add-salesman").appendTo(top).show().find(".pop-jxtj").show();
+		$(".add-salesman .pop-head span",top).text("添加销售员");
+		//工号可编辑
+		$(".add-salesman .job-number input",top).removeClass("no-border").attr("readonly",false)
+			.siblings(".impor").show();
+		$(".add-salesman .job-number input",top).focus(function(){$(this).addClass("focus").removeClass("no-border");});
+		$(".add-salesman .job-number input",top).blur(function(){$(this).removeClass("focus").removeClass("no-border");});
+		$(".zzc",top).show();
+        /*window.top.setPopContentHeight();*/
+		//销售级别初始化滚动条插件
+    	window.top.setNiceScroll(".select1 .select-drop ul");
+		//工作组初始化滚动条插件
+    	window.top.setNiceScroll(".select4 .select-drop ul");
+		//选取角色初始化滚动条插件
+    	window.top.setNiceScroll("#scroll");
+	});
+	//编辑销售员
+	$(".edit").click(function(){
+		$(".add-salesman").appendTo(top).show().find(".pop-jxtj").hide();
+		$(".add-salesman .pop-head span",top).text("编辑销售员");
+		//工号不可编辑
+		$(".add-salesman .job-number input",top).addClass("no-border").attr("readonly","readonly")
+			.siblings(".impor").hide();
+		$(".add-salesman .job-number input",top).focus(function(){$(this).addClass("no-border");});
+		$(".add-salesman .job-number input",top).blur(function(){$(this).addClass("no-border");});
+		$(".zzc",top).show();
+        /*window.top.setPopContentHeight();*/
+	});
+	//查看客户信息
+	$(".cust-info").click(function(){
+		$(".view-cus-info").appendTo(top).show().find(".pop-jxtj").show();
+		$(".view-cus-info .pop-head span",top);
+		$(".zzc",top).show();
+		window.top.setPopContentHeight();
+		//编辑
+		$(".view-cus-info .pop-bj",top).click(function(){
+			$(".view-cus-info",top).appendTo($(window.top.frames['mainFrame'].frames['tabFrame'].document.body)).hide();
+			$(".add-salesman").appendTo(top).show().find(".pop-jxtj").show();
+			$(".add-salesman .pop-head span",top).text("编辑销售员");
+			//工号不可编辑
+			$(".add-salesman .job-number input",top).addClass("no-border").attr("readonly","readonly");
+			$(".add-salesman .job-number input",top).focus(function(){$(this).addClass("no-border");});
+			$(".add-salesman .job-number input",top).blur(function(){$(this).addClass("no-border");});
+			//销售级别初始化滚动条插件
+			window.top.setNiceScroll(".select1 .select-drop ul");
+			//工作组初始化滚动条插件
+			window.top.setNiceScroll(".select4 .select-drop ul");
+			//选取角色初始化滚动条插件
+			window.top.setNiceScroll("#scroll");
+		});
+	});
+	//批量导入销售员
+	$(".import").click(function(){
+		$(".batch-import").appendTo(top).show();
+		$(".zzc",top).show();	
+	});
+	//批量删除确认
+	$(".table-top").delegate(".delete-able","click",function(){
+		$(".confirm").appendTo(top).show();
+		$(".zzc",top).show();	
+		$(".confirm-txt",top).html("您确定要删除所勾选的销售员吗？")
+		$(".confirm .pop-qd",top).click(function(){
+			$(this).parent().parent().appendTo($(window.top.frames['mainFrame'].frames['tabFrame'].document.body)).hide();
+			$(".zzc",window.top.document).hide();
+			$(".table-middle .checkbox:first").removeClass("selall");
+		});	
+	});
+	//删除
+	$(".table-middle").delegate(".delete-staff","click",function(){
+		$(".confirm").appendTo(top).show();
+		$(".zzc",top).show();
+		$(".confirm-txt",top).html("您确定要删除销售员【<span>王炳成，薛鹏 Kevin，吴建 white杨书豪、Thoysate Foster</span>】吗？")
+	});
+	//密码重置
+	$(".reset").click(function(){
+		$(".reset-psw").appendTo(top).show();
+		$(".zzc",top).show();	
+	});
+	//分页
+	$("#pagination").pagination(50, {
+		items_per_page: 1,
+		current_page: 2,
+		prev_text: "上一页",
+		next_text: "下一页",
+		first_text: " ",
+		prev_text: " ",
+		next_text: " ",
+		last_text: " ",
+		jump_text: "GO",
+		num_edge_entries: 3,
+		ellipse_text: '...',
+		num_display_entries: 5,
+		isSum: false,
+		link_to: 'javascript:void(0)'
+	});
+	//选择角色下拉框
+	$(".record-con .goods-name em").click(function(){
+		$(".record-con .goods-name > div",top).toggle();
+		$(".role",top).toggleClass("active");
+		$(this).toggleClass("toggle");
+		$("#scroll").getNiceScroll().resize();
+		$(window.top.document).bind("click",function(e){
+			var evt=e.target;
+			if($(evt).closest(".goods-name",top).length == 0){
+				$(".goods-name > div",top).hide();
+				$(window.top.document).unbind("click");
+				$(".record-con .goods-name em",top).removeClass("toggle");
+				$(".role",top).removeClass("active");
+			}
+		});		
+	});
+	//选取角色
+	$(".role .checkbox").click(function(){
+		if($(this).hasClass("checksel")) {
+			$(this).removeClass("checksel");
+			var txt = $(this).text() +";";
+			$(".role > span font",top).each(function(index, element) {
+                if( txt == $(element).text()) {
+					$(element).remove();
+					$(".role",top).attr("title",$(".role > span",top).text());	
+				};
+            });
+		}
+		else {
+			$(this).addClass("checksel");
+			var txt = $(this).text();
+			var font = $("<font>"+txt+";"+"</font>");
+			$(font).appendTo($(".role > span",top));
+			$(".role",top).attr("title",$(".role > span",top).text());	
+		};
+	});
+});
+</script>
+</head>
+
+<body>
+<div class="tab1-con ov-hi" style="display:block; overflow-y:auto;">
+	<div class="log mt0" tabindex="1">
+    	<div class="search-left">
+            <div class="user-name"><input type="text" msg="姓名" /></div>
+            <div class="select5 operation zl_select dl-ib fl po-re ml15">
+                <select>
+                    <option>工作组</option>
+                    <option value="2">全部</option>
+                    <option value="3">工作组1</option>
+                    <option value="4">工作组2</option>
+                    <option value="5">工作组3</option>
+                </select>
+            </div>
+            <div class="select operation zl_select dl-ib fl po-re ml15">
+                <select>
+                    <option>职位</option>
+                    <option value="2">销售员</option>
+                    <option value="3">销售员</option>
+                    <option value="4">销售员</option>
+                    <option value="5">销售员</option>
+                </select>
+            </div>
+            <div class="select2 operation zl_select dl-ib fl po-re ml15">
+                <select>
+                    <option>销售级别</option>
+                    <option value="2">普通</option>
+                    <option value="3">铜牌</option>
+                    <option value="4">银牌</option>
+                    <option value="5">金牌</option>
+                    <option value="3">铜牌</option>
+                    <option value="4">银牌</option>
+                    <option value="5">金牌</option>
+                </select>
+            </div>
+            <div class="select3 operation zl_select dl-ib fl po-re ml15">
+                <select>
+                    <option>角色</option>
+                    <option value="2">管理员</option>
+                    <option value="3">普通销售</option>
+                    <option value="4">销售代表</option>
+                    <option value="5">超级管理员</option>
+                    <option value="6">超级销售</option>
+                </select>
+            </div>
+        </div>
+        <div class="search"><a>搜 索</a></div>
+        <div class="clear fl ml15"><a>清空筛选</a></div>
+    </div>
+    <div class="log-table" style="display:block">
+        <div class="table-top">
+            <div class="fl fs14 colorfff ml15">销售员列表</div>
+            <div class="fr fs12 coloraaa mr15">共<span>20</span>条</div>
+            <div class="table-border"></div>
+            <div class="delete fr"><a>批量删除</a></div>
+            <div class="table-border"></div>
+            <div class="import colorfff fr"><a>导入</a></div>
+            <div class="add colorfff fr"><a>添加</a></div>
+        </div>
+        <div class="table-middle ov-hi">
+            <table width="100%" cellpadding="0" border="0" cellspacing="0">
+                <thead>
+                	<td width="2%" class="checkbox"></td>
+                    <td width="3%">No.</td>                   
+                    <td width="10%">工号(登录账号)</td>
+                    <td width="6%">姓名</td>
+                    <td width="13%">工作组</td>
+                    <td width="8%">职位</td>
+                    <td width="12%">销售级别</td>
+                    <td width="25%">角色</td>
+                    <td width="18%">操作</td>
+                </thead>
+                <tbody>
+                    <tr>
+                    	<td width="2%" class="checkbox"></td>
+                        <td width="3%">1</td>
+                        <td width="10%">123</td>
+                        <td width="6%"><a class="cust-info">张三</a></td>
+                        <td width="13%">市场运营部市场</td>
+                        <td width="8%">销售员</td>
+                        <td width="12%">金牌(五折以上)</td>
+                        <td width="25%">销售员销售员销售员销售员销售员销售员销售员销11</td>
+                        <td width="18%"><a class="edit mr20">编辑</a><a class="reset mr20">重置密码</a><a class="delete-staff mr20">删除</a></td>
+                    </tr>
+                    <tr>
+                    	<td width="2%" class="checkbox"></td>
+                        <td width="3%">1</td>
+                        <td width="10%">123</td>
+                        <td width="6%"><a class="cust-info">张三</a></td>
+                        <td width="13%">市场运营部市场</td>
+                        <td width="8%">销售员</td>
+                        <td width="12%">金牌(5.60折以上)</td>
+                        <td width="25%">销售员</td>
+                        <td width="18%"><a class="edit mr20">编辑</a><a class="reset mr20">重置密码</a><a class="delete-staff mr20">删除</a></td>
+                    </tr>
+                </tbody>
+            </table>
+            <!----------------没有搜索到数据---数据加载中----(显示时把tbody和table-bottom隐藏)----------->
+            <div class="pt15 pb15 bgcolorfafafa ta-center" style="display:none">没有搜索到<span>【某某集团】</span>的数据~!</div>
+            <div class="empty-table pt15 pb15 bgcolorfafafa ta-center" style="display:none"><a>数据加载中......</a></div>
+            <!--------------没有搜索到数据---数据加载中-------结束-------->
+        </div>
+        <!----------分页------------>
+        <div class="table-bottom">
+            <div class="pagination-panel pb-10 mg-t-10 mr20">
+                <div id="pagination" class="pagination-content fr"></div>
+            </div>
+        </div>
+        <!----------分页结束------------>
+    </div>
+</div>
+<!----------弹出层---添加/编辑销售员--------->
+<div class="pop add-salesman popwh">
+	<div class="pop-head"><span>添加销售员</span><a></a></div>
+    <div class="pop-con">
+    	<div class="h30 ml30 mb15 job-number"><span class="headline">工号</span><input type="text" value="1111" /><span class="impor">*</span></div>
+        <div class="h30 ml30 mb15"><span class="headline">姓名</span><input type="text" /><span class="impor">*</span></div>
+        <div class="h30 ml30 mb15">
+        	<span class="headline">工作组</span>
+            <div class="select4 zl_select dl-ib fl po-re">
+                <select>
+                    <option value="2">系统集成</option>
+                    <option value="3">系统集成</option>
+                    <option value="3">系统集成</option>
+                    <option value="3">系统集成</option>
+                    <option value="3">系统集成</option>
+                    <option value="3">系统集成</option>
+                    <option value="3">系统集成</option>
+                </select>
+            </div>
+            <span class="impor">*</span>
+        </div>
+        <div class="h30 ml30 mb15"><span class="headline">职位</span><input type="text" /><span class="impor">*</span></div>
+        <div class="h30 ml30 mb15"><span class="headline">座机</span><input type="text" /></div>
+        <div class="h30 ml30 mb15"><span class="headline">手机</span><input type="text" /><span class="impor">*</span></div>
+        <div class="h30 ml30 mb15">
+        	<span class="headline">邮箱</span><input type="text" /><span class="impor">*</span><span class="error">邮箱格式不正确</span>
+        </div>
+        <div class="h30 ml30 mb15">
+        	<span class="headline">销售级别</span>
+            <div class="select1 zl_select dl-ib fl po-re">
+                <select>
+                    <option value="2">级别名称(改价范围)</option>
+                    <option value="3">金牌(6折以上)</option>
+                    <option value="3">金牌(6折以上)</option>
+                    <option value="3">金牌(6折以上)</option>
+                    <option value="3">金牌(6折以上)</option>
+                    <option value="3">金牌(6折以上)</option>
+                    <option value="3">金牌(6折以上)</option>
+                    <option value="3">金牌(6折以上)</option>
+                    <option value="3">金牌(6折以上)</option>
+                    <option value="3">金牌(6折以上)</option>
+                    <option value="3">金牌(6折以上)</option>
+                </select>
+            </div>
+        </div>
+        <div class="h30 ml30 mb15 record-con">
+        	<span class="headline">角色</span>
+            <div class="role goods-name dl-ib po-re fl"> <!--错误样式给role 添加 error-style -->
+                <span style="color:#333"></span><em></em>
+                <div class="pr4">
+                	<div class="ovy-auto mh123 outline" id="scroll">
+                        <a class="checkbox">管理员</a>
+                        <a class="checkbox">普通销售</a>
+                        <a class="checkbox">销售代表</a>
+                        <a class="checkbox">超级管理员</a>
+                        <a class="checkbox">超级销售</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pop-foot"><a class="pop-jxtj">继续添加</a><a class="pop-qd">确 定</a><a class="pop-qx">取消</a></div>
+</div>
+<!----------弹出层添加/编辑销售员 结束------------>
+<!----------弹出层---查看员工信息--------->
+<div class="pop view-cus-info popwh">
+	<div class="pop-head"><span>查看员工信息</span><a></a></div>
+    <div class="pop-con" style="overflow:auto">
+    	<div class="h30 ml30 mb15"><span class="headline">工号</span><span class="headline headline2">11111</span></div>
+        <div class="h30 ml30 mb15"><span class="headline">姓名</span><span class="headline headline2">张三</span></div>
+        <div class="h30 ml30 mb15"><span class="headline">工作组</span><span class="headline headline2">系统集成</span></div>
+        <div class="h30 ml30 mb15"><span class="headline">职位</span><span class="headline headline2">销售员</span></div>
+        <div class="h30 ml30 mb15"><span class="headline">座机</span><span class="headline headline2">123123123</span></div>
+        <div class="h30 ml30 mb15"><span class="headline">手机</span><span class="headline headline2">123123123</span></div>
+        <div class="h30 ml30 mb15"><span class="headline">邮箱</span><span class="headline headline2">123456@163.com</span></div>
+        <div class="h30 ml30 mb15"><span class="headline">销售级别</span><span class="headline headline2">金牌</span></div>
+        <div class="h30 ml30 mb15">
+        	<span class="headline">角色</span>
+            <span class="headline headline2" style="height:auto;">管理员</span>
+        </div>
+    </div>
+    <div class="pop-foot"><a class="pop-bj">编 辑</a><a class="pop-qx">关闭</a></div>
+</div>
+<!----------弹出层查看员工信息 结束------------>
+
+<!----------弹出层---批量导入销售员--------->
+<div class="pop batch-import">
+	<div class="pop-head"><span>批量导入销售员</span><a></a></div>
+    <div class="pop-con ov-hi">
+    	<form>
+            <div class="ml30 mb15 fs14 color222">① 请下载数据模板，填写要导入的数据</div>
+            <div class="download ml30 mb15 fs13 color0066cc ti20"><a>下载数据模板</a></div>
+            <div class="ml30 mb15 fs14 color222">② 上传需要导入的文件</div>
+            <div class="upload mb20"><div></div><input type="file" /><span>选择文件</span></div>
+            <span class="upload-fail">上传失败</span>
+            <div class="file-box file-list ml30 mb20">
+                <span class="file-name">account_import_template.csv</span><a>删除</a>
+                <!--上传进度条-->
+                <!--<div class="upload-bar"><div class="bar"></div></div>-->
+                
+                <!--上传完成-->
+                <!--<div class="success">—— 上传成功</div>-->
+            </div>
+        </form>
+    </div>
+    <div class="pop-foot"><button class="pop-qd pop-qd-dis" disabled="disabled">确 定</button><a class="pop-qx">取消</a></div> 
+</div>
+<!----------弹出层批量导入销售员 结束------------>
+<!----------弹出层---删除确认--------->
+<div class="pop confirm">
+	<div class="pop-head"><span>删除确认</span><a></a></div>
+    <div class="pop-con">
+    	<div class="confirm-icon"></div>
+        <div class="confirm-txt">您确定要删除销售员【<span>王炳成，薛鹏 Kevin，吴建 white杨书豪、Thoysate Foster</span>】吗？</div>	
+    </div>
+    <div class="pop-foot"><a class="pop-qd">确 定</a><a class="pop-qx">取消</a></div>
+</div>
+<!----------弹出层删除确认 结束------------>
+<!----------弹出层---密码重置--------->
+<div class="reset-psw pop">
+	<div class="pop-head"><span>密码重置</span><a></a></div>
+    <div class="pop-con">
+    	<div class="confirm-icon"></div>
+        <div class="confirm-txt">您确定对销售员【***】进行重置密码操作吗？</div>	
+    </div>
+    <div class="pop-foot"><a class="pop-qd">确 定</a><a class="pop-qx">取消</a></div>
+</div>
+<!----------弹出层密码重置 结束------------>
+
+</body>
+</html>

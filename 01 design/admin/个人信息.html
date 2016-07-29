@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>查看订单</title>
+<link href="css/index.css" rel="stylesheet" type="text/css" />
+<script src="js/jquery-1.11.1.min.js" language="javascript" type="text/javascript"></script>
+<script src="js/function.js" language="javascript" type="text/javascript"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	//f5刷新
+	$(".record-head").trigger("focus");
+	document.onkeydown = function(e){
+		var ev = window.event || e;
+		var code = ev.keyCode || ev.which;
+		if (code == 116) {
+			if(ev.preventDefault) {
+				ev.preventDefault();
+			} else {
+				ev.keyCode = 0;
+				ev.returnValue = false;
+			}
+		}
+	};     
+});
+</script>
+</head>
+
+<body style="overflow-y:auto" class="mt30">
+<div class="record-head" tabindex="1">
+    <div class="return fr">
+    	<a href="消息列表.html">返回消息列表</a>
+    </div>
+</div>
+<div class="record-table table-top colorfff mt7">
+	<div class="fl ml15">个人信息</div>
+</div>
+<div class="record-con">
+	<div class="con-top" style="border-bottom:none; padding:25px 0">
+        <div class="ov-hi mb7">
+            <div class="fl width290">
+            	<span class="dl-ib h15 lh15 ta-right width38 ov-hi">部门：</span>
+                <span class="dl-ib h15 lh15 ov-hi">张三 </span>
+            </div>
+            <div class="fl width290">
+            	<span class="dl-ib h15 lh15 ta-right width75 ov-hi">工号：</span>
+                <span class="dl-ib h15 lh15 ov-hi">111108号</span>
+            </div>
+            <div class="fl">
+            	<span class="dl-ib h15 lh15 ta-right width75 ov-hi">姓名：</span>
+                <span class="dl-ib h15 lh15 ov-hi">卓朗科技</span>
+            </div>
+        </div>
+        <div class="ov-hi mb7">
+            <div class="fl width290">
+            	<span class="dl-ib h15 lh15 ta-right width38 ov-hi">职位：</span>
+            	<span class="dl-ib h15 lh15 ov-hi">12312121212</span>
+            </div>
+            <div class="fl width290">
+            	<span class="dl-ib h15 lh15 ta-right width75 ov-hi">座机：</span>
+            	<span class="dl-ib h15 lh15 ov-hi">12121212121</span>
+            </div>
+            <div class="fl">
+            	<span class="dl-ib h15 lh15 ta-right width75 ov-hi">手机：</span>
+            	<span class="dl-ib h15 lh15 ov-hi">wangbingcheng@troila.com</span>
+            </div>
+        </div>
+        <div class="ov-hi mb7">
+            <div class="fl width290">
+            	<span class="dl-ib h15 lh15 ta-right width38 ov-hi">邮箱：</span>
+            	<span class="dl-ib h15 lh15 ov-hi">金牌销售</span>
+            </div>
+            <div class="fl width290">
+            	<span class="dl-ib h15 lh15 ta-right width75 ov-hi">销售级别：</span>
+            	<span class="dl-ib h15 lh15 ov-hi">管理员</span>
+            </div>
+            <div class="fl">
+            	<span class="dl-ib h15 lh15 ta-right width75 ov-hi">角色：</span>
+            	<span class="dl-ib h15 lh15 ov-hi">wangbingcheng@troila.com</span>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

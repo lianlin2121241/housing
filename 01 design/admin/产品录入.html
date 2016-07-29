@@ -1,0 +1,544 @@
+<!DOCTYPE>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="edge" />
+<title>无标题文档</title>
+<link href="js/plugins/select/default-style/css/content.css" rel="stylesheet" type="text/css" />
+<link href="css/index.css" rel="stylesheet" type="text/css" />
+<link href="js/plugins/defaultMsg/default-style/css/content.css" rel="stylesheet" type="text/css" />
+<link href="js/plugins/pagination/pagenation.css" rel="stylesheet" type="text/css" />
+<link href="css/iquery-ui-index.css" rel="stylesheet" type="text/css" />
+<link href="css/jquery-ui.min.css" rel="stylesheet" type="text/css" />
+<script src="js/jquery-1.11.1.min.js" language="javascript" type="text/javascript"></script>
+<script src="js/plugins/ui/jquery.ui.core.min.js" type="text/javascript"></script>
+<script src="js/plugins/ui/jquery.ui.widget.min.js" type="text/javascript"></script>
+<script src="js/plugins/ui/jquery.ui.position.min.js" type="text/javascript"></script>
+<script src="js/plugins/ui/jquery.ui.menu.min.js" type="text/javascript"></script>
+<script src="js/plugins/ui/jquery.ui.autocomplete.js" type="text/javascript"></script>
+<script src="js/function.js" language="javascript" type="text/javascript"></script>
+<script src="js/plugins/select/default-style/js/jquery.zl_select_u3.js"></script>
+<script src="js/plugins/defaultMsg/default-style/js/jquery.defaultMsg.js"></script>
+<script src="js/plugins/pagination/jquery.pagination.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	//f5刷新
+	$(".log").trigger("focus");
+	document.onkeydown = function(e){
+		var ev = window.event || e;
+		var code = ev.keyCode || ev.which;
+		if (code == 116) {
+			if(ev.preventDefault) {
+				ev.preventDefault();
+				window.top.f5();
+			} else {
+				ev.keyCode = 0;
+				ev.returnValue = false;
+			}
+		}
+	};
+	contentWH();
+	$(window).resize(contentWH);
+	popWH();
+	//default msg
+	$(".user-name input").formsStyle();
+	//下拉列表
+	$(".zl_select.select3").zl_select({
+		w: 65
+		, h: 25
+		,windowArea:"top"
+	});
+	$(".zl_select.select-pro").zl_select({
+		w: 245
+		, h: 25
+		,windowArea:"top"
+	});
+	$(".zl_select.modular").zl_select({
+		w: 160
+		,h:30
+	});
+	$(".zl_select.operation").zl_select({
+		w: 160
+		,h:30
+	});
+	$(".zl_select.select2").zl_select({
+		w: 302
+		, h: 28
+		,windowArea:"top"
+	});
+	var top = window.top.document.body;
+	//添加产品信息
+	$(".add").click(function(){
+		$(".add-product.add-pro").appendTo(top).show().find(".pop-jxtj").show();
+		$(".add-product.add-pro .pop-head span",top).text("添加产品");
+		$(".zzc",top).show();
+		//选择名称初始化滚动条插件
+    	window.top.setNiceScroll(".select-pro .select-drop ul");
+        window.top.setPopContentHeight();
+		$("#pro-name",top).autocomplete({
+		  minLength: 0,
+		  source: proName,
+		  select: function( event, ui ) {
+			$("#pro-name",top).val( ui.item.value );
+			alert(ui.item.id);
+			return false;
+		  }
+    	});
+		window.top.setNiceScroll(".ui-autocomplete");
+	});
+	//编辑产品信息
+	$(".product1").on("click",".sj-btn .bj",function(){
+		$(".add-product.add-pro").appendTo(top).show().find(".pop-jxtj").hide();
+		$(".add-product.add-pro .pop-head span",top).text("编辑产品信息");
+		$(".zzc",top).show();
+	});
+	//删除产品信息
+	$(".sj-btn .sc").click(function(){
+		$(".confirm").appendTo(top).show();
+		$(".zzc",top).show();
+	});
+	//查看产品信息
+	$(".goods-name a").click(function(){
+		$(".view-pro.add-product").appendTo(top).show();
+		$(".zzc",top).show();
+		window.top.setPopContentHeight();
+	});
+	//全选
+    $(".table-middle").off("click");
+
+    $(".table-middle").on("click",".pro1-head .checkbox",function(){
+        !!$(this).hasClass("sel")?$(this).removeClass("sel"):$(this).addClass("sel");
+        !!$(".pro1-head .checkbox.sel").length>0?$(".delete").addClass("delete-able"):$(".delete").removeClass("delete-able");
+        if($(".pro1-head .checkbox.sel").length==$(".pro1-head .checkbox").length){
+            $(".product-head .checkbox").addClass("selall");
+        }else{
+            $(".product-head .checkbox").removeClass("selall");
+        }
+    })
+
+    $(".table-middle").on("click",".product-head .checkbox",function(){
+        var $checkboxChild=$(".pro1-head .checkbox");
+        if($(this).hasClass("selall")){
+            $(this).removeClass("selall");
+            $checkboxChild.removeClass("sel");
+            $(".delete").removeClass("delete-able");
+        }else{
+            $(this).addClass("selall");
+            $checkboxChild.addClass("sel");
+            $(".delete").addClass("delete-able");
+        }
+    })
+	//点击上架
+	$(".pro1-head").on("click",".sj-btn .sj",function(){
+		var xj = $("<div class='xj-btn fr'><div class='xj'>下架</div><div class='ysj fr color478120'>已上架</div></div>");
+		$(xj).appendTo($(this).parents(".pro1-head"));
+		$(this).parent().remove();
+	});
+	//点击下架
+	$(".pro1-head").on("click",".xj-btn .xj",function(){
+		var sj = $("<div class='sj-btn fr'><a class='sc'>删除</a><a class='bj'>编辑</a><div class='name-border fr t9 ml15'></div><div class='sj'>上架</div><div class='wsj fr coloraaa'>已下架</div></div>");
+		$(sj).appendTo($(this).parents(".pro1-head"));
+		$(this).parent().remove();	
+	});
+	//分页
+	$("#pagination").pagination(50, {
+		items_per_page: 1,
+		current_page: 2,
+		prev_text: "上一页",
+		next_text: "下一页",
+		first_text: " ",
+		prev_text: " ",
+		next_text: " ",
+		last_text: " ",
+		jump_text: "GO",
+		num_edge_entries: 3,
+		ellipse_text: '...',
+		num_display_entries: 5,
+		isSum: false,
+		link_to: 'javascript:void(0)'
+	});
+	//checkbox
+	$(".pro-table").on("click",".checkbox",function(){
+		if($(this).hasClass("checksel")) {
+			$(this).removeClass("checksel");
+			$(this).siblings(".date-zzc").show();
+		}
+		else {
+			$(this).addClass("checksel");	
+			$(this).siblings(".date-zzc").hide();
+		}
+	});
+	//添加产品产品名称模糊搜索
+	var proName = [
+      {
+        value: "Tcenter",
+		id:"aaa",
+      },
+      {
+        value: "Troila Cloud",
+        id:"bbb",
+      },
+	  {
+        value: "Troila Cloud",
+        id:"bbb",
+      },
+	  {
+        value: "Troila Cloud",
+        id:"bbb",
+      },
+	  {
+        value: "Troila Cloud",
+        id:"bbb",
+      },
+	  {
+        value: "Troila Cloud",
+        id:"bbb",
+      },
+      {
+        value: "Troila Desktop",
+        id:"ccc",
+      }
+    ];
+});
+</script>
+</head>
+
+<body>
+<div class="tab1-con ov-hi" style="display:block; overflow-y:auto;">
+    <div class="log product mt0" tabindex="1">
+    	<div class="search-left">
+            <div class="user-name"><input type="text" msg="产品名称/版本号" /></div>
+            <div class="contacts user-name"><input type="text" msg="简称" /></div>
+            <div class="modular zl_select dl-ib fl po-re ml15">
+                <select>
+                    <option>状态</option>
+                    <option value="2">未上架</option>
+                    <option value="3">已上架</option>
+                    <option value="3">已下架</option>
+                </select>
+            </div>
+            <div class="operation zl_select dl-ib fl po-re ml15">
+                <select>
+                    <option>类型</option>
+                    <option value="2">正式版</option>
+                    <option value="3">试用版</option>
+                </select>
+            </div>
+        </div>
+        <div class="search"><a>搜 索</a></div>
+        <div class="clear fl ml15"><a>清空筛选</a></div>
+	</div>
+    <div class="log-table product-list product-wrapper" style="display:block">
+        <div class="table-top">
+            <div class="fl fs14 colorfff ml15">产品列表</div>
+            <div class="fr fs12 coloraaa mr15">共<span>20</span>条</div>
+            <div class="table-border"></div>
+            <!--<div class="delete fr"><a>批量删除</a></div>-->
+            <div class="add colorfff fr mr0"><a>添加</a></div>
+        </div>
+        <div class="table-middle">
+            <div class="product-head width-p-98 mlauto mrauto">
+                <!--<span class="checkbox dl-ib h40"></span>-->
+                <span class="dl-ib h40 width30">No.</span>
+                <span class="width310 dl-ib h40">产品名称</span>
+                <span class="width100 dl-ib h40">单位</span>
+                <span class="width258 dl-ib h40">无限期单价(元)</span>
+                <span class="width135 dl-ib h40">有限期单价(元)</span>
+            </div>
+            <div class="product1">
+                <div class="pro1-head h40">
+                    <!--<span class="checkbox dl-ib"></span>-->
+                    <span class="dl-ib width30">1</span>
+                    <div class="goods-name width350 dl-ib ov-hi">
+                    	<a href="#">Troila Cloud  2.0 (正式版)</a>
+                    </div>
+                    <div class="name-border"></div>
+                    <div class="goods-name dl-ib ov-hi color646464">简称：TC</div>
+                    <div class="sj-btn fr">
+                        <a class="sc">删除</a>
+                        <a class="bj">编辑</a>
+                        <div class="name-border fr t9 ml15"></div>
+                        <div class="sj">上架</div>
+                        <div class="wsj fr colorae0004">未上架</div>
+                    </div>
+                </div>
+                <div class="pro1-con">
+                    <div>
+                    	<img src="images/has-license.png" class="has-license pl10 pr31" title="含有证书" />
+                        <span class="width280 dl-ib ta-left text-break v-a-m">TCenter</span>
+                        <span class="width130 dl-ib v-a-m">个</span>
+                        <span class="width145 dl-ib v-a-m ta-right">100</span>	
+                        <span class="width195 dl-ib v-a-m ta-right">10000<span>(年)</span></span>
+                    </div>
+                    <div>
+                    	<img src="images/has-license.png" class="has-license pl10 pr31" title="含有证书" />
+                        <span class="width280 dl-ib ta-left text-break v-a-m">TCenter</span>
+                        <span class="width130 dl-ib v-a-m">个</span>
+                        <span class="width145 dl-ib v-a-m ta-right">1000000</span>
+                        <span class="width195 dl-ib v-a-m ta-right">1000<span>(年)</span></span>
+                    </div>
+                    <div>
+                        <span class="width280 dl-ib pl55 ta-left text-break v-a-m">TCenter</span>
+                        <span class="width130 dl-ib v-a-m">个</span>
+                        <span class="width145 dl-ib v-a-m ta-right">10000</span>
+                        <span class="width195 dl-ib v-a-m ta-right">100000000<span>(年)</span></span>
+                    </div>
+                </div>
+            </div>
+            <div class="product1">
+                <div class="pro1-head h40">
+                    <!--<span class="checkbox dl-ib"></span>-->
+                    <span class="dl-ib width30">1</span>
+                    <div class="goods-name width350 dl-ib ov-hi">
+                    	<a href="#">Troila Cloud  2.0 (正式版)</a>
+                    </div>
+                    <div class="name-border"></div>
+                    <div class="goods-name dl-ib ov-hi color646464">简称：TC</div>
+                    <div class="sj-btn fr">
+                        <a class="sc">删除</a>
+                        <a class="bj">编辑</a>
+                        <div class="name-border fr t9 ml15"></div>
+                        <div class="sj-dis" title="当前有名称、版本、类型三项相同的产品已上架！">上架</div>
+                        <div class="wsj fr colorae0004">未上架</div>
+                    </div>
+                </div>
+                <div class="pro1-con">
+                    <div>
+                    	<img src="images/has-license.png" class="has-license pl10 pr31" title="含有证书" />
+                        <span class="width280 dl-ib ta-left text-break v-a-m">TCenter</span>
+                        <span class="width130 dl-ib v-a-m">个</span>
+                        <span class="width145 dl-ib v-a-m ta-right">100</span>	
+                        <span class="width195 dl-ib v-a-m ta-right">10000<span>(年)</span></span>
+                    </div>
+                    <div>
+                    	<img src="images/has-license.png" class="has-license pl10 pr31" title="含有证书" />
+                        <span class="width280 dl-ib ta-left text-break v-a-m">TCenter</span>
+                        <span class="width130 dl-ib v-a-m">个</span>
+                        <span class="width145 dl-ib v-a-m ta-right">1000000</span>
+                        <span class="width195 dl-ib v-a-m ta-right">1000<span>(年)</span></span>
+                    </div>
+                    <div>
+                        <span class="width280 dl-ib pl55 ta-left text-break v-a-m">TCenter</span>
+                        <span class="width130 dl-ib v-a-m">个</span>
+                        <span class="width145 dl-ib v-a-m ta-right">10000</span>
+                        <span class="width195 dl-ib v-a-m ta-right">100000000<span>(年)</span></span>
+                    </div>
+                </div>
+            </div>
+            <div class="product1">
+                <div class="pro1-head h40">
+                    <!--<span class="checkbox dl-ib"></span>-->
+                    <span class="dl-ib width30">1</span>
+                    <div class="goods-name width350 dl-ib ov-hi">
+                    	<a href="#">Troila Cloud  2.0 (正式版)</a>
+                    </div>
+                    <div class="name-border"></div>
+                    <div class="goods-name dl-ib ov-hi color646464">简称：TDV</div>
+                    <div class="xj-btn fr">
+                    	<div class="xj">下架</div>
+                    	<div class="ysj fr color478120">已上架</div>
+                    </div>
+                </div>
+                <div class="pro1-con">
+                    <div>
+                        <img src="images/has-license.png" class="has-license pl10 pr31" title="含有证书" />
+                        <span class="width280 dl-ib ta-left text-break v-a-m">TCenter</span>
+                        <span class="width130 dl-ib v-a-m">个</span>
+                        <span class="width145 dl-ib v-a-m ta-right">100</span>	
+                        <span class="width195 dl-ib v-a-m ta-right">10000<span>(年)</span></span>
+                    </div>
+                    <div>
+                        <img src="images/has-license.png" class="has-license pl10 pr31" title="含有证书" />
+                        <span class="width280 dl-ib ta-left text-break v-a-m">TCenter</span>
+                        <span class="width130 dl-ib v-a-m">个</span>
+                        <span class="width145 dl-ib v-a-m ta-right">1000000</span>
+                        <span class="width195 dl-ib v-a-m ta-right">1000<span>(年)</span></span>
+                    </div>
+                    <div>
+                        <span class="width280 dl-ib pl55 ta-left text-break v-a-m">TCenter</span>
+                        <span class="width130 dl-ib v-a-m">个</span>
+                        <span class="width145 dl-ib v-a-m ta-right">10000</span>
+                        <span class="width195 dl-ib v-a-m ta-right">100000000<span>(年)</span></span>
+                    </div>
+                </div>
+            </div>
+            <!----------------没有搜索到数据---数据加载中----(显示时把product1和table-bottom隐藏)----------->
+        	<div class="pt15 pb15 bgcolorfafafa ta-center" style="display:none">没有搜索到<span>【某某集团】</span>的数据~!</div>
+       		<div class="empty-table pt15 pb15 bgcolorfafafa ta-center" style="display:none"><a>数据加载中......</a></div>
+        	<!--------------没有搜索到数据---数据加载中-------结束-------->
+        </div>
+        <!----------分页------------>
+        <div class="table-bottom">
+            <div class="pagination-panel pb-10 mg-t-10 mr20">
+                <div id="pagination" class="pagination-content fr"></div>
+            </div>
+        </div>
+        <!----------分页结束------------>
+    </div>
+</div>
+
+<!----------弹出层---添加/编辑产品信息--------->
+<div class="pop add-product add-pro width795 left23p popwh">
+	<div class="pop-head"><span>添加产品</span><a></a></div>
+    <div class="pop-con" style="overflow-y:auto">
+        <div class="h30 ml25 mb15">
+        	<span class="headline">产品名称</span><input type="text" id="pro-name" /><span class="impor">*</span><span class="error">产品名称不能为空</span>
+        </div>
+        <div class="h30 ml25 mb15">
+        	<span class="headline">简称</span><input type="text" /><span class="impor">*</span><span class="error color646464">请填写五位及以下英文</span>
+        </div>
+        <div class="h30 ml25 mb15">
+        	<span class="headline">版本</span><input type="text" /><span class="impor">*</span><span class="error">版本名称不能为空</span>
+        </div>
+        <div class="h30 ml25 mb15">
+        	<span class="headline mr15">类型</span>
+            <div class="select2 zl_select dl-ib fl po-re ml15">
+                <select>
+                	<option>类型</option>
+                    <option value="1" selected="selected">正式版</option>
+                	<option value="2">试用版</option>
+                </select>
+            </div>
+            <span class="impor ov-hi">*</span>
+        </div>
+        <div class="pro-table">
+        	<div class="pro-table-head">
+            	<div class="width275">名称</div>
+                <div class="width100">单位</div>
+                <div class="width190">无限期单价(元)</div>
+                <div class="width165">有限期单价(元)</div>
+                <div class="product-add width20">+</div>
+            </div>
+            <div class="pro-table-con pro-con-edit">
+            	<div class="select-pro zl_select dl-ib fl po-re mr30"> <!--错误样式 给select-container添加error-style -->
+                    <select>
+                        <option>名称</option>
+                        <option value="1" selected="selected">名称1</option>
+                        <option value="2">名称2</option>
+                    </select>
+                </div>
+                <div class="width75"><input type="text" class="input2" /></div>
+                <div class="width155 po-re">
+                	<span class="checkbox fl mr5"></span> <!--错误样式 给checkbox添加error-style -->
+                    <input type="text" class="input2 price" />
+                    <div class="date-zzc add-zzc"></div>
+                </div>
+                <div class=" width225 po-re">
+                	<span class="checkbox fl mr5"></span>
+                    <div class="select3 zl_select dl-ib fl po-re mr10">
+                        <select>
+                            <option value="1" selected="selected">年</option>
+                        	<option value="2">月</option>
+                        </select>
+                    </div>
+                    <input type="text" class="input2 price" />
+                    <div class="date-zzc add-zzc width185"></div>
+                </div>
+                <div class="product-reduce width20">-</div>
+            </div>
+            <div class="pro-error">产品名称不能为空</div>
+        </div>
+        <div class="ml25 mb15 describe">
+            <span class="headline">产品描述</span>
+            <textarea class="textarea"></textarea>
+            <label class="text-length-tip">剩余<span>400</span>字符</label>
+        </div>
+        <div class="ml25 mb15 pb15">
+            <span class="headline">产品资料</span>
+            <div class="upload-box">
+                <a class="upload-all">选择文件</a>
+                <input type="file" />
+            </div>
+            <!--<span class="upload-fail lh30">上传失败</span>-->
+            <span class="error lh30">最多上传10个文件</span>
+            <div class="file-fj">
+                <div class="file-list">
+                    <span>1 产品资料.doc</span>
+                    <a>删除</a>
+                </div>
+                <div class="file-list">
+                    <span>2 产品资料.doc</span>
+                    <a>删除</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pop-foot"><a class="pop-jxtj">继续添加</a><a class="pop-qd">确 定</a><a class="pop-qx">取消</a></div>
+</div>
+<!----------弹出层添加/编辑产品信息 结束------------>
+
+
+<!----------查看产品信息--------->
+<div class="pop view-pro add-product width795 left23p popwh">
+	<div class="pop-head"><span>查看产品信息</span><a></a></div>
+    <div class="pop-con" style="overflow-y:auto">
+        <div class="h30 ml25 mb15">
+        	<span class="headline">产品名称</span><span class="headline-con">troila cloud 1.0</span>
+        </div>
+        <div class="h30 ml25 mb15">
+        	<span class="headline">简称</span><span class="headline-con">tdv</span>
+        </div>
+        <div class="h30 ml25 mb15">
+        	<span class="headline">版本</span><span class="headline-con">1.0</span>
+        </div>
+        <div class="h30 ml25 mb15">
+        	<span class="headline mr15">类型</span><span class="headline-con">正式版</span>
+        </div>
+        <div class="pro-table mb15">
+        	<div class="pro-table-head">
+            	<div class="width275">名称</div>
+                <div class="width120">单位</div>
+                <div class="width190">无限期单价(元)</div>
+                <div class="width165">有限期单价(元)</div>
+            </div>
+            <div class="pro-table-con pro-con-noedit">
+            	<div class="width275 ti20">tdvtdvtdv</div>
+                <div class="width100 ti20">个</div>
+                <div class="width105 ta-right">1,000</div>
+                <div class="width190 ta-right">1000/年</div>
+            </div>
+            <div class="pro-table-con pro-con-noedit">
+            	<div class="width275 ti20">tdvtdvtdv</div>
+                <div class="width100 ti20">个</div>
+                <div class="width105 ta-right">1,000</div>
+                <div class="width190 ta-right">1000/年</div>
+            </div>
+        </div>
+        <div class="ml25 mb15 describe">
+        	<span class="headline">产品描述</span>
+            <span class="describe-txt">产品描述产品描述产品描述产品描述产品描述产品描述产品描述产品描述产品描述产品描述产品描述产品描述产品描述产品描述产品描述产品描述产品描述产品描述产品描述产品描述产品描述产品描述产品描述产品描述产品描述产品描述</span>
+        </div>
+        <div class="ml25 mb15 pb15 ov-hi">
+        	<span class="headline">产品资料</span>
+            <a class="upload-all">一键下载</a>
+            <div class="file-fj mt20">
+            	<div class="file-list">
+                	<span>1 产品资料.doc</span>
+                    <a>下载</a>
+                </div>
+                <div class="file-list">
+                	<span>2 产品资料.doc</span>
+                    <a>下载</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pop-foot"><a class="pop-qd">编 辑</a><a class="pop-qx">关闭</a></div>
+</div>
+<!----------查看产品信息 结束------------>
+
+
+<!----------弹出层---删除确认--------->
+<div class="pop confirm">
+	<div class="pop-head"><span>删除确认</span><a></a></div>
+    <div class="pop-con">
+    	<div class="confirm-icon"></div>
+        <div class="confirm-txt">您确定要删除产品【XXX】吗？</div>	
+    </div>
+    <div class="pop-foot"><a class="pop-qd">确 定</a><a class="pop-qx">取消</a></div>
+</div>
+<!----------弹出层删除确认 结束------------>
+
+
+</body>
+</html>

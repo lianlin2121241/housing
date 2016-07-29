@@ -1,0 +1,753 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>新建订单</title>
+<link href="js/plugins/radio/default-style/css/zl_radio.css" rel="stylesheet" type="text/css" />
+<link href="js/plugins/select/default-style/css/content.css" rel="stylesheet" type="text/css" />
+<link href="css/iquery-ui-index.css" rel="stylesheet" type="text/css" />
+<link href="css/jquery-ui.min.css" rel="stylesheet" type="text/css" />
+<link href="css/index.css" rel="stylesheet" type="text/css" />
+<script src="js/jquery-1.11.1.min.js" language="javascript" type="text/javascript"></script>
+<script src="js/plugins/ui/jquery.ui.core.min.js" type="text/javascript"></script>
+<script src="js/plugins/ui/jquery.ui.widget.min.js" type="text/javascript"></script>
+<script src="js/plugins/ui/jquery.ui.position.min.js" type="text/javascript"></script>
+<script src="js/plugins/ui/jquery.ui.menu.min.js" type="text/javascript"></script>
+<script src="js/plugins/select/default-style/js/jquery.zl_select_u3.js" type="text/javascript"></script>
+<script src="js/plugins/ui/jquery.ui.autocomplete.js" type="text/javascript"></script>
+<script src="js/plugins/ui/jquery.ui.datepicker.min.js" type="text/javascript"></script>
+<script src="js/plugins/jquery.ui.datepicker-zh-CN.js" type="text/javascript"></script>
+<script src="js/plugins/niceScroll/js/jquery.nicescroll.js" type="text/javascript"></script>
+<script src="js/plugins/radio/default-style/js/jquery.zl_radio_origin.js" type="text/javascript"></script>
+<script src="js/function.js" language="javascript" type="text/javascript"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	//f5刷新
+	$(".record-head").trigger("focus");
+	document.onkeydown = function(e){
+		var ev = window.event || e;
+		var code = ev.keyCode || ev.which;
+		if (code == 116) {
+			if(ev.preventDefault) {
+				ev.preventDefault();
+			} else {
+				ev.keyCode = 0;
+				ev.returnValue = false;
+			}
+		}
+	};
+//选择客户模糊搜索	
+	var customer = [
+      {
+        value: "jasonjasonjasonjasonjasonjasonjasonjasonjason",
+		id:"aaa",
+      },
+      {
+        value: "luffffffffffffffffffffffffffffffffffcy",
+        id:"bbb",
+      },
+      {
+        value: "天津市信阳通讯技术开发有限公司(zhaonaili)",
+        id:"ccc",
+      },
+      {
+        value: "lucy",
+        id:"bbb",
+      },
+      {
+        value: "lucy",
+        id:"bbb",
+      },
+      {
+        value: "lucy",
+        id:"bbb",
+      },
+      {
+        value: "lucy",
+        id:"bbb",
+      },
+      {
+        value: "lucy",
+        id:"bbb",
+      }
+    ];
+	$("#search").autocomplete({
+      minLength: 0,
+      source: customer,
+      focus: function( event, ui ) {
+        //$( "#search" ).val( ui.item.value );
+        return false;
+      },
+      select: function( event, ui ) {
+        $( "#search" ).val( ui.item.value );
+ 		alert(ui.item.id);
+        return false;
+      }
+    });
+	$(".ui-autocomplete").css("width",245);
+	var top = window.top.document.body;
+	//取消订单
+	$(".ta-center .pop-qx").click(function(){
+		$(".cancel-order").appendTo(top).show();
+		$(".zzc",top).show();	
+	});
+	$(".cancel-order .pop-qx").click(function(){
+		$(this).parent().parent().appendTo($(window.top.frames['mainFrame'].document.body)).hide();
+		$(".zzc",top).hide();
+	});
+	//清空产品
+	$(".pro-empty-able").click(function(){
+		$(".product-empty").appendTo(top).show();
+		$(".zzc",top).show();	
+	});
+	$(".pro-empty .pop-qx").click(function(){
+		$(this).parent().parent().appendTo($(window.top.frames['mainFrame'].document.body)).hide();
+		$(".zzc",top).hide();
+	});
+	//选择产品复选框
+	$(".goods-name .checkbox").click(function(){
+		$(this).toggleClass("checksel");	
+	});
+	//选择产品下拉框
+	$(".record-con .goods-name em").click(function(){
+		$(".record-con .goods-name > div").toggle();
+		$(".record-con .goods-name").toggleClass("active");
+		$(this).toggleClass("toggle");
+		$("#scroll").getNiceScroll().resize();
+		$(document).bind("click",function(e){
+			var evt=e.target;
+			if($(evt).closest(".goods-name").length == 0){
+				$(".goods-name > div").hide();
+				$(document).unbind("click");
+				$(".record-con .goods-name em").removeClass("toggle");
+				$(".record-con .goods-name").removeClass("active");
+			}
+		});		
+	});
+	$(".tj").click(function(){
+		$(".record-con .goods-name > div").hide();
+		$(".record-con .goods-name em").removeClass("toggle");
+		$(".record-con .goods-name").removeClass("active");
+	});
+	//删除产品
+	$(".con-middle .pro1 .reduce").click(function(){
+		$(".con-middle .pro1").remove();
+		$(".product1 .pro1").remove();
+	});
+	$(".con-middle .pro2 .reduce").click(function(){
+		$(".con-middle .pro2").remove();
+		$(".product1 .pro2").remove();	
+	});
+	//产品hover
+	$(".record-con.choose-goods .middle-left tbody tr.bgcolorebebeb").hover(function(){
+		$(this).parents(".middle-left").siblings(".middle-right").children("div.bgcolorebebeb").css("background-color","#b6dadc");	
+	},function(){
+		$(this).parents(".middle-left").siblings(".middle-right").children("div.bgcolorebebeb").css("background-color","#ebebeb");	
+	});
+	//日历控件
+	$(".datepicker").datepicker({
+		showOn: "both",
+		buttonImage: "images/date.png",
+		buttonText: null,
+		buttonImageOnly: true,
+		dateFormat:"yy-mm-dd",
+		onClose: function( selectedDate ) {
+				$(this).parent().css("border","1px solid #aaa");
+				$(this).siblings("img").attr("src","images/date.png");
+			}	
+	});
+	//选择客户名称
+	$(".product-name em").click(function(){
+		$(".product-name > div").toggle();
+		$(".product-name").toggleClass("active");
+		$(this).toggleClass("toggle");
+		$("#cus-scroll").getNiceScroll().resize();
+		$(document).bind("click",function(e){
+			var evt=e.target;
+			if($(evt).closest(".product-name").length == 0){
+				$(".product-name > div").hide();
+				$(document).unbind("click");
+				$(".product-name em").removeClass("toggle");
+				$(".product-name").removeClass("active");
+			}
+		});	
+	});
+	$(".product-name input").blur(function(){
+		$(this).css("border","none");
+		$(".product-name").removeClass("active");
+	});
+	$(".product-name input").focus(function(){
+		$(this).css("border","none");
+		$(this).siblings(".ovy-auto").hide();
+		$(".product-name em").removeClass("toggle");
+		$(".product-name").addClass("active");
+	});
+	$(".product-name div a").click(function(){
+		var txt = $(this).text();
+		$(".product-name input").val(txt).css("color","#222");
+		$(".product-name > div").hide();	
+		$(".product-name em").removeClass("toggle");
+		$(".product-name").removeClass("active");
+	});
+	//初始化滚动条插件
+    $("#scroll").niceScroll({
+        cursorcolor: "#00C9C7",
+        autohidemode: false,
+	    cursorwidth: "5px",
+		background: "#EFEFEF",
+    });
+	
+	$("#ui-id-1").niceScroll({
+        cursorcolor: "#00C9C7",
+        autohidemode: false,
+	    cursorwidth: "5px",
+		background: "#EFEFEF",
+    });
+	$("#cus-scroll").niceScroll({
+        cursorcolor: "#00C9C7",
+        autohidemode: false,
+	    cursorwidth: "5px",
+		background: "#EFEFEF",
+    });
+	//下拉列表
+	$(".zl_select.modular").zl_select({
+		w: 160
+		,h:30
+	});
+	$(".select-drop").niceScroll({
+        cursorcolor: "#00C9C7",
+        autohidemode: false,
+	    cursorwidth: "5px",
+		background: "#EFEFEF",
+    });
+	//有限期无限期radio
+	$(".zl_radio").zl_radio();
+	$(".middle-left").on("click",".zl_radio",function(){
+		if( $(".zl_radio2").hasClass("zl_radio_down") ) {
+			$(this).parents("td").siblings("td").find(".zl_radio1").siblings("span").css("color","#bbb");
+			$(this).siblings(".date-zzc").hide();	
+		};
+		if( $(".zl_radio1").hasClass("zl_radio_down") ) {
+			$(this).parents("td").siblings("td").find(".zl_radio2").siblings(".date-zzc").show();	
+			$(this).siblings("span").css("color","#222");	
+		}
+	});
+	//产品编辑点击保存修改
+	$("body").on("click",".save-able",function(){
+		$(".middle-left").find(".zl_radio").css("visibility","hidden"); //隐藏radio
+		$(".middle-left").find("input").
+			css({"border":"none","background-color":"transparent"}).attr("readonly","readonly"); //隐藏输入框变只读
+		$(".middle-left").find(".num-box").
+			css({"border":"none","background-color":"transparent"}); 
+		$(".middle-left").find(".num-box").children("input").focus(function(){
+			$(this).parent().css("border","none");
+		});
+		$(".middle-left").find(".num-box").children("input").blur(function(){
+			$(this).parent().css("border","none")
+		});
+		$(".middle-left").find(".finite").
+			css({"border":"none","background-color":"transparent"}); 
+		$(".middle-left").find(" input:not(.from input)").focus(function(){
+			$(this).css("border","none");
+		});
+		$(".middle-left").find(" input:not(.from input)").blur(function(){
+			$(this).css("border","none")
+		});
+		$(".middle-left").find(".zl_radio1:not(.zl_radio_down)").siblings("span").text("——"); //没有勾选“永久”变成“——”
+		$(".middle-left").find(".zl_radio2:not(.zl_radio_down)").parent(".all_account").hide();  
+		var span = $("<span class='colorbbb dl-i ml55'>——</span>");
+		$(span).appendTo( $(".middle-left").find(".zl_radio2:not(.zl_radio_down)").parents("td")); //没有勾选日期的变成“——”
+		$(".middle-left").find(".zl_radio2.zl_radio_down").siblings(".finite").children("span").css("color","#222");  
+		$(".middle-left").find(".zl_radio2.zl_radio_down").siblings(".time").children(".from").
+			css({"border":"none","background-color":"transparent"}).children("img").css("visibility","hidden");  //勾选日期的隐藏日历框	
+		$(".middle-left").find(".zl_radio2.zl_radio_down").siblings(".date-zzc").show().css("opacity","0");
+		$(".save-able").hide().siblings(".edit-pro-able").show();
+		$(".num-add").hide();
+		$(".num-reduce").hide();
+	});
+	//产品编辑点击编辑产品
+	$("body").on("click",".edit-pro-able",function(){
+		$(".middle-left").find(".zl_radio").css("visibility","visible"); //显示radio
+		$(".middle-left").find("input:not(.from input):not(.num-box input):not(.finite input)").
+			css({"border":"1px solid #999","background-color":"#fff"}).attr("readonly",false); //显示输入框可写
+		$(".middle-left").find(".num-box,.finite").
+			css({"border":"1px solid #999","background-color":"#fff"}).children("input").attr("readonly",false); 
+		$(".middle-left").find(".num-box").children("input").focus(function(){
+			$(this).parent().css("border","1px solid #0db4be")
+		});
+		$(".middle-left").find(".num-box").children("input").blur(function(){
+			$(this).parent().css("border","1px solid #999")
+		});
+		$(".middle-left").find(".zl_radio1").siblings("span").text("永久"); //“——”变成“永久”
+		$(".middle-left").find(".zl_radio2").parent(".all_account").show();  //“——”变成日期
+		$(".middle-left").find(".zl_radio2").siblings(".finite").children("span").css("color","#bbb");
+		$(".middle-left").find(".zl_radio2").siblings(".time").children(".from").
+			css({"border":"1px solid #999","background-color":"#fff"}).
+			children("img").css("visibility","visible").attr("src","images/date.png");  //勾选日期的显示日历框	
+		$(".middle-left").find(".zl_radio2").siblings(".time").find("input").css("border","none");
+		
+		$(".middle-left").find(" input:not(.from input):not(.num-box input):not(.finite input)").focus(function(){
+			$(this).css("border","1px solid #0db4be")
+		});
+		$(".middle-left").find(" input:not(.from input):not(.num-box input):not(.finite input)").blur(function(){
+			$(this).css("border","1px solid #999")
+		});
+		$(".middle-left").find(".zl_radio2.zl_radio_down").siblings(".date-zzc").hide().css("opacity","0.5")
+		$(".middle-left").find(".all_account").siblings("span").remove();
+		$(".middle-left").find(".from input").attr("readonly",false);
+		$(".edit-pro-able").hide().siblings(".save-able").show();
+		$(".num-add").show();
+		$(".num-reduce").show();
+	});
+	//提交订单
+	$(".pop-tjdd").click(function(){
+		window.top.promptStrong();
+		//loading	
+		/*$(this).html("");
+		var span = $("<span class='loading'></span>");
+		$(span).appendTo(this);*/
+	});
+	//number+
+	$(".num-add").click(function(){
+		var num = parseInt($(this).siblings(".number").val());
+		if((num>=0) ){
+			var numa =num+1;
+			$(this).siblings(".number").val(numa);
+		}
+	});
+	//number-
+	$(".num-reduce").click(function(){
+		var num = parseInt($(this).siblings(".number").val());
+		if(num){
+			var numa =num-1;
+			$(this).siblings(".number").val(numa);
+		}
+		else if(num==0){
+			return false;
+		};
+	});
+});
+</script>
+</head>
+
+<body style="overflow-y:auto">
+<div class="record-head" tabindex="1">
+	<div class="fl">新建订单</div><div class="return fr"><a href="订单管理.html">返回订单列表</a></div>
+</div>
+<div class="record-table table-top colorfff mt7 ti20">选择客户</div>
+<div class="record-con new-order">
+	<div class="con-top">
+    	<div class="mb15 ">
+        	<div class="modular zl_select dl-ib fl po-re mr15 top0">
+                <select>
+                    <option>客户</option>
+                    <option value="2">我的客户</option>
+                    <option value="3">全部客户</option>
+                    <option value="4">工作组</option>
+                    <option value="3">全部客户</option>
+                    <option value="4">工作组</option>
+                    <option value="3">全部客户</option>
+                    <option value="4">工作组</option>
+                </select>
+            </div>
+        	<div class="fl po-re">
+                <div class="product-name dl-ib po-re fl">
+                    <input type="text" class="fl" id="search"></input><em></em>
+                    <div class="ovy-auto">
+                    	<div id="cus-scroll" class="cus-scroll">
+                            <a>jasonjasonjasonjasonjasonjasonjasonjasonjason</a>
+                            <a>客户二客户二客户二客户二</a>
+                            <a>客户三客户三客户三客户三</a>
+                            <a>客户四客户四客户四客户四</a>
+                            <a>客户四客户四客户四客户四</a>
+                            <a>客户四客户四客户四客户四</a>
+                            <a>客户四客户四客户四客户四</a>
+                            <a>客户四客户四客户四客户四</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tips fl h30">请选择客户!</div>
+            <div class="clear-both"></div>
+        </div>
+        <div class="ov-hi dl-ib mr20">
+            <div>
+            	<span class="dl-ib h20 lh20 ta-right width75 ov-hi">客户名称：</span>
+                <span class="dl-ib h20 lh20 ov-hi">天士力天津制药有限公司 </span>
+            </div>
+            <div>
+            	<span class="dl-ib h20 lh20 ta-right width75 ov-hi">联系人：</span>
+            	<span class="dl-ib h20 lh20 ov-hi">王炳成 </span>
+            </div>
+            <div>
+            	<span class="dl-ib h20 lh20 ta-right width75 ov-hi">其他联系人：</span>
+            	<span class="dl-ib h20 lh20 ov-hi">王炳成 </span>
+            </div>
+        </div>
+        <div class="ov-hi dl-ib mr20">
+        	<div>
+            	<span class="dl-ib h20 lh20 ta-right width75 ov-hi">地址：</span>
+                <span class="dl-ib h20 lh20 ov-hi">天津市西青开发区赛达园108号</span>
+            </div>
+            <div>
+            	<span class="dl-ib h20 lh20 ta-right width75 ov-hi">电话：</span>
+            	<span class="dl-ib h20 lh20 ov-hi">12115</span>
+            </div>
+            <div>
+            	<span class="dl-ib h20 lh20 ta-right width75 ov-hi">电话：</span>
+            	<span class="dl-ib h20 lh20 ov-hi">12115</span>
+            </div>
+        </div> 
+        <div class="ov-hi dl-ib">
+            <div>
+            	<span class="dl-ib h20 lh20 ta-right width75 ov-hi">备注：</span>
+                <span class="dl-ib h20 lh20 ov-hi"></span>
+            </div>
+            <div>
+            	<span class="dl-ib h20 lh20 ta-right width75 ov-hi">邮箱：</span>
+            	<span class="dl-ib h20 lh20 ov-hi">wangbingcheng@troila.com</span>
+            </div>
+            <div>
+            	<span class="dl-ib h20 lh20 ta-right width75 ov-hi">邮箱：</span>
+            	<span class="dl-ib h20 lh20 ov-hi">wangbingcheng@troila.com</span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="record-table table-top colorfff ti20 mt20">
+	<span>选择产品</span>
+    <span class="coloraaa">(可选择多个产品)</span>
+    <a href="#" class="pro-empty-able fr mr20">清空产品</a><!--不可用是pro-empty 可用状态添加pro-empty-able   -->
+    <div class="table-border"></div>
+    <a href="#" class="edit-pro-able fr">编辑产品</a>
+    <a href="#" class="save-able fr">保存修改</a>  <!--不可用是save 可用状态添加save-able   -->
+</div>
+<div class="record-con choose-goods">
+	<div class="con-top ov-auto">
+    	<div class="color008992 mb15">
+        	<div class="goods-name dl-ib po-re fl">
+                <span>选择产品</span><em></em>
+                <div class="pr4">
+                	<div class="ovy-auto mh120 outline" id="scroll">
+                        <a class="checkbox">产品一</a>
+                        <a class="checkbox">产品二</a>
+                        <a class="checkbox">产品三</a>
+                        <a class="checkbox">产品四</a>
+                        <a class="checkbox">产品四</a>
+                        <a class="checkbox">产品四</a>
+                        <a class="checkbox">产品四</a>
+                        <a class="checkbox">产品四</a>
+                    </div>
+                    <div class="fr mr20"><a class="tj">添加</a></div>
+                </div>
+            </div>
+            <div class="tips fl h30">请至少选择1个产品!</div>
+        </div>
+    </div>
+    <div class="con-middle">
+        <div class="top">
+        	<table width="100%" cellpadding="0" cellspacing="0">
+            	<tr>
+                    <td class="ta-left ti20" width="15%">产品名称</td>
+                    <td width="4%">单位</td>
+                    <td width="5%">无限期</td>
+                    <td width="18%">有限期</td>
+                    <td width="6%">单价(元)</td>
+                    <td width="5%">数量</td>
+                    <td width="8%">折扣(6折以上)</td>
+                    <td width="16%" class="pr35 ta-right">总价(元)</td>
+                    <td width="2%"></td>
+                </tr>
+            </table>
+        </div>
+        <div class="pro1 ov-hi mb7">
+            <div class="middle-left fl" style="width:98%">
+                <table width="100%" cellpadding="0" cellspacing="0">
+                	<thead>
+                    	<tr class="h40 bgcolorf0efef">
+                            <td width="2%">1</td>
+                            <td width="68%" colspan="6" class="ta-left">
+                                <div class="dl-ib ov-hi lh20 width350 text-nobreak">Troila Cloud  2.0 (正式版)</div>
+                                <div class="name-border top0 mr15"></div>
+                                <div class="dl-ib ov-hi color646464 lh20">简称：TC</div>
+                            </td>
+                            <td width="7%" class="po-re">
+                                <div class="po-re ov-hi width72 num-box">
+                                    <input type="text" class="number width45" />
+                                    <span class="po-ab coloraaa">折</span>
+                                </div>
+                            </td>
+                            <td width="22%" class="po-re">
+                            	<span class="zj t-d-line coloraaa po-re">210,022,100,00</span>
+                                <input type="text" class="zj-number number width100" />
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="bgcolore3e3e3">
+                            <td width="2%"><img src="images/has-license.png" class="has-license" title="含有证书" /></td>
+                            <td width="17%" class="ta-left subpro-name">TCenter</td>
+                            <td width="4%">个</td>
+                            <td width="7%">
+                                <div class="all_sonaccount">
+                                    <div class="zl_radio zl_radio1 zl_radio_down" name="a1">
+                                        <input type="radio" name="a1" checked />
+                                    </div>
+                                    <span class="dl-ib">永久</span>
+                                </div>
+                            </td>
+                            <td width="20%" class="po-re">
+                                <div class="all_account">
+                                    <div class="zl_radio zl_radio2 zl_radio_normal top4" name="a1">
+                                        <input type="radio" name="a1" />
+                                    </div>
+                                    <div class="dl-ib po-re finite fl ml5">
+                                        <input type="text" />
+                                        <span class="po-ab">年</span>
+                                    </div>
+                                    <div class="date dl-ib time fl ml10">
+                                        <div class="dl-ib from fl"><input type="text" class="datepicker" onfocus="this.blur()" /></div>
+                                    </div>
+                                    <div class="date-zzc pro-zzc"></div>
+                                </div>
+                            </td>
+                            <td width="10%" class="ta-right pr15 p5">10,000,000.00</td>
+                            <td width="9%">
+                            	<a class="num-reduce"></a>
+                            	<input class="number" type="text" />
+                                <a class="num-add"></a>
+                            </td>
+                            <td width="8%"></td>
+                            <td width="22%" class="ta-right pr45">1000,000,000</td>
+                        </tr>
+                        <tr class="bgcolore3e3e3">
+                            <td width="2%"><img src="images/has-license.png" class="has-license" title="含有证书" /></td>
+                            <td width="17%" class="ta-left subpro-name">T Desktop</td>
+                            <td width="4%">点</td>
+                            <td width="7%">
+                                <div class="all_sonaccount">
+                                    <div class="zl_radio zl_radio1 zl_radio_down" name="a2">
+                                        <input type="radio" name="a2" checked />
+                                    </div>
+                                    <span class="dl-ib">永久</span>
+                                </div>
+                            </td>
+                            <td width="20%" class="po-re">
+                                <div class="all_account" style="display:none">
+                                    <div class="zl_radio zl_radio2 zl_radio_normal top4" name="a2">
+                                        <input type="radio" name="a2" />
+                                    </div>
+                                    <div class="dl-ib po-re finite fl ml5">
+                                        <input type="text" />
+                                        <span class="po-ab">年</span>
+                                    </div>
+                                    <div class="date dl-ib time fl ml10">
+                                        <div class="dl-ib from fl"><input type="text" class="datepicker" onfocus="this.blur()" /></div>
+                                    </div>
+                                    <div class="date-zzc pro-zzc"></div>
+                                </div>
+                            </td>
+                            <td width="10%" class="ta-right pr15 p5">1000</td>
+                            <td width="9%">
+                            	<a class="num-reduce"></a>
+                            	<input class="number" type="text" />
+                                <a class="num-add"></a>
+                            </td>
+                            <td width="8%"></td>
+                            <td width="22%" class="ta-right pr45">1000</td>
+                        </tr>
+                        <tr class="bgcolore3e3e3">
+                            <td width="2%"></td>
+                            <td width="17%" class="ta-left subpro-name">TCenter</td>
+                            <td width="4%">个</td>
+                            <td width="7%">
+                                <div class="all_sonaccount">
+                                    <div class="zl_radio zl_radio1 zl_radio_down" name="a3">
+                                        <input type="radio" name="a3" checked />
+                                    </div>
+                                    <span class="dl-ib">永久</span>
+                                </div>
+                            </td>
+                            <td width="20%" class="po-re">
+                                <div class="all_account">
+                                    <div class="zl_radio zl_radio2 zl_radio_normal top4" name="a3">
+                                        <input type="radio" name="a3" />
+                                    </div>
+                                    <div class="dl-ib po-re finite fl ml5">
+                                        <input type="text" />
+                                        <span class="po-ab">年</span>
+                                    </div>
+                                    <div class="date dl-ib time fl ml10">
+                                        <div class="dl-ib from fl"><input type="text" class="datepicker" onfocus="this.blur()" /></div>
+                                    </div>
+                                    <div class="date-zzc pro-zzc"></div>
+                                </div>
+                            </td>
+                            <td width="10%" class="ta-right pr15 p5">1000</td>
+                            <td width="9%">
+                            	<a class="num-reduce"></a>
+                            	<input class="number" type="text" />
+                                <a class="num-add"></a>
+                            </td>
+                            <td width="8%"></td>
+                            <td width="22%" class="ta-right pr45">1000</td>
+                        </tr>
+                    </tbody>
+                    <!--<tfoot>
+                    	<tr class="bgcolore3e3e3"><td colspan="9"><a class="xg">确定</a><a class="xgxg" style="display:none">修改</a></td></tr>
+                    </tfoot>-->
+                </table>
+            </div>
+            <div class="middle-right fl b-l-ccc" style="width:1.5%">
+                <div class="reduce"></div>
+            </div>
+        </div>
+        <div class="pro2 ov-hi mb7">
+            <div class="middle-left fl" style="width:98%">
+                <table width="100%" cellpadding="0" cellspacing="0">
+                	<thead>
+                    	<tr class="h40 bgcolorf0efef">
+                            <td width="2%">1</td>
+                            <td width="68%" colspan="6" class="ta-left">
+                                <div class="dl-ib ov-hi lh20 width350 text-nobreak">Troila Cloud  2.0 (正式版)</div>
+                                <div class="name-border top0 mr15"></div>
+                                <div class="dl-ib ov-hi color646464 lh20">简称：TC</div>
+                            </td>
+                            <td width="7%" class="po-re">
+                                <div class="po-re ov-hi width72 num-box">
+                                    <input type="text" class="number width45" />
+                                    <span class="po-ab coloraaa">折</span>
+                                </div>
+                            </td>
+                            <td width="22%" class="po-re">
+                            	<span class="zj t-d-line coloraaa po-re">210,022,100,00</span>
+                                <input type="text" class="zj-number number width100" />
+                            </td>
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="bgcolore3e3e3">
+                            <td width="2%"></td>
+                            <td width="17%" class="ta-left subpro-name">T Desktop</td>
+                            <td width="4%">点</td>
+                            <td width="7%">
+                                <div class="all_sonaccount">
+                                    <div class="zl_radio zl_radio1 zl_radio_down" name="a4">
+                                        <input type="radio" name="a2" checked />
+                                    </div>
+                                    <span class="dl-ib">永久</span>
+                                </div>
+                            </td>
+                            <td width="20%" class="po-re">
+                                <div class="all_account" style="display:none">
+                                    <div class="zl_radio zl_radio2 zl_radio_normal top4" name="a4">
+                                        <input type="radio" name="a2" />
+                                    </div>
+                                    <div class="dl-ib po-re finite fl ml5">
+                                        <input type="text" />
+                                        <span class="po-ab">年</span>
+                                    </div>
+                                    <div class="date dl-ib time fl ml10">
+                                        <div class="dl-ib from fl"><input type="text" class="datepicker" onfocus="this.blur()" /></div>
+                                    </div>
+                                    <div class="date-zzc pro-zzc"></div>
+                                </div>
+                            </td>
+                            <td width="10%" class="ta-right pr15 p5">1000</td>
+                            <td width="9%">
+                            	<a class="num-reduce"></a>
+                            	<input class="number" type="text" />
+                                <a class="num-add"></a>
+                            </td>
+                            <td width="8%"></td>
+                            <td width="22%" class="ta-right pr45">1000</td>
+                        </tr>
+                    </tbody>
+                    <!--<tfoot>
+                    	<tr class="bgcolore3e3e3"><td colspan="9"><a class="xg">确定</a><a class="xgxg" style="display:none">修改</a></td></tr>
+                    </tfoot>-->
+                </table>
+            </div>
+            <div class="middle-right fl b-l-ccc" style="width:1.5%">
+                <div class="reduce"></div>
+            </div>
+        </div>
+        <div class="pro-btn">
+        	<a href="#" class="pro-empty-able clear-pro fr">清空产品</a>
+            <a href="#" class="edit-pro-able edit-pro fr mr20">编辑产品</a>
+    		<a href="#" class="save-able save-pro fr mr20">保存修改</a>
+        </div>
+    </div>
+</div>
+<div class="settlement log-table product-list mt20">
+    <div class="table-middle">
+    	<div class="color008992 mb7 pt7 ti20">结算信息</div>
+    	<div class="product-head">
+        	<span class="width275 dl-ib h40">商品名称</span>
+            <span class="width218 mr20 dl-ib h40" style="text-align:right">总价(元)</span>
+            <span class="width225 dl-ib h40" style="text-align:center">折扣(折)</span>
+            <span class="dl-ib h40">总计金额(元)</span>
+        </div>
+        <div class="product1">
+        	<div class="pro1-head ov-hi">
+            	<div class="fl">
+                    <div class="pro1">
+                        <span class="dl-ib width20 ml15">1</span>
+                        <span class="goods-name dl-ib width275">Troila Cloud Cloud Cloud  2.0</span>
+                        <span class="width218 dl-ib h40 mr20" style="text-align:right">
+                            <span style="color:#222;text-align:right" class="width100 dl-ib">110,000,000.00</span>
+                            <span class="change width100 dl-ib" style="text-decoration:line-through;color:#aaa;text-align:right">110,000,000.00</span>
+                        </span>
+                        <span class="width225 dl-ib h40" style="text-align:center">
+                            <span style="color:#222">6.00</span>
+                        </span>
+                     </div>
+                     <div class="pro2">
+                        <span class="dl-ib width20 ml15">1</span>
+                        <span class="goods-name dl-ib width275">Troila Cloud  2.0</span>
+                        <span class="width218 dl-ib h40 mr20" style="text-align:right">
+                            <span style="color:#222;text-align:right" class="width100 dl-ib">1100</span>
+                            <span class="change width100 dl-ib" style="text-decoration:line-through;color:#aaa;text-align:right">1100</span>
+                        </span>
+                        <span class="width225 dl-ib h40" style="text-align:center">
+                            <span style="color:#222">6.00</span>
+                        </span>
+                     </div>
+                 </div>
+                 <div class="fl">   
+            		<span class="dl-ib h40">
+                        <span class="colorff6600 price">1100</span>
+                        <span class="change" style="text-decoration:line-through;color:#aaa">1100</span>
+                    </span>
+                	<!--<span class="width80 dl-ib h40"><a class="bc">改价</a></span>-->
+                </div>
+            </div>
+        </div>
+        <div class="color008992 mb7 pt7 ti20 clear-both">备忘内容</div>
+        <div class="memo clear-both"><input type="text" /></div>
+    </div>
+</div>
+<div class="mt20 mb20 ta-center"><a class="pop-tjdd ov-hi">提交订单</a><a class="pop-qx lh30 dl-ib ov-hi top0">取消</a></div>
+<!----------弹出层---取消订单--------->
+<div class="cancel-order reset-psw pop1">
+	<div class="pop-head"><span>信息提示</span><a></a></div>
+    <div class="pop-con">
+    	<div class="confirm-icon"></div>
+        <div class="confirm-txt">您确定要放弃下单吗？订单信息将不被保存</div>	
+    </div>
+    <div class="pop-foot"><a class="pop-qd">确 定</a><a class="pop-qx">取消</a></div>
+</div>
+<!----------弹出层取消订单 结束------------>
+<!----------弹出层---清空产品--------->
+<div class="product-empty reset-psw pop1">
+	<div class="pop-head"><span>删除确认</span><a></a></div>
+    <div class="pop-con">
+    	<div class="confirm-icon"></div>
+        <div class="confirm-txt">您确定要清空列表中的全部产品吗？</div>	
+    </div>
+    <div class="pop-foot"><a class="pop-qd">确 定</a><a class="pop-qx">取消</a></div>
+</div>
+<!----------弹出层清空产品 结束------------>
+</body>
+</html>

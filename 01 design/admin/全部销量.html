@@ -1,0 +1,173 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link href="js/plugins/select/default-style/css/content.css" rel="stylesheet" type="text/css" />
+<link href="css/jquery-ui.min.css" rel="stylesheet" type="text/css" />
+<link href="css/index.css" rel="stylesheet" type="text/css" />
+<script src="js/jquery-1.11.1.min.js" language="javascript" type="text/javascript"></script>
+<script src="js/function.js" language="javascript" type="text/javascript"></script>
+<script src="js/plugins/select/default-style/js/jquery.zl_select_u3.js"></script>
+<script src="js/plugins/jquery-ui-1.10.4.custom.min.js"></script>
+<script src="js/plugins/jquery-ui-timepicker-addon.min.js"></script>
+<script src="js/plugins/jquery.ui.datepicker-zh-CN.js"></script>
+<script src="js/plugins/echarts-all.js" language="javascript" type="text/javascript"></script>
+<script src="js/plugins/niceScroll/js/jquery.nicescroll.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	//f5刷新
+	$(".log").trigger("focus");
+	document.onkeydown = function(e){
+		var ev = window.event || e;
+		var code = ev.keyCode || ev.which;
+		if (code == 116) {
+			if(ev.preventDefault) {
+				ev.preventDefault();
+				window.top.f5();
+			} else {
+				ev.keyCode = 0;
+				ev.returnValue = false;
+			}
+		}
+	};
+	//下拉
+	$(".zl_select.select1").zl_select({
+		w: 160
+		,h:30
+	});
+	$(".select-drop ul").niceScroll({
+        cursorcolor: "#00C9C7",
+        autohidemode: false,
+	    cursorwidth: "5px",
+		background: "#EFEFEF",
+    });
+	//日历控件
+	$("#from").datepicker({
+		changeMonth: true,
+        changeYear: true,
+		showOn: "both",
+		buttonImage: "images/date.png",
+		buttonText: null,
+		buttonImageOnly: true,
+		onClose: function(dateText, inst) {
+				 var month = $("#ui-datepicker-div .ui-datepicker-month option:selected").val();//得到选中的月份值
+				 var year = $("#ui-datepicker-div .ui-datepicker-year option:selected").val();//得到选中的年份值
+				 $('#from').val(year+'-'+(parseInt(month)+1));//给input赋值，其中要对月值加1才是实际的月份
+				 $(".from").addClass("focus");
+				 $(".from img").attr("src","images/date-sel.png");
+				 $(this).siblings(".date-clear").css("display","inline-block");
+				 $(this).siblings(".date-clear").click(function(){
+					 $(this).siblings("input").val("");
+					 $( "#from" ).datepicker( "option", "buttonImage", "images/date.png" );
+					 $(this).parent().removeClass("focus");
+					 $(this).hide();
+				 });		
+			 },
+	});
+	$("#to").datepicker({
+		changeMonth: true,
+        changeYear: true,
+		showOn: "both",
+		buttonImage: "images/date.png",
+		buttonText: null,
+		buttonImageOnly: true,
+		onClose: function(dateText, inst) {
+				 var month = $("#ui-datepicker-div .ui-datepicker-month option:selected").val();//得到选中的月份值
+				 var year = $("#ui-datepicker-div .ui-datepicker-year option:selected").val();//得到选中的年份值
+				 $('#to').val(year+'-'+(parseInt(month)+1));//给input赋值，其中要对月值加1才是实际的月份
+				 $(".to").addClass("focus");
+				 $(".to img").attr("src","images/date-sel.png");
+				 $(this).siblings(".date-clear").css("display","inline-block");
+				 $(this).siblings(".date-clear").click(function(){
+					 $(this).siblings("input").val("");
+					 $( "#to" ).datepicker( "option", "buttonImage", "images/date.png" );
+					 $(this).parent().removeClass("focus");
+					 $(this).hide();
+				 });
+			 }	
+	});
+	
+option = {
+    tooltip : {
+        trigger: 'axis'
+    },
+    legend: {
+        data:['销售总额','销售总量']
+    },
+    calculable : false,
+    xAxis : [
+        {
+            type : 'category',
+            boundaryGap : false,
+            data : ['','一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月']
+        }
+    ],
+    yAxis : [
+        {
+            type : 'value',
+			name :'万元'
+        },
+		{
+            type : 'value',
+			name :'单'
+        }
+    ],
+    series : [
+        {
+            name:'销售总额',
+            type:'line',
+            smooth:false,
+            itemStyle: {normal: {areaStyle: {type: 'default'},color : '#8E81AF'}},
+            data:[10, 12, 21, 54, 260, 830, 710,10, 12, 21, 54, 260, 830, 710,200]
+        },
+        {
+            name:'销售总量',
+			yAxisIndex:1,
+            type:'line',
+            smooth:false,
+            itemStyle: {normal: {areaStyle: {type: 'default'},color : '#50AAD1'}},
+            data:[30, 182, 434, 791, 390, 30, 10,30, 182, 434, 791, 390, 30, 10,50]
+        }
+    ]
+};
+var lineChart = echarts.init(document.getElementById("lineChart"));
+	lineChart.setOption(option);
+});
+</script>
+<style>.ui-datepicker-calendar {display: none}</style>
+</head>
+
+<body>
+<div class="tab1-con ov-hi" style="display:block">
+    <div class="statistics log order" tabindex="1">
+    	<div class="search-left">
+        	<div class="select1 zl_select dl-ib fl po-re ml30">
+                <select>
+                    <option>工作组</option>
+                    <option value="2">全部</option>
+                    <option value="3">工作组1</option>
+                    <option value="4">工作组2</option>
+                    <option value="5">工作组3</option>
+                </select>
+            </div>
+            <div class="dl-ib time fl ml15">
+                <div class="dl-ib from fl"><input type="text" id="from" onfocus="this.blur()" /><a class="date-clear" href="#"></a></div>
+                <div class="dl-ib fl txt">至</div>
+                <div class="dl-ib to fl"><input type="text" id="to" onfocus="this.blur()" /><a class="date-clear" href="#"></a></div>
+            </div>
+        </div>
+        <div class="search"><a>搜 索</a></div>
+        <div class="clear fl ml15"><a>清空筛选</a></div>
+    </div>
+    <div class="log-table order-list admin">
+        <div class="table-top">
+            <div class="fl fs14 colorfff ml15">2016年产品月销量统计</div>
+        </div>
+        <div class="product-sales">
+        	<div class="product-sales-chart" id="lineChart"></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

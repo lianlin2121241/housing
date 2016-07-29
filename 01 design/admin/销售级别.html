@@ -1,0 +1,317 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>销售级别</title>
+<link href="js/plugins/select/default-style/css/content.css" rel="stylesheet" type="text/css" />
+<link href="css/index.css" rel="stylesheet" type="text/css" />
+<link href="js/plugins/defaultMsg/default-style/css/content.css" rel="stylesheet" type="text/css" />
+<link href="js/plugins/pagination/pagenation.css" rel="stylesheet" type="text/css" />
+<script src="js/jquery-1.11.1.min.js" language="javascript" type="text/javascript"></script>
+<script src="js/function.js" language="javascript" type="text/javascript"></script>
+<script src="js/plugins/defaultMsg/default-style/js/jquery.defaultMsg.js"></script>
+<script src="js/plugins/pagination/jquery.pagination.js"></script>
+<script src="js/plugins/select/default-style/js/jquery.zl_select_u3.js"></script>
+<script src="js/plugins/niceScroll/js/jquery.nicescroll.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	//f5刷新
+	$(".log").trigger("focus");
+	document.onkeydown = function(e){
+		var ev = window.event || e;
+		var code = ev.keyCode || ev.which;
+		if (code == 116) {
+			if(ev.preventDefault) {
+				ev.preventDefault();
+				window.top.f5();
+			} else {
+				ev.keyCode = 0;
+				ev.returnValue = false;
+			}
+		}
+	};
+	var top = window.top.document.body;
+	var self = window.self.document.body;
+	$(".user-name input").formsStyle();
+	//下拉列表
+	$(".zl_select.select").zl_select({
+		w: 160
+		,h:30
+	});
+	$(".zl_select.select2").zl_select({
+		w: 160
+		,h:30
+	});
+	$(".zl_select.select3").zl_select({
+		w: 160
+		,h:30
+	});
+	$(".select-drop ul").niceScroll({
+        cursorcolor: "#00C9C7",
+        autohidemode: false,
+	    cursorwidth: "5px",
+		background: "#EFEFEF",
+    });
+	//添加销售级别
+	$(".add").click(function(){
+		$(".add-salesman").appendTo(top).show().find(".pop-jxtj").show();
+		$(".add-salesman .pop-head span",top).text("添加销售级别");
+		$(".zzc",top).show();
+        /*window.top.setPopContentHeight();*/
+	});
+	//编辑销售级别
+	$(".edit").click(function(){
+		var txt = $(this).parent().siblings(".state").text();
+		if( txt == "使用中" ) {
+			$(".confirm-edit").appendTo(top).show();
+			$(".zzc",top).show();
+			$(".confirm-edit .edit-pop-qd",top).click(function(){
+				$(".confirm-edit",top).appendTo($(window.top.frames['mainFrame'].frames['tabFrame'].document.body)).hide();
+				$(".add-salesman").appendTo(top).show().find(".pop-jxtj").hide();
+				$(".add-salesman .pop-head span",top).text("编辑销售级别");
+			});	
+		};
+		if( txt == "未使用" ) {
+			$(".add-salesman").appendTo(top).show().find(".pop-jxtj").hide();
+			$(".add-salesman .pop-head span",top).text("编辑销售级别");
+			$(".zzc",top).show();
+		}
+        /*window.top.setPopContentHeight();*/
+	});
+	//批量删除确认
+	$(".table-top").delegate(".delete-able","click",function(){
+		$(".confirm").appendTo(top).show().find(".confirm-txt").text("列表有销售级别正在使用中，删除后会影响相应销售员的改价范围，您确定要将其删除吗？");;
+		$(".zzc",top).show();	
+	});
+	//删除
+	$(".table-middle").delegate(".delete-staff","click",function(){
+		var txt = $(this).parent().siblings(".state").text();
+		if( txt == "使用中" ) {
+			$(".confirm").appendTo(top).show()
+				.find(".confirm-txt").text("销售级别【***】正在使用中，删除后会影响相应销售员的改价范围，您确定要将其删除吗？");
+			$(".zzc",top).show();
+		};
+		if( txt == "未使用" ) {
+			$(".confirm").appendTo(top).show()
+				.find(".confirm-txt").text("您确定要删除销售级别【***】吗？");
+			$(".zzc",top).show();
+		};
+	});
+	//分页
+	$("#pagination").pagination(50, {
+		items_per_page: 1,
+		current_page: 2,
+		prev_text: "上一页",
+		next_text: "下一页",
+		first_text: " ",
+		prev_text: " ",
+		next_text: " ",
+		last_text: " ",
+		jump_text: "GO",
+		num_edge_entries: 3,
+		ellipse_text: '...',
+		num_display_entries: 5,
+		isSum: false,
+		link_to: 'javascript:void(0)'
+	});
+});
+</script>
+</head>
+
+<body>
+<div class="tab1-con ov-hi" style="display:block; overflow-y:auto;">
+	<div class="log mt0" tabindex="1">
+    	<div class="search-left">
+            <div class="user-name"><input type="text" msg="级别名称" /></div>
+            <div class="select2 operation zl_select dl-ib fl po-re ml15">
+                <select>
+                    <option>改价范围</option>
+                    <option value="2">6.00折以上</option>
+                    <option value="3">7.00折以上</option>
+                    <option value="3">8.00折以上</option>
+                    <option value="3">9.00折以上</option>
+                </select>
+            </div>
+            <div class="select3 operation zl_select dl-ib fl po-re ml15">
+                <select>
+                    <option>状态</option>
+                    <option value="2">使用中</option>
+                    <option value="3">未使用</option>
+                </select>
+            </div>
+        </div>
+        <div class="search"><a>搜 索</a></div>
+        <div class="clear fl ml15"><a>清空筛选</a></div>
+    </div>
+    <div class="log-table" style="display:block">
+        <div class="table-top">
+            <div class="fl fs14 colorfff ml15">销售级别列表</div>
+            <div class="fr fs12 coloraaa mr15">共<span>20</span>条</div>
+            <div class="table-border"></div>
+            <div class="delete fr"><a>批量删除</a></div>
+            <div class="table-border"></div>
+            <div class="add colorfff fr mr0"><a>添加</a></div>
+        </div>
+        <div class="table-middle">
+            <table width="100%" cellpadding="0" border="0" cellspacing="0">
+                <thead>
+                    <td width="5%" class="checkbox"></td>
+                    <td width="5%">No.</td>
+                    <td width="25%">级别名称</td>
+                    <td width="25%">改价范围</td>
+                    <td width="20%">状态</td>
+                    <td width="20%">操作</td>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td width="5%" class="checkbox"></td>
+                        <td width="5%">No.</td>
+                        <td width="25%">普通</td>
+                        <td width="25%">9.00折以上</td>
+                        <td width="20%" class="state">使用中</td>
+                        <td width="20%">
+                        	<a class="edit mr20">编辑</a><a class="delete-staff">删除</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="5%" class="checkbox"></td>
+                        <td width="5%">No.</td>
+                        <td width="25%">普通</td>
+                        <td width="25%">9.00折以上</td>
+                        <td width="20%" class="state">未使用</td>
+                        <td width="20%">
+                        	<a class="edit mr20">编辑</a><a class="delete-staff">删除</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="5%" class="checkbox"></td>
+                        <td width="5%">No.</td>
+                        <td width="25%">普通</td>
+                        <td width="25%">9.00折以上</td>
+                        <td width="20%" class="state">使用中</td>
+                        <td width="20%">
+                        	<a class="edit mr20">编辑</a><a class="delete-staff">删除</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="5%" class="checkbox"></td>
+                        <td width="5%">No.</td>
+                        <td width="25%">普通</td>
+                        <td width="25%">9.00折以上</td>
+                        <td width="20%" class="state">未使用</td>
+                        <td width="20%">
+                        	<a class="edit mr20">编辑</a><a class="delete-staff">删除</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="5%" class="checkbox"></td>
+                        <td width="5%">No.</td>
+                        <td width="25%">普通</td>
+                        <td width="25%">9.00折以上</td>
+                        <td width="20%" class="state">未使用</td>
+                        <td width="20%">
+                        	<a class="edit mr20">编辑</a><a class="delete-staff">删除</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="5%" class="checkbox"></td>
+                        <td width="5%">No.</td>
+                        <td width="25%">普通</td>
+                        <td width="25%">9.00折以上</td>
+                        <td width="20%" class="state">使用中</td>
+                        <td width="20%">
+                        	<a class="edit mr20">编辑</a><a class="delete-staff">删除</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="5%" class="checkbox"></td>
+                        <td width="5%">No.</td>
+                        <td width="25%">普通</td>
+                        <td width="25%">9.00折以上</td>
+                        <td width="20%" class="state">使用中</td>
+                        <td width="20%">
+                        	<a class="edit mr20">编辑</a><a class="delete-staff">删除</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="5%" class="checkbox"></td>
+                        <td width="5%">No.</td>
+                        <td width="25%">普通</td>
+                        <td width="25%">9.00折以上</td>
+                        <td width="20%" class="state">未使用</td>
+                        <td width="20%">
+                        	<a class="edit mr20">编辑</a><a class="delete-staff">删除</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="5%" class="checkbox"></td>
+                        <td width="5%">No.</td>
+                        <td width="25%">普通</td>
+                        <td width="25%">9.00折以上</td>
+                        <td width="20%" class="state">使用中</td>
+                        <td width="20%">
+                        	<a class="edit mr20">编辑</a><a class="delete-staff">删除</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="5%" class="checkbox"></td>
+                        <td width="5%">No.</td>
+                        <td width="25%">普通</td>
+                        <td width="25%">9.00折以上</td>
+                        <td width="20%" class="state">使用中</td>
+                        <td width="20%">
+                        	<a class="edit mr20">编辑</a><a class="delete-staff">删除</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <!----------------没有搜索到数据---数据加载中----(显示时把tbody和table-bottom隐藏)----------->
+            <div class="pt15 pb15 bgcolorfafafa ta-center" style="display:none">没有搜索到<span>【某某集团】</span>的数据~!</div>
+            <div class="empty-table pt15 pb15 bgcolorfafafa ta-center" style="display:none"><a>数据加载中......</a></div>
+            <!--------------没有搜索到数据---数据加载中-------结束-------->
+        </div>
+        <!----------分页------------>
+        <div class="table-bottom">
+            <div class="pagination-panel pb-10 mg-t-10 mr20">
+                <div id="pagination" class="pagination-content fr"></div>
+            </div>
+        </div>
+        <!----------分页结束------------>
+    </div>
+</div>
+<!----------弹出层---添加/编辑销售级别--------->
+<div class="pop add-salesman">
+	<div class="pop-head"><span>添加/编辑销售级别</span><a></a></div>
+    <div class="pop-con">
+    	<div class="h30 ml30 mb15"><span class="headline">级别名称</span><input type="text" /><span class="impor">*</span></div>
+        <div class="h30 ml30 mb15 po-re">
+        	<span class="headline">改价范围</span>
+            <input type="text" />
+            <span class="discount">折以上</span>
+            <span class="impor">*</span>
+        </div>
+    </div>
+    <div class="pop-foot"><a class="pop-jxtj">继续添加</a><a class="pop-qd">确 定</a><a class="pop-qx">取消</a></div>
+</div>
+<!----------弹出层添加/编辑销售员 结束------------>
+<div class="pop confirm">
+	<div class="pop-head"><span>删除确认</span><a></a></div>
+    <div class="pop-con">
+    	<div class="confirm-icon"></div>
+        <div class="confirm-txt">该销售级别正在使用中，删除后影响相应销售员的改价范围，确认删除？</div>	
+    </div>
+    <div class="pop-foot"><a class="pop-qd">确 定</a><a class="pop-qx">取消</a></div>
+</div>
+<!----------弹出层删除确认 结束------------>
+<!----------弹出层---编辑确认--------->
+<div class="pop confirm-edit">
+	<div class="pop-head"><span>编辑确认</span><a></a></div>
+    <div class="pop-con">
+    	<div class="confirm-icon"></div>
+        <div class="confirm-txt">该销售级别正在使用中,编辑后会影响相应销售员的改价范围,确认编辑？</div>	
+    </div>
+    <div class="pop-foot"><a class="edit-pop-qd">确 定</a><a class="pop-qx">取消</a></div>
+</div>
+<!----------弹出层编辑确认 结束------------>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>登录页</title>
+<link href="css/index.css" rel="stylesheet" type="text/css" />
+<script src="js/jquery-1.11.1.min.js" language="javascript" type="text/javascript"></script>
+<script language="javascript">
+$(function(){
+	res();
+	$(window).resize(res);
+	//点击登录验证
+	$(".login-btn").click(function(){
+		$(this).text("");
+		var span = $("<span class='loading'></span>");
+		$(span).appendTo(this);
+	});
+	$(".login-user input").focus();
+	//清除
+	$(".login-psw input").bind("keyup",function(){
+		var that = $(this);
+		if($(this).val() != ""){
+			$(this).siblings(".login-clear").css("display","inline-block");
+			$(this).siblings(".login-clear").click(function(){
+				that.val("");	
+			})
+		}else{
+			$(this).siblings(".login-clear").hide();
+		}
+	})
+	$(".login-psw input").bind("blur",function(){
+		if($(this).val() == 0){
+			$(this).siblings(".login-clear").hide();
+		}
+	});
+	$(".login-user input").bind("keyup",function(){
+		var that = $(this);
+		if($(this).val() != ""){
+			$(this).siblings(".login-clear").css("display","inline-block");
+			$(this).siblings(".login-clear").click(function(){
+				that.val("");	
+			})
+		}else{
+			$(this).siblings(".login-clear").hide();
+		}
+	})
+	$(".login-user input").bind("blur",function(){
+		if($(this).val() == 0){
+			$(this).siblings(".login-clear").hide();
+		}
+	});
+	
+})
+function res(){
+	var winH = document.documentElement.clientHeight<630?document.documentElement.scrollHeight:document.documentElement.clientHeight;
+	var winW = document.body.clientWidth;
+	$(".login-box").css({top:(winH-611)/2});
+	$(".login-box").css({left:(winW-337)/2});
+	$(".login-bg").css({height:winH });			
+}
+</script>
+</head>
+
+<body style="overflow:auto">
+<div class="login-bg">
+	<div class="login-box">
+    	<div class="login-logo"></div>
+        <div class="login-error">用户名或密码有误</div>
+        <div class="login-user"><input type="text" value="" /><a class="login-clear"></a></div>
+        <div class="login-psw"><input type="password" value="" /><a class="login-clear"></a></div>
+        <div class="login-btn">登 录</div>
+    </div>
+</div>
+</body>
+</html>

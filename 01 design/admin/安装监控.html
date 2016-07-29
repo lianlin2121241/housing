@@ -1,0 +1,219 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>客户管理</title>
+<link href="css/index.css" rel="stylesheet" type="text/css" />
+<link href="js/plugins/select/default-style/css/content.css" rel="stylesheet" type="text/css" />
+<link href="js/plugins/defaultMsg/default-style/css/content.css" rel="stylesheet" type="text/css" />
+<link href="js/plugins/pagination/pagenation.css" rel="stylesheet" type="text/css" />
+<script src="js/jquery-1.11.1.min.js" language="javascript" type="text/javascript"></script>
+<script src="js/function.js" language="javascript" type="text/javascript"></script>
+<script src="js/plugins/select/default-style/js/jquery.zl_select_u3.js"></script>
+<script src="js/plugins/defaultMsg/default-style/js/jquery.defaultMsg.js"></script>
+<script src="js/plugins/pagination/jquery.pagination.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	//f5刷新
+	$(".log").trigger("focus");
+	document.onkeydown = function(e){
+		var ev = window.event || e;
+		var code = ev.keyCode || ev.which;
+		if (code == 116) {
+			if(ev.preventDefault) {
+				ev.preventDefault();
+				window.top.f5();
+			} else {
+				ev.keyCode = 0;
+				ev.returnValue = false;
+			}
+		}
+	};
+	var top = window.top.document.body;
+    $(".user-name input").formsStyle();
+	popWH();
+	$(window).resize(popWH);
+	//查看客户信息
+	$(".customer-list td.cur-po").click(function(){
+		$(".customer-info.cus-info").appendTo(top).show();
+		$(".zzc",top).show();	
+	});
+	//分页
+	$("#pagination").pagination(50, {
+		items_per_page: 1,
+		current_page: 2,
+		prev_text: "上一页",
+		next_text: "下一页",
+		first_text: " ",
+		prev_text: " ",
+		next_text: " ",
+		last_text: " ",
+		jump_text: "GO",
+		num_edge_entries: 3,
+		ellipse_text: '...',
+		num_display_entries: 5,
+		isSum: false,
+		link_to: 'javascript:void(0)'
+	});
+});
+</script>
+</head>
+
+<body style="overflow-y:auto;overflow-x:hidden;">
+<div class="log customer" tabindex="1">
+	<div class="search-left">
+        <div class="user-name"><input type="text" msg="客户名称" /></div>
+        <div class="contacts user-name"><input type="text" msg="订单编号" /></div>
+    </div>
+    <div class="search"><a>搜 索</a></div>
+    <div class="clear fl ml15"><a>清空筛选</a></div>
+</div>
+<div class="install customer-list log-table">
+	<div class="table-top">
+    	<div class="fl fs14 colorfff ml15">安装信息列表</div>
+        <div class="fr fs12 coloraaa mr15">共<span>20</span>条</div>
+    </div>
+    <div class="table-middle">
+        <table width="100%" cellpadding="0" border="0" cellspacing="0">
+        	<thead>
+                <td width="5%">No.</td>
+                <td width="35%">客户名称</td>
+                <td width="20%">订单编号</td>
+                <td width="15%">安装时间</td>
+                <td width="15%">安装信息</td>
+            </thead>
+            <tbody>           	
+                <tr>
+                	<td width="5%">No.</td>
+                    <td width="35%" class="cur-po color0066cc">部门部门部门部门部门部门部门部门部门部</td>
+                    <td width="20%"><a href="查看订单.html" class="cur-po color0066cc">1233333333333</a></td>
+                    <td width="15%">安装时间</td>
+                    <td width="15%"><a class="view" href="查看安装信息.html"></a></td>
+                </tr>
+                <tr>
+                	<td width="5%">No.</td>
+                    <td width="35%" class="cur-po color0066cc">部门部门部门部门部门部门部门部门部门部</td>
+                    <td width="20%"><a href="查看订单.html" class="cur-po color0066cc">1233333333333</a></td>
+                    <td width="15%">安装时间</td>
+                    <td width="15%"><a class="view" href="查看安装信息.html"></a></td>
+                </tr>
+                <tr>
+                	<td width="5%">No.</td>
+                    <td width="35%" class="cur-po color0066cc">部门部门部门部门部门部门部门部门部门部</td>
+                    <td width="20%"><a href="查看订单.html" class="cur-po color0066cc">1233333333333</a></td>
+                    <td width="15%">安装时间</td>
+                    <td width="15%"><a class="view" href="查看安装信息.html"></a></td>
+                </tr>
+                <tr>
+                	<td width="5%">No.</td>
+                    <td width="35%" class="cur-po color0066cc">部门部门部门部门部门部门部门部门部门部</td>
+                    <td width="20%"><a href="查看订单.html" class="cur-po color0066cc">1233333333333</a></td>
+                    <td width="15%">安装时间</td>
+                    <td width="15%"><a class="view" href="查看安装信息.html"></a></td>
+                </tr>
+                <tr>
+                	<td width="5%">No.</td>
+                    <td width="35%" class="cur-po color0066cc">部门部门部门部门部门部门部门部门部门部</td>
+                    <td width="20%"><a href="查看订单.html" class="cur-po color0066cc">1233333333333</a></td>
+                    <td width="15%">安装时间</td>
+                    <td width="15%"><a class="view" href="查看安装信息.html"></a></td>
+                </tr>
+                <tr>
+                	<td width="5%">No.</td>
+                    <td width="35%" class="cur-po color0066cc">部门部门部门部门部门部门部门部门部门部</td>
+                    <td width="20%"><a href="查看订单.html" class="cur-po color0066cc">1233333333333</a></td>
+                    <td width="15%">安装时间</td>
+                    <td width="15%"><a class="view" href="查看安装信息.html"></a></td>
+                </tr>
+                <tr>
+                	<td width="5%">No.</td>
+                    <td width="35%" class="cur-po color0066cc">部门部门部门部门部门部门部门部门部门部</td>
+                    <td width="20%"><a href="查看订单.html" class="cur-po color0066cc">1233333333333</a></td>
+                    <td width="15%">安装时间</td>
+                    <td width="15%"><a class="view" href="查看安装信息.html"></a></td>
+                </tr>
+                <tr>
+                	<td width="5%">No.</td>
+                    <td width="35%" class="cur-po color0066cc">部门部门部门部门部门部门部门部门部门部</td>
+                    <td width="20%"><a href="查看订单.html" class="cur-po color0066cc">1233333333333</a></td>
+                    <td width="15%">安装时间</td>
+                    <td width="15%"><a class="view" href="查看安装信息.html"></a></td>
+                </tr>
+                <tr>
+                	<td width="5%">No.</td>
+                    <td width="35%" class="cur-po color0066cc">部门部门部门部门部门部门部门部门部门部</td>
+                    <td width="20%"><a href="查看订单.html" class="cur-po color0066cc">1233333333333</a></td>
+                    <td width="15%">安装时间</td>
+                    <td width="15%"><a class="view" href="查看安装信息.html"></a></td>
+                </tr>
+                <tr>
+                	<td width="5%">No.</td>
+                    <td width="35%" class="cur-po color0066cc">部门部门部门部门部门部门部门部门部门部</td>
+                    <td width="20%"><a href="查看订单.html" class="cur-po color0066cc">1233333333333</a></td>
+                    <td width="15%">安装时间</td>
+                    <td width="15%"><a class="view" href="查看安装信息.html"></a></td>
+                </tr>
+            </tbody>
+        </table>
+        <!----------------没有搜索到数据---数据加载中----(显示时把tbody和table-bottom隐藏)----------->
+        <div class="pt15 pb15 bgcolorfafafa ta-center" style="display:none">没有搜索到<span>【某某集团】</span>的数据~!</div>
+       	<div class="empty-table pt15 pb15 bgcolorfafafa ta-center" style="display:none"><a>数据加载中......</a></div>
+        <!--------------没有搜索到数据---数据加载中-------结束-------->
+    </div>
+    <!----------分页------------>
+    <div class="table-bottom">
+    	<div class="pagination-panel pb-10 mg-t-10 mr20">
+            <div id="pagination" class="pagination-content fr"></div>
+        </div>
+    </div>
+    <!----------分页结束------------>
+</div>
+<!----------弹出层---查看客户信息--------->
+<div class="pop1 customer-info cus-info popwh3">
+	<div class="pop-head"><span>查看客户信息</span><a></a></div>
+    <div class="pop-con">
+    	<div class="customer-name mb15">
+        	<span class="width80 dl-ib ta-right">客户名称</span>
+            <span class="dl-ib ta-left ml15 ti10">客户名称客户名称客户名称</span>
+        </div>
+        <div class="customer-address mb15">
+        	<span class="width80 dl-ib ta-right">地址</span>
+            <span class="dl-ib ta-left ml15 ti10">地址地址地址</span>
+        </div>
+        <div class="people mr15 mb2">
+        	<div class="customer-name mb15">
+        		<span class="width80 dl-ib ta-right">联系人</span>
+            	<span class="dl-ib ta-left ml15 ti10">wangbingcheng</span>
+        	</div>
+            <div class="customer-name mb15">
+        		<span class="width80 dl-ib ta-right">联系人电话</span>
+            	<span class="dl-ib ta-left ml15 ti10">022-45678945-5080、IP:9998</span>
+        	</div>
+            <div class="customer-name">
+        		<span class="width80 dl-ib ta-right">联系人邮箱</span>
+            	<span class="dl-ib ta-left ml15 ti10">wangbingcheng@troila.com</span>
+        	</div>
+        </div>
+        <div class="other-people mr15">
+        	<div class="customer-name mb15">
+        		<span class="width80 dl-ib ta-right">其他联系人</span>
+            	<span class="dl-ib ta-left ml15 ti10">wangbingcheng</span>
+        	</div>
+            <div class="customer-name mb15">
+        		<span class="width80 dl-ib ta-right">联系人电话</span>
+            	<span class="dl-ib ta-left ml15 ti10">022-45678945-5080、IP:9998</span>
+        	</div>
+            <div class="customer-name">
+        		<span class="width80 dl-ib ta-right">联系人邮箱</span>
+            	<span class="dl-ib ta-left ml15 ti10">wangbingcheng@troila.com</span>
+        	</div>
+        </div>
+        <div class="remarks mt20">
+        	<span class="width80 dl-ib ta-right">备注</span>
+            <span class="dl-ib ta-left ml15 ti10">系统集成系统集成系统集成系统集成系统集成</span>
+        </div>
+    </div>
+</div>
+<!----------弹出层查看客户信息 结束------------>
+</body>
+</html>
