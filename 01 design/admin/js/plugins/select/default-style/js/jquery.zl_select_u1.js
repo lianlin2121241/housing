@@ -5,7 +5,10 @@
             w: 200,
             h: 26,
             items_w: null,
-            items_h: null
+            items_h: null,
+            selectDropPanel:"",
+            disabledClickCallback: $.noop(),
+            completeCallback:$.noop()
         };
         setOptions(options);
         var opts = [];
@@ -15,33 +18,44 @@
             if ($(this).hasClass("zl_select_ele")) {
                 return true;
             }
-            var obj = $(this).hide().addClass("zl_select_ele");
+            var obj = $(this).addClass("zl_select_ele");
+            var randomStr=randomString(6);
+            obj.attr("data-id",randomStr);
             var drop, items, container;
-            obj.wrap($("<div class='zl_select'></div>").css("display", "inline-block"));
-            var selectPanel = obj.closest(".zl_select");
             container = $("<a class='select-container' onclick='return false;' href='#' tabindex='-1' />");
             var content = $("<span />");
             var icon = $("<div />");
             content.appendTo(container);
             icon.appendTo(container);
-            obj.closest(".zl_select").width(getOptions().w);
+            container.width((getOptions().w||obj.width())-14-2)
+                .height(getOptions().h||obj.height())
+                .css("line-height", (getOptions().h||obj.height()) + "px");
+            if(obj.prop("disabled")){
+                container.addClass("disabled");
+            }
+            obj.wrap($("<div class='zl_select'></div>").css("display", "inline-block"));
+            var selectPanel = obj.closest(".zl_select");
             container.appendTo(selectPanel)
-                .height(getOptions().h)
-                .css("line-height", getOptions().h + "px");
             var iconw = icon.outerWidth();
             //内容区宽度
             //10是container的内边距和边框宽度之和。
-            content.width(getOptions().w - iconw-10);
+            content.width(container.width() - iconw);
+            obj.hide();
 
             drop = $("<div class='select-drop' />");
             items = $("<ul class='items' />");
             items.appendTo(drop);
-            drop.appendTo(selectPanel)
-                .width(!!getOptions().items_w ? getOptions().items_w : selectPanel.innerWidth()-2
-);
+            drop.appendTo(!!defaults.selectDropPanel?defaults.selectDropPanel:selectPanel)
+                .width(!!getOptions().items_w ? getOptions().items_w : container.innerWidth());
             if (getOptions().items_h) {
                 drop.height(getOptions().items_h)
             }
+            drop.attr("data-for",randomStr);
+            !!$.fn.niceScroll&&drop.niceScroll({
+                autohidemode:false
+            });
+            //修改样式回调
+            !!defaults.completeCallback&&defaults.completeCallback(obj);
             var selectEle = obj;
             _init_item({
                 selectEle: selectEle,
@@ -67,19 +81,74 @@
                 })
             })
 
+            var positionUsing=function(position, feedback){
+                $( this ).css( position );
+                container.css({
+                    "borderColor":"#00c9c7"
+                })
+                if(feedback.vertical=="bottom"){
+                    $(this).css({
+                        "borderTopLeftRadius":"12px",
+                        "borderTopRightRadius":"12px",
+                        "borderBottom":"none",
+                        "borderBottomLeftRadius":"0px",
+                        "borderBottomRightRadius":"0px",
+                        "borderTop":"1px solid #00c9c7"
+                    })
+
+                    container.css({
+                        "borderTopLeftRadius":"0px",
+                        "borderTopRightRadius":"0px",
+                        "borderBottom":"1px solid #00c9c7",
+                        "borderBottomLeftRadius":"12px",
+                        "borderBottomRightRadius":"12px",
+                        "borderTop":"none"
+                    })
+                }else if(feedback.vertical=="top"){
+                    $(this).css({
+                        "borderTopLeftRadius":"0px",
+                        "borderTopRightRadius":"0px",
+                        "borderBottom":"1px solid #00c9c7",
+                        "borderBottomLeftRadius":"12px",
+                        "borderBottomRightRadius":"12px",
+                        "borderTop":"none"
+                    })
+
+                    container.css({
+                        "borderTopLeftRadius":"12px",
+                        "borderTopRightRadius":"12px",
+                        "borderBottom":"none",
+                        "borderBottomLeftRadius":"0px",
+                        "borderBottomRightRadius":"0px",
+                        "borderTop":"1px solid #00c9c7"
+                    })
+                }
+            }
             //select组件内容框绑定事件。
             container.on("click", function (e) {
-				container.css("border","1px solid #0db4be");
-				drop.css({"border":"1px solid #0db4be","border-top":"none"});
                 //var drop=$(this).siblings(".select-drop");
                 e.stopPropagation();
+                if($(this).hasClass("disabled")){
+                    !!defaults.disabledClickCallback&&defaults.disabledClickCallback.call($(this));
+                    return false;
+                }
                 if (drop.is(":hidden")) {
                     $(".select-drop").hide();
+                    $(".select-container").css({
+                        "borderTopLeftRadius":"12px",
+                        "borderTopRightRadius":"12px",
+                        "borderBottom":"1px solid #999999",
+                        "borderBottomLeftRadius":"12px",
+                        "borderBottomRightRadius":"12px",
+                        "borderTop":"1px solid #999999",
+                        "borderColor":"#999999"
+                    })
                     drop.show()
                         .position({
-                            my: "left top-1",//减1，为了避免下边框双重重叠，所以向上移动1像素。
+                            my: "left top-1",
                             at: "left bottom",
-                            of: $(this)
+                            of: $(this),
+                            using:positionUsing
                         });
                     //内容区宽度
                     //content.width(getOptions().w - 10 - iconw);
@@ -89,11 +158,33 @@
                         //点击事件触发元素是select组件内容框时，不隐藏select组件下拉项。
                         if ($(evt).closest("a.select-container").length == 0) {
                             drop.hide();
+                            container.css({
+                                "borderColor":"#999999"
+                            })
+                            container.css({
+                                "borderTopLeftRadius":"12px",
+                                "borderTopRightRadius":"12px",
+                                "borderBottom":"1px solid #999999",
+                                "borderBottomLeftRadius":"12px",
+                                "borderBottomRightRadius":"12px",
+                                "borderTop":"1px solid #999999"
+                            })
                             $(document).undelegate("body", "click");
                         }
                     })
                 } else {
                     drop.hide();
+                    container.css({
+                        "borderColor":"#999999"
+                    })
+                    container.css({
+                        "borderTopLeftRadius":"12px",
+                        "borderTopRightRadius":"12px",
+                        "borderBottom":"1px solid #999999",
+                        "borderBottomLeftRadius":"12px",
+                        "borderBottomRightRadius":"12px",
+                        "borderTop":"1px solid #999999"
+                    })
                 }
             })
         })
@@ -107,12 +198,29 @@
                     container = selectPanel.find(".select-container"),
                     selectEle = selectPanel.find("select"),
                     drop = selectPanel.find(".select-drop");
+                if(drop.length==0||items.length==0){
+                    drop=$(document).find(".select-drop[data-for="+that.attr('data-id')+"]");
+                    items=$(document).find(".select-drop[data-for="+that.attr('data-id')+"]").find(".items");
+                }
                 _init_item({
                     selectEle: selectEle,
                     container: container,
                     items: items,
                     drop: drop
                 })
+            })
+        }
+
+        //修改禁用状态
+        objArray.changeDisState = function(obj){
+            var eleObjs = !!obj ? obj : objArray;
+            $.each(eleObjs, function (index, ele) {
+                var selectEle = $(ele);
+                if (selectEle.prop("disabled")) {
+                    selectEle.siblings(".select-container").addClass("disabled");
+                } else {
+                    selectEle.siblings(".select-container").removeClass("disabled");
+                }
             })
         }
 
@@ -184,6 +292,18 @@
         //得到参数集合
         function getOptions() {
             return defaults;
+        }
+
+        //获取随机字符串
+        function randomString(len) {
+            len = len || 32;
+            var $chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678';    /****默认去掉了容易混淆的字符oOLl,9gq,Vv,Uu,I1****/
+            var maxPos = $chars.length;
+            var str = '';
+            for (i = 0; i < len; i++) {
+                str += $chars.charAt(Math.floor(Math.random() * maxPos));
+            }
+            return str;
         }
 
         return objArray;

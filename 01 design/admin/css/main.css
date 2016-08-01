@@ -1,5 +1,23 @@
 ﻿@charset "utf-8";
 /* CSS Document */
+input{
+	outline: none;
+}
+div::-moz-focus-inner,
+button::-moz-focus-inner,
+input[type="reset"]::-moz-focus-inner,
+input[type="button"]::-moz-focus-inner,
+input[type="submit"]::-moz-focus-inner,
+input[type="file"] > input[type="button"]::-moz-focus-inner {
+	border: none;
+}
+input,select,textarea{
+	color: inherit;
+	font-size: inherit;
+	font-family: inherit;
+}
+::-ms-clear{display:none;}
+::-ms-reveal{display:none;}
 /***********************************管理员用户日志 start**********************************************/
 a {
 	text-decoration:none;
@@ -88,11 +106,25 @@ input::-ms-reveal{
 	background:url(../images/list.png) no-repeat 10px center;
 }
 .search-left {
-	float:left;
-	position:relative;
-	top:20px;
-	width:1040px;
-	border-right:1px solid #dddddd;
+	float: left;
+	border-right: 1px solid #dddddd;
+	margin: 20px 0px 0px 20px;
+}
+.search-left-item{
+	margin-right: 15px;
+	display: inline-block;
+	vertical-align: middle;
+}
+.search-left-item-control{
+	width: 138px;
+	height: 30px;
+	border: 1px solid #aaaaaa;
+	border-radius: 4px;
+	padding: 0 10px;
+	font-size: 13px;
+	color: #aaaaaa;
+	line-height: 30px;
+	background-color: #fafafa;
 }
 .user {
 	font-size:14px;
@@ -121,7 +153,7 @@ input::-ms-reveal{
 	background:url(../images/menu-bg-repeat.png) repeat-y;
 }
 .menu-shandow {
-	position:fixed;
+	position:absolute;
 	bottom:0;
 	width:122px;
 	height:564px;
@@ -347,12 +379,18 @@ input::-ms-reveal{
 	color:#969fbd;
 	font-size:13px;
 }
+.table-middle thead tr{
+	background-color: #fafafa;
+}
 .table-middle tbody {
 	color:#222;
 	font-size:13px;
 }
-.admin .table-middle td:first-child {
-	padding-left:2%;
+.table-middle tbody tr:nth-child(2n) {
+	background-color: #fafafa;
+}
+.table-middle tbody tr:nth-child(2n+1) {
+	background-color: #e3e3e3;
 }
 .table-bottom {
 	width:95%;
@@ -369,13 +407,13 @@ input::-ms-reveal{
 	table-layout:fixed
 }
 .log-table td {
-	height:30px;
-	padding:5px;
-	white-space:nowrap;
-	word-break:normal;
-	word-wrap:normal;
-	overflow:hidden;
-	text-overflow:ellipsis;
+	height: 30px;
+	padding: 5px 10px 5px 10px;
+	white-space: nowrap;
+	word-break: normal;
+	word-wrap: normal;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 .modular.zl_select .select-container,.operation.zl_select .select-container,.select1.zl_select .select-container,.select2.zl_select .select-container,.select3.zl_select .select-container,.select4.zl_select .select-container,.select5.zl_select .select-container,.select-pro.zl_select .select-container,.select6.zl_select .select-container {
 	border: 1px solid #aaaaaa;
@@ -439,31 +477,28 @@ input::-ms-reveal{
 	display:inline-block;
 }
 .search {
-	font-size:14px;
-	color:#fafafa;
-	height:30px;
-	line-height:30px;
-	text-align:center;
-	width:75px;
-	position:relative;
-	top:20px;
-	background-color:#0DB4BE;
-	cursor:pointer;
-	float:left;
-	border-radius:4px;
-	margin-left:15px;
+	font-size: 14px;
+	color: #fafafa;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	width: 75px;
+	margin: 20px 0px 0px 15px;
+	background-color: #0DB4BE;
+	cursor: pointer;
+	float: left;
+	border-radius: 4px;
 }
 .search a{color:#fafafa}
 .search:hover {
 	background-color:#008992;
 }
 .clear {
-	position:relative;
-	top:28px;
-	color:#0066cc;
-	font-size:13px;
-	cursor:pointer;
-	float:left;
+	color: #0066cc;
+	font-size: 13px;
+	cursor: pointer;
+	float: left;
+	margin: 26px 0px 0px 15px;
 }
 .clear a{color:#0066cc}
 .clear:hover {
@@ -2459,40 +2494,6 @@ input::-ms-reveal{
 }
 .record-title .border.fl {float:left}
 /***********************************安装监控 end************************************************/
-.select-drop {
-	margin-top:-3px;
-}
-.select-drop ul.items li {
-	padding:5px 3px 5px 8px;
-}
-.select-drop ul.items li.over {
-	background-color:#B6DADC;
-	text-indent:5px;
-}
-.select-container {
-	border-radius:4px;
-}
-.pro-table-con .select-container {
-	position:relative;
-	top:9px;
-	left:13px;
-}
-.pro-table-con .select3 .select-container {
-	left:0;
-}
-.pro-table-con .select-drop ul li {
-	line-height:15px;
-}
-.pro-table-con .select-drop {
-	margin-top:6px;
-	margin-left:13px;
-}
-.pro-table-con .select3 .select-drop {
-	margin-left:0;
-}
-.pop-con .zl_select {
-	float:left;
-}
 /********************权限设置********************/
 .left-head {
 	height:40px;

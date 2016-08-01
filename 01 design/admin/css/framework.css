@@ -82,7 +82,7 @@ body,main{
 }
 /****************************head end******************************/
 /****************************content start************************/
-.content{
+.main-content{
 	margin-left: 122px;
 }
 .menu{
@@ -91,6 +91,7 @@ body,main{
 	color:#FFFFFF;
 	background-image:url(../images/menu-bg3.png);
 	background-repeat:repeat-y;
+	position: relative;
 }
 .page{
 	position: relative;

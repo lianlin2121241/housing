@@ -1,103 +1,87 @@
-﻿/* CSS Document */
+/* CSS Document */
 .zl_select .select-container {
-	background-color: #fafafa;
+	background-color: #f4f4f4;
     -moz-background-clip: padding;
     -webkit-background-clip: padding-box;
     background-clip: padding-box;
-    border: 1px solid #d8d9dd;
+    border: 1px solid #999999;
 /*	border-bottom: 0px;*/
     display: block;
     overflow: hidden;
     white-space: nowrap;
     position: relative;
     line-height: 26px;
-    padding: 0 0 0 8px;
-    color: #444;
+    padding: 0 0 0 14px;
+    color: #333333;
     text-decoration: none;
 	outline:none;
-	border-radius:4px;
+	border-radius: 12px;
+}
+.zl_select .select-container.disabled {
+	border-color: #999999;
+	background: #eaeaea;
+	color: #999999;
 }
 
 .zl_select select{
-	display:none;
+	/*display:none;*/
+}
+.zl_select{
+	vertical-align: middle;
+    position: relative;
 }
 
 .select-drop{
-	position:absolute;
-	display:none;
+	position: absolute;
+	display: none;
 	border-width: 1px 1px 1px 1px;
-	border-color:#aaa;
-	border-style:solid;
-	/*height:auto;*/
-	background:#fff;
-	z-index:10000;
-	margin-top:-1px;
-	z-index:999999999;
-	overflow:hidden;
+	border-color: #00c9c7;
+	border-style: solid;
+	height: auto;
+	background: #fff;
+	z-index: 10000;
+	margin-top: -1px;
+	overflow-y: auto;
+	max-height: 160px;
 }
 
 .select-drop ul.items{
 	list-style:none;
 	margin:0px;
 	padding:0px;
-	height: 100%;
-	overflow: auto;
-	max-height:120px;
 }
 
 .select-drop ul.items li{
 	cursor:pointer;
-	padding: 3px 3px 3px 8px;
 	word-warp: break-word;
-	word-break: break-all;/*Only work in IE*/ 
+	word-break: break-all;/*Only work in IE*/
+	text-align: left;
+	padding-left: 14px;
 }
 
 .select-drop ul.items li.over{
-	background:#eee;
+	background:#dddddd;
 }
 
 .select-drop ul.items li.down{
-	background:#ccc;
+	background:#d1d1d1;
 }
 
 .zl_select .select-container > div{
-	width:30px;
+	width:20px;
 	height:100%;
 	float:right;
 	clear:right;
-	background:url(../images/down.png) no-repeat center;
+	background:url(../images/icon.png) no-repeat 0px center;
 	position:absolute;
 	right:0px;
-	background-color:#fafafa;
+	/*background-color:#fff;*/
 }
-.zl_select.active .select-container > div{
-	background-image:url(../images/up.png);
-}
+
 .zl_select .select-container > span{
 	float:left;
 	overflow: hidden;
 	text-overflow:ellipsis;
 	white-space: nowrap; 
 	text-align:left;
-}
-.zl_select.has-val a.select-container {
-	border:1px solid #aaa;
-	color:#222;
-}
-.zl_select.active a.select-container{
-	border:1px solid #0db4be;
-	color:#222;
-}
-.log .zl_select.has-val a.select-container {
-	border:1px solid #0db4be;
-}
-.zl_select.active .select-drop{
-	border:1px solid #0db4be;
-	border-top:none;
-	border-radius:0 0 4px 4px;
-	overflow: hidden;
-}
-.zl_select.disabled a.select-container{
-	border:1px solid #e0e0e0;
-	color:#bbbbbb;
 }
