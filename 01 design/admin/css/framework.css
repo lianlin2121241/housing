@@ -7,13 +7,13 @@ body,main{
 	font-family:"微软雅黑";
 }
 /****************************head start******************************/
-.head{
+.main-head{
 	width:100%;
 	height:50px;;
 	position:relative;
 	background-color:#008992;
 }
-.head .up{
+.main-head .up{
 	width:100%;
 	height:60px;
 	background:url(../images/bg_tittleBar.png);
@@ -89,16 +89,17 @@ body,main{
 	float:left;
 	width:122px;
 	color:#FFFFFF;
-	background-image:url(../images/menu-bg3.png);
+	background-image:url(../images/framework/menu-bg3.png);
 	background-repeat:repeat-y;
 	position: relative;
 }
-.page{
+.main-page{
 	position: relative;
 	width: 100%;
 	background-color: #ebebeb;
+	overflow: hidden;
 }
-.page > div.iframe_container{
+.main-page > div.iframe_container{
 	height:100%;
 	margin: 0 auto;
 }

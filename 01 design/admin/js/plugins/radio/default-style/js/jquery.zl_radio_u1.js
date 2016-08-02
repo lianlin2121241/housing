@@ -1,37 +1,47 @@
-// JavaScript Document
+/*!
+ * zl_radio
+ * ‰æùËµñ‰∫é jquery.js
+ */
 (function ($) {
     var zl_radio=function(element, option){
         this.element=element;
         this.option=option;
     }
     zl_radio.prototype.setState=function(ele){
-        if($(":radio",ele).is(":disabled")){
-            $(ele).removeClass("zl_radio_normal zl_radio_down").addClass("zl_radio_disabled");
-        }else if($(":radio",ele).is(":checked")){
-            $(ele).removeClass("zl_radio_normal zl_radio_disabled").addClass("zl_radio_down");
+        var $elePanel=$(ele).closest(".radio_label");
+        $elePanel.removeClass("radio_normal radio_down radio_disabled")
+        if($(ele).is(":disabled")){
+            $elePanel.addClass("radio_disabled");
+        }else if($(ele).is(":checked")){
+            $elePanel.addClass("radio_down");
         }else{
-            $(ele).removeClass("zl_radio_down zl_radio_disabled").addClass("zl_radio_normal");
+            $elePanel.addClass("radio_normal");
         }
     }
     zl_radio.prototype.init=function(ele){
-        var eleObj,
-            eleName;
-        eleObj = $(ele);
-        eleName = eleObj.attr("name");
-        eleObj.bind("hover", function () {
-        }, function () {
-        });
+        var eleObj = $(ele),
+            eleParent=eleObj.parent(),
+            panel=null,
+            icon_i=null;
+        if(!$.nodeName(eleParent[0],"LABEL")){
+            eleObj.wrap("<label></label>");
+            panel=eleObj.closest("label");
+        }else{
+            panel=eleParent;
+        }
+        icon_i=$("<i class='icon_radio'></i>").prependTo(panel);
+        eleObj.addClass("radio_ele");
+        panel.addClass("radio_label");
+        zl_radio.prototype.setState(eleObj);
         eleObj.bind("click", function () {
-            if($(this).find(":radio").is(":disabled")){
-                return;
-            }
-            $("div.zl_radio[name=" + eleName + "]").removeClass("zl_radio_down");
-            $("div.zl_radio[name=" + eleName + "]").addClass("zl_radio_normal");
-            eleObj.addClass("zl_radio_down");
+            var eleName = eleObj.attr("name");
+            $.each($("[name="+eleName+"]"),function(index,eleObj){
+                zl_radio.prototype.setState(eleObj);
+            })
         })
-        //º‡Ã˝ ¬º˛
-        eleObj.bind("changeDisabled.zl_radio", function (e) {
-            zl_radio.prototype.setState(e.ele)
+        //ÁõëÂê¨‰∫ã‰ª∂
+        eleObj.bind("changeState.zl_radio", function (e) {
+            zl_radio.prototype.setState(this)
         })
     }
     $.fn.zl_radio = function () {
@@ -40,13 +50,6 @@
             var temp_radio=new zl_radio(ele);
             temp_radio.init(ele);
             temp_radio.setState(ele);
-            //∂®“Â ¬º˛
-            var changeDisabled = jQuery.Event( "changeDisabled.zl_radio",{
-                ele:ele
-            });
-            //Ω´ ¬º˛∞Û∂®µΩ‘™Àÿ Ù–‘
-            $(ele).data("data-eventChangeDisabled",changeDisabled);
-			temp_radio = null;
         })
         return radio_array;
     };

@@ -1,0 +1,283 @@
+﻿/**********************文字按钮样式  开始**********************/
+.text-btn{
+	color: #0066cc;
+	font-size: 13px;
+	cursor: pointer;
+	text-decoration: none;
+}
+.text-btn:focus{
+	text-decoration: underline;
+}
+/**********************文字按钮样式  结束**********************/
+
+/**********************图文按钮样式  开始**********************/
+.icon-btn{
+	color: #fff;
+	text-decoration: none;
+	display: inline-block;
+	height: 35px;
+	line-height: 35px;
+	padding-left: 20px;
+	cursor: pointer;
+	vertical-align: middle;
+}
+.icon-btn:focus{
+	color: #00ffff;
+}
+.icon-btn.add{
+	background: url(../images/add.png) no-repeat 0 9px;
+}
+.icon-btn.add:hover{
+	background: url(../images/add-hover.png) no-repeat 0 9px;
+}
+/**********************图文按钮样式  结束**********************/
+
+/**********************普通按钮样式  开始**********************/
+.btn{
+	width: 65px;
+	height: 30px;
+	background-color: #0db4be;
+	font-size: 14px;
+	color: #fff;
+	text-align: center;
+	line-height: 30px;
+	cursor: pointer;
+	display: inline-block;
+	border-radius: 4px;
+	margin-left: 20px;
+	border: none;
+}
+.btn:focus{
+	background-color: #008992;
+}
+.btn.continue{
+	width: 90px;
+	height: 30px;
+	background-color: #fafafa;
+	font-size: 14px;
+	color: #009999;
+	line-height: 30px;
+	text-align: center;
+	border: 1px solid #0db4be;
+	border-radius: 4px;
+	display: inline-block;
+	cursor: pointer;
+}
+.btn.continue:focus{
+	background-color: #d0dedf;
+}
+/**********************普通按钮样式  结束**********************/
+
+/**********************查询表单样式  开始**********************/
+.search-form {
+	width: 100%;
+	height: 72px;
+	background-color: #fafafa;
+	position: relative;
+	outline: none;
+}
+.search-left {
+	float: left;
+	border-right: 1px solid #dddddd;
+	margin: 20px 0px 0px 20px;
+}
+.search-left-item {
+	margin-right: 15px;
+	display: inline-block;
+	vertical-align: middle;
+}
+.search-left-item-control {
+	width: 138px;
+	height: 30px;
+	border: 1px solid #aaaaaa;
+	border-radius: 4px;
+	padding: 0 10px;
+	font-size: 13px;
+	color: #333333;
+	line-height: 30px;
+	background-color: #fafafa;
+}
+.search-btn{
+	margin: 20px 0px 0px 15px;
+}
+.search-btn-clear{
+	margin: 26px 0px 0px 15px;
+}
+/**********************查询表单样式  结束**********************/
+
+/**********************表格头结构样式  开始**********************/
+.table-top {
+	margin: 30px 20px 0px;
+	height: 35px;
+	line-height: 35px;
+	background-color: #555555;
+	border-radius: 5px 5px 0 0;
+	margin-top: 30px;
+}
+.table-top-title{
+	line-height: 35px;
+	color: #fff;
+	font-size: 14px;
+	float: left;
+	margin-left: 15px;
+}
+.table-top-subtitle{
+	float: right;
+	margin-right: 15px;
+}
+.table-top-num{
+	line-height: 35px;
+	color: #aaa;
+	font-size: 12px;
+	vertical-align: middle;
+}
+.table-top-border {
+	height: 18px;
+	width: 1px;
+	background-color: #777777;
+	margin: 0 10px;
+	vertical-align: middle;
+}
+/**********************表格头结构样式  结束**********************/
+
+/**********************表格样式  开始**********************/
+.table-middle {
+	margin: 0px 20px 0px;
+}
+.table-middle table{
+	margin: 0 auto;
+	table-layout: fixed;
+}
+.table-middle thead {
+	color: #969fbd;
+	font-size: 13px;
+}
+.table-middle thead tr {
+	background-color: #fafafa;
+}
+.table-middle tbody {
+	color: #222;
+	font-size: 13px;
+}
+.table-middle tbody tr:nth-child(2n+1) {
+	background-color: #e3e3e3;
+}
+.table-middle tbody tr:nth-child(2n) {
+	background-color: #fafafa;
+}
+.table-middle th,.table-middle td {
+	height: 30px;
+	padding: 5px 10px 5px 10px;
+	white-space: nowrap;
+	word-break: normal;
+	word-wrap: normal;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+/**********************表格样式  结束**********************/
+
+/**********************表格分页样式  开始**********************/
+.table-bottom {
+	margin: 20px 20px 0px;
+	background-color: #e3e3e3;
+	border-radius: 0 0 5px 5px;
+	height: 40px;
+}
+.pagination-content {
+	float: right;
+	margin-right: 10px;
+	margin-top: 13px;
+}
+/**********************表格分页样式  结束**********************/
+
+/**********************弹出层样式  开始**********************/
+.pop {
+	width: 690px;
+	display: none;
+	overflow: visible;
+	position: fixed;
+	z-index: 10;
+	top: 100px;
+	left: 50%;
+	margin: 0px 0px 0px -345px;
+}
+.pop-head {
+	height: 35px;
+	line-height: 35px;
+	width: 100%;
+	background-color: #555555;
+	font-size: 14px;
+	color: #fff;
+	text-indent: 12px;
+	border-radius: 4px 4px 0 0;
+	position: relative;
+}
+.pop-head .close {
+	width: 30px;
+	height: 30px;
+	float: right;
+	position: absolute;
+	right: 10px;
+	cursor: pointer;
+	display: inline-block;
+	background: url(../images/icon/close.png) no-repeat 0 2px;
+}
+.pop-con {
+	padding: 25px 0;
+	width: 100%;
+	background-color: #fafafa;
+}
+.pop-foot {
+	height: 50px;
+	width: 100%;
+	background-color: #e3e3e3;
+	text-align: center;
+	border-radius: 0 0 4px 4px;
+}
+/**********************弹出层样式  结束**********************/
+
+/**********************表单结构样式  开始**********************/
+.form-group {
+	min-height: 30px;
+	margin: 0px 0px 15px 25px;
+}
+.form-group-title {
+	font-size: 14px;
+	color: #222;
+	width: 80px;
+	margin-right: 30px;
+	display: inline-block;
+	height: 30px;
+	line-height: 30px;
+	text-align: right;
+	vertical-align: middle;
+	overflow: hidden;
+}
+.form-control {
+	border: 1px solid #aaa;
+	border-radius: 4px;
+	height: 28px;
+	line-height: 28px;
+	width: 280px;
+	padding: 0 10px;
+	vertical-align: middle;
+	background-color: #fafafa;
+}
+.impor {
+	font-size: 12px;
+	color: #ae0004;
+	margin: 0 5px;
+	display: inline-block;
+	height: 30px;
+	line-height: 30px;
+	vertical-align: middle;
+}
+.error-msg {
+	font-size: 13px;
+	color: #ae0004;
+	height: 30px;
+	line-height: 30px;
+	display: inline-block;
+	vertical-align: middle;
+}
+/**********************表单结构样式  结束**********************/

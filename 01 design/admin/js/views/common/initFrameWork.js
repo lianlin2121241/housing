@@ -15,14 +15,17 @@
 	'use strict';
 	function initFrameWorkHeight(){
 		var wh=$(window).height(),
-			menuLogoH=$(".menu-logo").outerHeight(true)
+			menuLogoH=$(".menu-logo").outerHeight(true),
+			menuHead=$(".main-head").outerHeight(true)
 
 		var $menuEle=$(".menu"),
 			$content=$(".main-content"),
-			$menuCon=$(".menu-con");
+			$menuCon=$(".menu-con"),
+			$mainPage=$(".main-page");
 
 		$menuEle.add($content).height(wh);
 		$menuCon.height(wh-menuLogoH);
+		$mainPage.height(wh-menuHead);
 	}
 
 	return {

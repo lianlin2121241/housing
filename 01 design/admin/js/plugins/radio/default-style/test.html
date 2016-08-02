@@ -3,8 +3,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel="stylesheet" type="text/css" href="css/zl_radio.css">
-<script type="text/javascript" src="../../common/js/jquery-1.9.1.min.js"></script>
-<script type="text/javascript" src="js/jquery.zl_radio.min.js"></script>
+	<script type="text/javascript" src="../../../libs/jquery-1.8.3.js"></script>
+<script type="text/javascript" src="js/jquery.zl_radio.js"></script>
 <title></title>
 <style>
 .ul_style{
@@ -27,12 +27,10 @@
 	margin-left:20px;
 }
 .all_account span{
-	margin-top:3px;
 	margin-left:5px;
 	float:left;
 }
 .all_sonaccount span{
-	margin-top:3px;
 	margin-left:5px;
 	float:left;
 }
@@ -40,22 +38,39 @@
 <script>
 $(function(){
 	$(".zl_radio").zl_radio();
+
+	$("#chbTest").click(function() {
+		if ($(this).is(":checked")) {
+			$("#aa,#bb").prop("disabled",false)
+					.each(function(){
+						$(this).trigger("changeState");
+					});
+		}else{
+			$("#aa,#bb").prop("disabled",true)
+					.each(function(){
+						$(this).trigger("changeState");
+					});
+		}
+	})
 })
 </script>
 </head>
 <body>
+<input type="checkbox" id="chbTest" checked="checked"/><label for="chbTest">测试</label>
 <ul class="ul_style">
 	<li>所在机房：</li>
 	<li>
 		<div class="all_account">
 			<div class="zl_radio zl_radio_normal" name="account_type">
 				<input id="aa"  type="radio" name="account_type_rad"  value="1" />
-			</div><span>全部账户</span>
+				<span>全部账户</span>
+			</div>
 		</div>
 		<div class="all_sonaccount">
 			<div class="zl_radio zl_radio_down" name="account_type">
-				<input id="b" type="radio" name="account_type_rad" checked value="2" />
-			</div><span>仅子账户</span>
+				<input id="bb" type="radio" name="account_type_rad" checked value="2" />
+				<span>仅子账户</span>
+			</div>
 		</div>
 	</li>
 </ul>
