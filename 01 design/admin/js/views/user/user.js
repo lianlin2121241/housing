@@ -45,6 +45,11 @@
 		function page_callback(page_index, jq){
 			return true;
 		}
+
+		$(".table-top")
+			.on("click","#btnAdd",function(){
+				$("#panelAdd").show().addClass("visible");
+			})
 	}
 	return {
 		init:init

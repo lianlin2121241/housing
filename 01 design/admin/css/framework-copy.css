@@ -6,6 +6,24 @@
 	font-family:"微软雅黑";
 	list-style: none;
 }
+input{
+	outline: none;
+}
+div::-moz-focus-inner,
+button::-moz-focus-inner,
+input[type="reset"]::-moz-focus-inner,
+input[type="button"]::-moz-focus-inner,
+input[type="submit"]::-moz-focus-inner,
+input[type="file"] > input[type="button"]::-moz-focus-inner {
+	border: none;
+}
+input,select,textarea{
+	color: inherit;
+	font-size: inherit;
+	font-family: inherit;
+}
+::-ms-clear{display:none;}
+::-ms-reveal{display:none;}
 /****************************menu start******************************/
 .menu {
 	float: left;
@@ -213,6 +231,9 @@
 }
 .head-right:hover .login-sub {
 	display: block;
+}
+.login-sub a {
+	text-decoration: none;
 }
 .login-sub > div {
 	height: 28px;
