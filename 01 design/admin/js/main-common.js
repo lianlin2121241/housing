@@ -14,6 +14,7 @@ require.config({
         plugins_select:"plugins/select/default-style/js/jquery.zl_select_u4",
         plugins_checkbox:"plugins/checkbox/default-style/js/jquery.zl_checkbox_u3",
         initFrameWork:"views/common/initFrameWork",
+        commonFunction:"views/common/commonFunction",
         userModel:"views/user/user",
         permissionsModel:"views/permissions/permissions"
     },

@@ -4,14 +4,14 @@
 (function (factory) {
 	if (typeof define === 'function' && define.amd) {
 		// AMD
-		define(["jquery","underscore","initFrameWork","plugins_select","jqueryUiCore","jqueryUiWidget","jqueryUiPosition","pagination"], factory);
+		define(["jquery","underscore","initFrameWork","commonFunction","plugins_select","jqueryUiCore","jqueryUiWidget","jqueryUiPosition","pagination"], factory);
 	} else if (typeof module === 'object' && module.exports) {
 		factory(require('jquery'));
 	} else {
 		// Browser globals
 		factory(jQuery);
 	}
-})(function ($,_,initFrameWork) {
+})(function ($,_,initFrameWork,commonFunction) {
 	'use strict';
 	function init(){
 		initFrameWork.initFrameWorkHeight();
@@ -48,7 +48,14 @@
 
 		$(".table-top")
 			.on("click","#btnAdd",function(){
-				$("#panelAdd").show().addClass("visible");
+				var pop=$("#panelAdd");
+				commonFunction.showPop(pop);
+			})
+
+		$("#panelAdd")
+			.on("click",".close",function(){
+				var pop=$("#panelAdd");
+				commonFunction.hidePop(pop);
 			})
 	}
 	return {

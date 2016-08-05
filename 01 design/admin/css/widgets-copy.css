@@ -210,9 +210,19 @@
 /**********************表格分页样式  结束**********************/
 
 /**********************弹出层样式  开始**********************/
+.shade{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	z-index: 9;
+	top: 0px;
+	left: 0px;
+	background-color: rgba(0,0,0,.5);
+	display: none;
+}
 .pop {
 	width: 690px;
-	display: none;
+	/*display: none;*/
 	overflow: visible;
 	position: fixed;
 	z-index: 10;
@@ -220,13 +230,13 @@
 	left: 50%;
 	margin: 0px 0px 0px -345px;
 	-webkit-transition-property: opacity;
-	transition-property: transform;
-	-webkit-transition-duration:.9s;
-	transition-duration:.9s;
+	transition-property: opacity,transform;
+	-webkit-transition-duration:.3s;
+	transition-duration:.3s;
 	-webkit-transition-timing-function: ease-in;
 	transition-timing-function: ease-in;
 	-webkit-transition-delay: 0s;
-	transition-delay:0.18s;
+	transition-delay:0s;
 	opacity: .5;
 	-webkit-transform: scale(0.8,0.8);
 	-moz-transform:  scale(0.8,0.8);
@@ -237,6 +247,9 @@
 	-webkit-transform: scale(1,1);
 	-moz-transform:  scale(1,1);
 	transform:  scale(1,1);
+}
+.pop.hidden{
+	display:none;
 }
 .pop-head {
 	height: 35px;
