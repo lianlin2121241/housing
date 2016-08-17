@@ -69,6 +69,26 @@
 }
 /**********************普通按钮样式  结束**********************/
 
+/**********************icon按钮样式  开始**********************/
+.icon16{
+	width: 16px;
+	height: 16px;
+	background: url("../images/icon/icon-16X16.png") no-repeat;
+	cursor: pointer;
+	display: inline-block;
+	vertical-align: middle;
+}
+.icon16:hover{
+	background-image: url("../images/icon/icon-16X16-00ffff.png");
+}
+.icon16-del{
+	background-position: 0px 0px;
+}
+.icon16-add{
+	background-position: -30px 0px;
+}
+/**********************icon按钮样式  结束**********************/
+
 /**********************查询表单样式  开始**********************/
 .search-form {
 	width: 100%;
@@ -76,7 +96,6 @@
 	background-color: #fafafa;
 	position: relative;
 	outline: none;
-	overflow: hidden;
 }
 .search-left {
 	float: left;

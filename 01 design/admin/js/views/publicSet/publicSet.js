@@ -15,19 +15,6 @@
 	'use strict';
 	function init(){
 		initFrameWork.initFrameWorkHeight();
-		$(".checkbox").zl_checkbox()
-
-		$(".table-top")
-			.on("click","#btnAdd",function(){
-				var pop=$("#panelAdd");
-				commonFunction.showPop(pop);
-			})
-
-		$("#panelAdd")
-			.on("click",".close",function(){
-				var pop=$("#panelAdd");
-				commonFunction.hidePop(pop);
-			})
 	}
 	return {
 		init:init

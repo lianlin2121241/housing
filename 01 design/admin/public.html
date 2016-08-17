@@ -1,0 +1,82 @@
+<!DOCTYPE html> 
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="edge" />
+    <title>公共设置</title>
+    <link href="css/index.css" rel="stylesheet" type="text/css" />
+    <link href="js/plugins/checkbox/default-style/css/zl_checkbox_u3.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<!--menu-->
+<div class="menu">
+    <div class="menu-shandow"></div>
+    <div class="menu-logo"><span class="menu-logo-icon"></span></div>
+    <div class="menu-con">
+        <ul>
+            <li class="secondary">
+                <a href="软件管理.html" target="mainFrame">二手房管理</a>
+            </li>
+            <li class="rent"><a href="产品管理.html" target="mainFrame">租房管理</a></li>
+            <li class="community"><a href="销售员管理.html" target="mainFrame">小区管理</a></li>
+            <li class="user"><a href="客户管理.html" target="mainFrame">用户管理</a></li>
+            <li class="public"><a href="订单管理.html" target="mainFrame" class="selected">公共设置</a>
+                <div class="menu-sel"></div>
+            </li>
+            <li class="permissions"><a href="销售统计.html" target="mainFrame">权限设置</a></li>
+        </ul>
+    </div>
+</div>
+<!----------遮罩层------------>
+<div class="shade"></div>
+<!--content-->
+<div class="main-content">
+    <!--head-->
+    <div class="main-head">
+        <div class="head-left">公共设置</div>
+        <div class="head-right">
+            <span class="login-icon"></span><span class="head-user">您好,Admin</span><em class="user-tip"></em><a class="down"></a>
+            <div class="login-sub">
+                <div class="personal-info"><a href="个人信息.html" target="mainFrame">个人信息</a></div>
+                <div class="msg-list mt7"><a href="消息列表.html" target="mainFrame">消息列表</a><em class="email-tip"></em></div>
+                <div class="modify-psw mt7"><a>修改密码</a></div>
+                <div class="exit-account mt7"><a>退出账户</a></div>
+            </div>
+        </div>
+    </div>
+    <!--main-page-->
+    <div class="main-page">
+        <div class="public-set-panel">
+            <ul class="public-set-list">
+                <li class="public-set-item active">在职状态</li>
+                <li class="public-set-item">在职状态</li>
+                <li class="public-set-item">在职状态</li>
+            </ul>
+            <div class="public-set-arrow">>></div>
+            <div class="value-form-panel">
+                <div class="value-form-head">
+                    <input type="text" class="value-form-controller">
+                    <span class="icon16 icon16-add"></span>
+                </div>
+                <ul class="public-set-list edit">
+                    <li class="public-set-item fs0">
+                        <span class="public-set-item-text">离职</span>
+                        <span class="icon16 icon16-del"></span>
+                    </li>
+                    <li class="public-set-item fs0">
+                        <span class="public-set-item-text">离职</span>
+                        <span class="icon16 icon16-del"></span>
+                    </li>
+                    <li class="public-set-item fs0">
+                        <span class="public-set-item-text">离职</span>
+                        <span class="icon16 icon16-del"></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script data-main="js/main-permissions" src="js/plugins/requireJS/require.js" type="application/javascript"></script>
+</html>
