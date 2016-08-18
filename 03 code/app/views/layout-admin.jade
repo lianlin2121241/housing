@@ -1,0 +1,14 @@
+doctype
+html
+	head
+		meta(charset=utf-8)
+		title #{title}
+		include ./includes/head-admin
+	body
+		include ./includes/menu-admin
+		.main-content
+			include ./includes/header-admin
+			.main-page
+				block content
+		block content_pop
+

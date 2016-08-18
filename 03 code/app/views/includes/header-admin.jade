@@ -1,0 +1,18 @@
+.main-head
+	.head-left 
+		| #{menuName}
+	.head-right
+		span.login-icon
+		span.head-user 您好,#{userName}
+		em.user-tip
+		a.down
+		.login-sub
+			.personal-info
+				a(href="/admin/personInfo") 个人信息
+			.msg-list.mt7
+				a(href="/admin/msgList") 消息列表
+				em.email-tip
+			.modify-psw.mt7
+				a 修改密码
+			.exit-account.mt7
+				a 退出账户

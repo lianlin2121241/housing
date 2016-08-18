@@ -1,0 +1,274 @@
+﻿@charset "utf-8";
+*{
+	margin:0;
+	padding:0;
+	font-size:12px;
+	font-family:"微软雅黑";
+	list-style: none;
+}
+input{
+	outline: none;
+}
+div::-moz-focus-inner,
+button::-moz-focus-inner,
+input[type="reset"]::-moz-focus-inner,
+input[type="button"]::-moz-focus-inner,
+input[type="submit"]::-moz-focus-inner,
+input[type="file"] > input[type="button"]::-moz-focus-inner {
+	border: none;
+}
+input,select,textarea{
+	color: inherit;
+	font-size: inherit;
+	font-family: inherit;
+}
+::-ms-clear{display:none;}
+::-ms-reveal{display:none;}
+/****************************menu start******************************/
+.menu {
+	float: left;
+	width: 122px;
+	color: #FFFFFF;
+	background-image: url(../images/framework/menu-bg3.png);
+	background-repeat: repeat-y;
+	position: relative;
+}
+.menu-shandow {
+	 position: absolute;
+	 bottom: 0;
+	 width: 122px;
+	 height: 564px;
+	 background: url(../images/framework/menu-bg2.png) no-repeat;
+ }
+.menu-logo {
+	height: 59px;
+	width: 100%;
+	background: url(../images/framework/menu-border.png) no-repeat bottom;
+}
+.menu-logo .menu-logo-icon {
+	background: url(../images/framework/logo.png) no-repeat;
+	width: 34px;
+	height: 36px;
+	text-align: center;
+	display: inline-block;
+	position: relative;
+	top: 7px;
+	left: 44px;
+}
+.menu-con {
+	width: 100%;
+	overflow-y: auto;
+}
+.menu-con ul {
+	padding: 0;
+	margin: 0;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+.menu-con ul li {
+	list-style: none;
+	float: left;
+	width: 98%;
+	height: 58px;
+	font-size: 13px;
+	color: #fafafa;
+	text-align: center;
+	cursor: pointer;
+	position: relative;
+	background: url(../images/framework/menu-border.png) no-repeat 0px 100%;
+}
+.menu-con ul li a {
+	text-decoration: none;
+	color: #fafafa;
+	display: inline-block;
+	width: 100%;
+	height: 15px;
+	line-height: 14px;
+	padding-top: 21px;
+	padding-bottom: 21px;
+	outline: none;
+	text-align: left;
+	text-indent: 42px;
+	font-size: 13px;
+}
+.menu-con ul li a:hover,.menu-con ul li a.selected {
+	color: #00ffff;
+}
+.menu-con ul li.secondary a {
+	background: url(../images/framework/menu1.png) no-repeat 15px 19px;
+}
+.menu-con ul li.secondary a:hover,.menu-con ul li.secondary a.selected {
+	background: url(../images/framework/menu1-sel.png) no-repeat 15px 19px;
+}
+.menu-con ul li.rent a {
+	background: url(../images/framework/menu2.png) no-repeat 15px 19px;
+}
+.menu-con ul li.rent a:hover,.menu-con ul li.rent a.selected {
+	background: url(../images/framework/menu2-sel.png) no-repeat 15px 19px;
+}
+.menu-con ul li.community a {
+	background: url(../images/framework/menu3.png) no-repeat 15px 19px;
+}
+.menu-con ul li.community a:hover,.menu-con ul li.community a.selected {
+	background: url(../images/framework/menu3-sel.png) no-repeat 15px 19px;
+}
+.menu-con ul li.user a {
+	background: url(../images/framework/menu4.png) no-repeat 15px 19px;
+}
+.menu-con ul li.user a:hover,.menu-con ul li.user a.selected {
+	background: url(../images/framework/menu4-sel.png) no-repeat 15px 19px;
+}
+.menu-con ul li.public a {
+	background: url(../images/framework/menu5.png) no-repeat 15px 19px;
+}
+.menu-con ul li.public a:hover,.menu-con ul li.public a.selected {
+	background: url(../images/framework/menu5-sel.png) no-repeat 15px 19px;
+}
+.menu-con ul li.permissions a {
+	background: url(../images/framework/menu6.png) no-repeat 15px 19px;
+}
+.menu-con ul li.permissions a:hover,.menu-con ul li.permissions a.selected {
+	background: url(../images/framework/menu6-sel.png) no-repeat 15px 19px;
+}
+.menu-sel {
+	position: absolute;
+	right: -4px;
+	background: url(../images/framework/menu-sel.png) no-repeat;
+	width: 10px;
+	height: 20px;
+	top: 19px;
+	z-index: 2;
+}
+/****************************menu start******************************/
+
+.main-content {
+	margin-left: 122px;
+}
+
+/****************************head start******************************/
+.main-head {
+	width: 100%;
+	height: 50px;
+	position: relative;
+	background-color: #008992;
+}
+.head-left {
+	background: url(../images/framework/logo2.png) no-repeat 0px -3px;
+	height: 26px;
+	float: left;
+	font-size: 16px;
+	color: #fafafa;
+	line-height: 26px;
+	padding-left: 23px;
+	margin: 11px 0px 0px 10px;
+}
+.head-right {
+	width: 158px;
+	height: 100%;
+	position: relative;
+	float: right;
+	right: 30px;
+	cursor: pointer;
+}
+.head-right:hover {
+	background: url(../images/framework/login-bg1.png) no-repeat;
+}
+.login-icon {
+	background: url(../images/framework/user.png) no-repeat;
+	width: 20px;
+	height: 20px;
+	display: inline-block;
+	position: relative;
+	top: 12px;
+	left: 12px;
+}
+.head-user {
+	font-size: 14px;
+	color: #fff;
+	line-height: 20px;
+	position: relative;
+	top: 8px;
+	left: 23px;
+}
+.user-tip {
+	background: url(../images/framework/tip.png) no-repeat;
+	width: 15px;
+	height: 15px;
+	display: inline-block;
+	position: relative;
+	top: 10px;
+	left: 24px;
+}
+.email-tip {
+	background: url(../images/framework/tip.png) no-repeat;
+	width: 15px;
+	height: 15px;
+	display: inline-block;
+	top: 10px;
+	right: 3px;
+	position: absolute;
+}
+.head-right .down {
+	background: url(../images/framework/down.png) no-repeat;
+	width: 25px;
+	height: 25px;
+	display: inline-block;
+	float: right;
+	margin-top: 12px;
+	margin-right: -2px;
+}
+.head-right:hover .down {
+	background: url(../images/framework/up.png) no-repeat;
+}
+.login-sub {
+	width: 158px;
+	height: 145px;
+	position: absolute;
+	top: 50px;
+	z-index: 2;
+	background: url(../images/framework/login-bg2.png) no-repeat;
+	display: none;
+}
+.head-right:hover .login-sub {
+	display: block;
+}
+.login-sub a {
+	text-decoration: none;
+}
+.login-sub > div {
+	height: 28px;
+	width: 154px;
+	line-height: 28px;
+	font-size: 13px;
+	color: #fff;
+	cursor: pointer;
+	margin-left: 2px;
+	text-indent: 42px;
+	position: relative;
+	margin-bottom: 7px;
+}
+.personal-info {
+	background: url(../images/framework/info.png) no-repeat 10px center;
+}
+.msg-list {
+	background: url(../images/framework/list.png) no-repeat 10px center;
+}
+.modify-psw {
+	background: url(../images/framework/modify-psw.png) no-repeat 10px center;
+}
+.exit-account {
+	background: url(../images/framework/exit.png) no-repeat 10px center;
+}
+.login-sub > div a {
+	color: #fff;
+	width: 100%;
+	float: left;
+}
+/****************************head end******************************/
+
+.main-page {
+	position: relative;
+	width: 100%;
+	background-color: #ebebeb;
+	overflow: hidden;
+}
