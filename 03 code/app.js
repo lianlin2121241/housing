@@ -6,6 +6,9 @@ var session=require("express-session")
 var mongoose=require("mongoose")
 var logger=require("morgan");
 
+var dbUrl="mongodb://127.0.0.1/housing"
+mongoose.connect(dbUrl)
+
 var port=process.env.ROPT||3000;
 var app=express();
 

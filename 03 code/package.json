@@ -9,6 +9,7 @@
   "author": "limingle",
   "license": "MIT",
   "devDependencies": {
+    "bcrypt-nodejs": "^0.0.3",
     "body-parser": "^1.15.2",
     "connect-mongo": "^1.3.2",
     "cookie-parser": "^1.4.3",

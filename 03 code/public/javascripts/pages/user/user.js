@@ -58,6 +58,15 @@
 				commonFunction.hidePop(pop);
 			})
 	}
+	function loadData(data){
+
+	}
+	function clearTable(){
+
+	}
+	function applyTable(list){
+
+	}
 	return {
 		init:init
 	}

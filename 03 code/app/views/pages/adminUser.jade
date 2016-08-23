@@ -22,7 +22,7 @@ block content
 			.table-top-border
 			.table-top-num
 				| 共
-				span #{listCount}
+				span &nbsp;#{listCount}&nbsp;
 				| 条
 	.table-middle
 		table(width="100%",cellpadding="0",border="0",cellspacing="0")
@@ -49,15 +49,29 @@ block content
 						a.text-btn 通过
 						a.text-btn 拒绝
 						a.text-btn 重置密码
-		<!----------------没有搜索到数据---数据加载中----(显示时把tbody和table-bottom隐藏)----------->
-		.pt15.pb15.bgcolorfafafa.ta-center(style="display:none") 没有搜索到匹配的数据~!
-		.empty-table.pt15.pb15.bgcolorfafafa.ta-center(style="display:none")
+		// 没有搜索到数据---数据加载中----(显示时把tbody和table-bottom隐藏)
+		.pt15.pb15.bgcolorfafafa.ta-center(id="noData",style="display:none") 没有搜索到匹配的数据~!
+		.empty-table.pt15.pb15.bgcolorfafafa.ta-center(id="loadData",style="display:none")
 			a 数据加载中......
-		<!--------------没有搜索到数据---数据加载中-------结束-------->
-	<!----------分页------------>
-	.table-bottom
+		//没有搜索到数据---数据加载中-------结束
+	// 分页
+	.table-bottom(id="paginationPanel")
 		.pagination-content
-	<!----------分页结束------------>
+	// 分页结束
+	script(id="tempItem",type="text/template")
+		tr
+			td(width="5%") <%item.index%>
+			td(width="15%") <%item.userName%>
+			td(width="15%") <%item.personName%>
+			td(width="15%") <%item.phone%>
+			td(width="20%") <%item.address%>
+			td(width="10%") <%item.role%>
+			td(width="20%")
+				a.text-btn 编辑
+				a.text-btn 删除
+				a.text-btn 通过
+				a.text-btn 拒绝
+				a.text-btn 重置密码
 block content_pop
 	.pop.hidden(id="panelAdd")
 		.pop-head
@@ -91,7 +105,8 @@ block content_pop
 				span.error-msg 软件名称不能为空
 			.form-group
 				label.form-group-title 职位
-				input.form-control(type="text")
+				select.combox-form
+					option 职位
 				span.impor *
 				span.error-msg 软件名称不能为空
 			.form-group
