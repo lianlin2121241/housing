@@ -1,0 +1,42 @@
+/* CSS Document */
+.div_forms{
+/*	border:1px solid #cccccc;*/
+	padding:0px;
+	float:left;
+}
+.forms_default_style{
+	border:0px;
+	outline:none;
+	color:#a0a0a0;
+	font-size:12px;
+	margin-left:2px;
+	float:left;
+	position:absolute;
+	background:url(0) no-repeat; 
+}
+.forms-default-style{
+	border:0px;
+	outline:none;
+	color:#a0a0a0;
+	font-size:12px;
+	margin-left:2px;
+	float:left;
+	position:absolute;
+	background:url(0) no-repeat; 
+}
+.div_text{
+	position:absolute;
+	color:#a0a0a0;
+	font-size:12px;
+}
+.div-text{
+	position:absolute;
+	color:#a0a0a0;
+	font-size:12px;
+}
+.search-wrapper .div_forms{
+	border: 0;
+}
+.search-wrap .div-forms{
+	border: 0;
+}

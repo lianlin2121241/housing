@@ -1,0 +1,25 @@
+{
+  "name": "housing",
+  "description": "房屋中介",
+  "main": "3000",
+  "authors": [
+    "limingle"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/lianlin2121241/housing",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/javascripts/libs",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "jquery": "^3.1.0",
+    "requirejs": "^2.2.0",
+    "jquery-ui": "jqueryui#^1.12.0",
+    "underscore": "^1.8.3"
+  }
+}

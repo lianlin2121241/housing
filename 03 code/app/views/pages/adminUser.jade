@@ -1,0 +1,122 @@
+extends ../layout-admin
+block content
+	.search-form
+		.search-left
+			.search-left-item
+				input.search-left-item-control(type="text",placeholder="用户名")
+			.search-left-item
+				input.search-left-item-control(type="text",placeholder="姓名")
+			.search-left-item
+				input.search-left-item-control(type="text",placeholder="联系电话")
+			.search-left-item
+				select.combox
+					option 职位
+		.search-btn
+			a.btn 搜 索
+		.search-btn-clear
+			a.text-btn 清空筛选
+	.table-top
+		.table-top-title 用户列表
+		.table-top-subtitle
+			a.icon-btn.add(id="btnAdd") 添加
+			.table-top-border
+			.table-top-num
+				| 共
+				span &nbsp;#{listCount}&nbsp;
+				| 条
+	.table-middle
+		table(width="100%",cellpadding="0",border="0",cellspacing="0")
+			thead
+				tr
+					th(width="5%") No.
+					th(width="15%") 用户名
+					th(width="15%") 姓名
+					th(width="15%") 联系电话
+					th(width="20%") 门店地址
+					th(width="10%") 角色
+					th(width="20%") 操作
+			tbody
+				tr
+					td(width="5%") 1
+					td(width="15%") admin
+					td(width="15%") 李明乐
+					td(width="15%") 13132136548
+					td(width="20%") 重阳里菜市场第一家
+					td(width="10%") 管理员
+					td(width="20%")
+						a.text-btn 编辑
+						a.text-btn 删除
+						a.text-btn 通过
+						a.text-btn 拒绝
+						a.text-btn 重置密码
+		// 没有搜索到数据---数据加载中----(显示时把tbody和table-bottom隐藏)
+		.pt15.pb15.bgcolorfafafa.ta-center(id="noData",style="display:none") 没有搜索到匹配的数据~!
+		.empty-table.pt15.pb15.bgcolorfafafa.ta-center(id="loadData",style="display:none")
+			a 数据加载中......
+		//没有搜索到数据---数据加载中-------结束
+	// 分页
+	.table-bottom(id="paginationPanel")
+		.pagination-content
+	// 分页结束
+	script(id="tempItem",type="text/template")
+		tr
+			td(width="5%") <%item.index%>
+			td(width="15%") <%item.userName%>
+			td(width="15%") <%item.personName%>
+			td(width="15%") <%item.phone%>
+			td(width="20%") <%item.address%>
+			td(width="10%") <%item.role%>
+			td(width="20%")
+				a.text-btn 编辑
+				a.text-btn 删除
+				a.text-btn 通过
+				a.text-btn 拒绝
+				a.text-btn 重置密码
+block content_pop
+	.pop.hidden(id="panelAdd")
+		.pop-head
+			span.pop-head-title 添加用户
+			a.close
+		.pop-con
+			.form-group
+				label.form-group-title 用户名
+				input.form-control(type="text")
+				span.impor *
+				span.error-msg 软件名称不能为空
+			.form-group
+				label.form-group-title 姓名
+				input.form-control(type="text")
+				span.impor *
+				span.error-msg 软件名称不能为空
+			.form-group
+				label.form-group-title 联系电话
+				input.form-control(type="text")
+				span.impor *
+				span.error-msg 软件名称不能为空
+			.form-group
+				label.form-group-title 邮箱
+				input.form-control(type="text")
+				span.impor *
+				span.error-msg 软件名称不能为空
+			.form-group
+				label.form-group-title 门店地址
+				input.form-control(type="text")
+				span.impor *
+				span.error-msg 软件名称不能为空
+			.form-group
+				label.form-group-title 职位
+				select.combox-form
+					option 职位
+				span.impor *
+				span.error-msg 软件名称不能为空
+			.form-group
+				label.form-group-title 角色
+				select.combox-form
+					option 职位
+				span.impor *
+				span.error-msg 软件名称不能为空
+		.pop-foot
+			a.btn.continue 继续添加
+			a.btn 确 定
+			a.text-btn 取消
+	script(src="/javascripts/libs/requirejs/require.js",data-main="/javascripts/main-user",type="application/javascript")
