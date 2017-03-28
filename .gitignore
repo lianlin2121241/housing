@@ -1,3 +1,5 @@
-.idea
-node_modules
-public/javascript/libs
+01 design/.idea
+01 design/node_modules
+02 code/.idea
+02 code/node_modules
+02 code/public/javascript/libs
