@@ -9,7 +9,7 @@ var logger=require("morgan");
 var port=process.env.ROPT||3000;
 var app=express();
 
-var dbUrl="mongodb://127.0.0.1/imooc";
+var dbUrl="mongodb://127.0.0.1/housing";
 
 app.locals.moment=require("moment");
 //引入bodyParser中间件

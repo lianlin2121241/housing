@@ -1,0 +1,23 @@
+<div class="public-set-panel">
+    <ul class="public-set-list">
+        <li class="public-set-item" ng-click="type" ng-repeat="type in baseData.allType" ng-class="{'active':baseData.currentType._id==type._id}"><span class="public-set-item-text">{{type.name}}</span></li>
+    </ul>
+    <div class="public-set-arrow">&gt;&gt;</div>
+    <div class="value-form-panel">
+        <div class="value-form-head">
+            <input type="text" class="value-form-controller" ng-keypress="addPublicItem($event)" ng-model="baseData.publicNewItem">
+            <span class="icon12 glyphicon glyphicon-plus" ng-click="addPublicItem()" role='button'></span>
+        </div>
+        <ul class="public-set-list edit">
+            <li class="public-set-item fs0" ng-dblclick="editPublicItem(item)" ng-repeat="item in baseData.subjectType">
+                <div ng-if="item.isEdit">
+                    <input type="text" class="public-set-item-input" focus-if ng-keypress="savePublicItem($event,item)" ng-model="item.modifyName">
+                </div>
+                <div ng-if="!item.isEdit">
+                    <span class="public-set-item-text">{{item.name}}</span>
+                    <span class="icon12 glyphicon glyphicon-trash" ng-click="delPublicItem(item)"></span>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

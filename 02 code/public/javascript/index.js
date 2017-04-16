@@ -1,23 +1,17 @@
-var myApp=angular.module("myApp",["ui.router"]);
+var myApp=angular.module("myApp",["ui.router",'focus-if']);
 
 myApp.config(['$stateProvider','$urlRouterProvider',function($stateProvider,$urlRouterProvider) {
-	$urlRouterProvider.when('','/PageTab');	
-	
+	$urlRouterProvider.when("","/AddNeighbourhoods");
 	$stateProvider
-		.state("PageTab",{
-			url:"/PageTab",
-			templateUrl:"PageTab.html"
+		.state("AddNeighbourhoods",{
+			url:"/AddNeighbourhoods",
+			templateUrl:"views/neighbourhoodsManage/AddNeighbourhoods.html",
+			controller:'addNeighbourhoodsController'
 		})
-		.state("PageTab.Page1",{
-			url:"/Page1",
-			templateUrl:"Page-1.html"
+		.state("publicSetting",{
+			url:"/publicSetting",
+			templateUrl:"views/settingManage/public.html",
+			controller:'publicSettingController'
 		})
-		.state("PageTab.Page2",{
-			url:"/Page2",
-			templateUrl:"Page-2.html"
-		})
-		.state("PageTab.Page3",{
-			url:"/Page3",
-			templateUrl:"Page-3.html"
-		})
+	$urlRouterProvider.otherwise('AddNeighbourhoods');	
 }])
