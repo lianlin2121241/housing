@@ -8,6 +8,11 @@ myApp.config(['$stateProvider','$urlRouterProvider',function($stateProvider,$url
 			templateUrl:"views/neighbourhoodsManage/AddNeighbourhoods.html",
 			controller:'addNeighbourhoodsController'
 		})
+		.state("UpdateNeighbourhoods",{
+			url:"/UpdateNeighbourhoods/:id",
+			templateUrl:"views/neighbourhoodsManage/AddNeighbourhoods.html",
+			controller:'addNeighbourhoodsController'
+		})
 		.state("publicSetting",{
 			url:"/publicSetting",
 			templateUrl:"views/settingManage/public.html",

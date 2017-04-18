@@ -1,5 +1,3 @@
-// var myApp=angular.module("myApp.controller");
-
 angular.module("myApp")
 	.controller('publicSettingController', ['$scope','apiFactory', function(scope,apiFactory){
 		scope.baseData={
@@ -71,8 +69,8 @@ angular.module("myApp")
 			})
 		}
 
-		scope.getItemsById=function(id){
-			apiFactory.publicSetting.getItemsById.queryCallback(id,function(data){
+		scope.getItemsById=function(params){
+			apiFactory.publicSetting.getItemsById.queryCallback(params,function(data){
 				if(data.success){
 					scope.baseData.subjectType=data.data;
 				}

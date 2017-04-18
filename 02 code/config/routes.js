@@ -5,6 +5,7 @@ var Comment=require("../app/controllers/comment");
 var Category=require("../app/controllers/category");
 var Multiparty=require("connect-multiparty");
 var PublicSetting=require("../app/controllers/publicSetting");
+var Neighbourhoods=require("../app/controllers/neighbourhoods");
 var multipartMiddleware =Multiparty();
 
 module.exports=function(app){
@@ -49,4 +50,8 @@ module.exports=function(app){
 	app.post("/publicSetting/save",PublicSetting.save);
 	app.get("/publicSetting/getItemsById",PublicSetting.getItemsById);
 	app.delete("/publicSetting/delItem",PublicSetting.del);
+
+	//小区管理
+	app.post("/neighbourhoods/save",Neighbourhoods.save);
+	app.get("/neighbourhoods/update/:id",Neighbourhoods.update);
 }

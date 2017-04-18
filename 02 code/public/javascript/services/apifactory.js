@@ -73,6 +73,21 @@ angular.module('myApp')
                         params: params
                     }
                 }),
+            },
+            neighbourhoods:{
+                save: getQuery(function(params) {
+                    return {
+                        method: 'POST',
+                        url: baseUrl + '/neighbourhoods/save',
+                        data: params
+                    }
+                }),
+                getNeighbourhoodsById:getQuery(function(params) {
+                    return {
+                        method: 'GET',
+                        url: baseUrl + '/neighbourhoods/update/'+params
+                    }
+                }),
             }
         }
     });
