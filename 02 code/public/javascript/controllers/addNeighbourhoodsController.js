@@ -1,5 +1,3 @@
-// var myApp=angular.module("myApp.controller");
-
 angular.module("myApp")
 	.controller('addNeighbourhoodsController', ['$scope','commonFun','apiFactory','commonConfig','$stateParams', function(scope,commonFun,apiFactory,commonConfig,$stateParams){
 		scope.baseData={
@@ -21,6 +19,10 @@ angular.module("myApp")
 			latitude:'',
 			imagePath:''
 		}
+
+		scope.photos={};
+
+		scope.reader=new FileReader();
 
 		var id=$stateParams.id;
 
@@ -72,6 +74,18 @@ angular.module("myApp")
 					alert("保存成功");
 				}
 			})
+		}
+
+		scope.updatePhoto=function(files){
+			scope.reader.readAsDataURL(files[0]);
+			scope.reader.onload=function(e){
+				console.log(e.target.result);
+			}
+		}
+
+		//打开选择图片
+		scope.openSelectPhoto=function(){
+			return angular.element("#fileAreaPhoto").click();
 		}
 
 		// 重置

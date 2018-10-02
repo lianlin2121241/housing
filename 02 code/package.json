@@ -1,6 +1,6 @@
 {
   "name": "imooc",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "imooc",
   "main": "app.js",
   "dependencies": {
@@ -19,9 +19,12 @@
     "morgan": "^1.7.0",
     "node-gyp": "^3.4.0",
     "process": "^0.11.3",
+    "testnpmpublish": "^1.0.0",
+    "testnpmpublishlimingle": "^0.1.0",
     "underscore": "^1.8.3"
   },
   "devDependencies": {
+    "eslint-plugin-angular": "^2.3.0",
     "grunt-concurrent": "^2.3.0",
     "grunt-contrib-watch": "^1.0.0",
     "grunt-nodemon": "^0.4.2"
@@ -31,6 +34,16 @@
   },
   "keywords": [
     "imooc"
+  ],
+  "_npmUser": {
+    "name": "limingle",
+    "email": "lml241@163.com"
+  },
+  "maintainers": [
+    {
+      "name": "limingle",
+      "email": "lml241@163.com"
+    }
   ],
   "author": "limingle",
   "license": "MIT"

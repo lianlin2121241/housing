@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('myApp')
     .factory('apiFactory', function($http, $q, $location) {
         // Service logic

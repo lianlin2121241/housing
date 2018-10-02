@@ -87,6 +87,8 @@
 
 				<div class="col-sm-9">
 					<input type="hidden" id="imgPath" name="imgPath">
+					<input type="file" id="fileAreaPhoto" accept="image/*" multiple="true" onchange="angular.element(this).scope().updatePhoto(this.files)">
+					<button type="button" class="btn btn-primary" ng-click="openSelectPhoto()">上传图片</button>
 				</div>
 			</div>
 

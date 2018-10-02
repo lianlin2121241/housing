@@ -20,3 +20,6 @@ myApp.config(['$stateProvider','$urlRouterProvider',function($stateProvider,$url
 		})
 	$urlRouterProvider.otherwise('AddNeighbourhoods');	
 }])
+
+var a=1;
+if(a=1){}
